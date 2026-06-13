@@ -1,0 +1,101 @@
+body{
+    background: linear-gradient(
+        to bottom,
+        #eef4ff,
+        #ffffff
+    );
+}
+
+.navbar{
+    padding:15px 0;
+}
+
+.navbar-brand{
+    font-weight:700;
+}
+
+.navbar{
+    padding:15px 0;
+}
+
+.navbar-brand{
+    font-weight:700;
+}
+
+.hero-section{
+    padding:100px 0;
+}
+
+.category-card{
+    transition:0.3s ease;
+}
+
+.category-card:hover{
+    transform:translateY(-5px);
+}
+
+/* GENERAL */
+body{
+    background:#eef4ff;
+    font-family:Arial, sans-serif;
+}
+
+/* NAVBAR */
+.navbar{
+    padding:15px 0;
+}
+
+.navbar-brand{
+    font-weight:700;
+    font-size: 1.5rem;
+}
+
+/* HERO */
+.hero-section{
+    padding:100px 0;
+}
+
+.hero-title{
+    font-size:3rem;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.hero-subtitle{
+    font-size:1.2rem;
+    color:#6c757d;
+    margin-bottom:30px;
+}
+
+/* CATEGORY CARDS */
+.category-card{
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 15px;
+}
+
+.category-card:hover{
+    transform: translateY(-8px);
+}
+
+/* Browse Listings Images */
+.listing-card-image{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* Listing Detail Images */
+.detail-image{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Owner Buttons */
+.owner-action-btn{
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

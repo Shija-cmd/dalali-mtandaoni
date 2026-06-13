@@ -52,6 +52,10 @@ class Listing(models.Model):
         default=False
     )
     
+    is_featured = models.BooleanField(
+        default=False
+    )
+    
     is_active = models.BooleanField(
         default=True
     )
@@ -89,4 +93,31 @@ class ListingImage(models.Model):
 
     def __str__(self):
 
-        return f"Image for {self.listing.title}"    
+        return f"Image for {self.listing.title}"  
+    
+class Favorite(models.Model):
+
+    user = models.ForeignKey(
+        'accounts.User',
+        on_delete=models.CASCADE
+    )
+
+    listing = models.ForeignKey(
+        Listing,
+        on_delete=models.CASCADE
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+
+        unique_together = (
+            'user',
+            'listing'
+        )
+
+    def __str__(self):
+
+        return f"{self.user.username} - {self.listing.title}"  

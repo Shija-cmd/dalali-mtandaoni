@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ listing.title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+
+<div class="row">
+
+    <!-- Images -->
+    <div class="col-md-6">
+
+        <div class="row">
+
+            {% for image in listing.images.all %}
+
+                <div class="col-md-4 mb-3">
+
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="{{ listing.title }}"
+                        class="detail-image shadow"
+                    >
+
+                </div>
+
+            {% empty %}
+
+                <div class="col-12">
+
+                    <p class="text-muted">
+                        No images available.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- Listing Details -->
+    <div class="col-md-6">
+
+        <h1 class="fw-bold">
+            {{ listing.title }}
+        </h1>
+
+        <p class="text-muted">
+            {{ listing.location }}
+        </p>
+
+        <h3 class="text-primary">
+            TZS {{ listing.price }}
+        </h3>
+
+        <span class="badge bg-primary mb-3">
+            {{ listing.category }}
+        </span>
+
+        <p>
+            {{ listing.description }}
+        </p>
+
+        {% if user == listing.owner %}
+
+        <a
+            href="{% url 'upload_listing_image' listing.id %}"
+            class="btn btn-primary mt-3"
+        >
+            Upload Images
+        </a>
+
+        {% endif %}
+
+        <hr>
+
+        <!-- Owner Information -->
+        <div class="card shadow-sm mt-4">
+
+            <div class="card-body">
+
+                <h4 class="mb-3">
+                    Owner Information
+                </h4>
+
+                <p>
+                    <strong>Owner:</strong>
+                    {{ listing.owner.username }}
+                </p>
+
+                <p>
+                    <strong>Phone:</strong>
+                    {{ listing.owner.phone_number }}
+                </p>
+
+                <div class="d-flex gap-2 mt-3">
+
+                    {% if listing.owner.is_verified %}
+
+                        <button
+                            class="btn btn-outline-success owner-action-btn"
+                            disabled
+                        >
+                            ✓ Verified Owner
+                        </button>
+
+                    {% else %}
+
+                        <button
+                            class="btn btn-outline-secondary owner-action-btn"
+                            disabled
+                        >
+                            ✗ Unverified Owner
+                        </button>
+
+                    {% endif %}
+
+                    <a
+                        href="{% url 'owner_profile' listing.owner.id %}"
+                            class="btn btn-outline-primary owner-action-btn"
+                    >
+                        👤 View Profile
+                    </a>
+
+                    <a
+                        href="tel:{{ listing.owner.phone_number }}"
+                        class="btn btn-success owner-action-btn"
+                    >
+                        📞 Call Owner
+                    </a>
+
+                    <a
+                        href="{% url 'toggle_favorite' listing.id %}"
+                        class="btn btn-outline-danger owner-action-btn"
+                        >
+
+                            {% if is_favorite %}
+
+                                ❤️ Saved
+
+                            {% else %}
+
+                                🤍 Save Listing
+
+                            {% endif %}
+
+                        </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+{% endblock %}

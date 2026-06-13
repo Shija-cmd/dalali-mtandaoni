@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="mb-4">
+        Owner Dashboard
+    </h1>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm text-center">
+
+                <div class="card-body">
+
+                    <h2>
+                        {{ total_listings }}
+                    </h2>
+
+                    <p>
+                        Total Listings
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm text-center">
+
+                <div class="card-body">
+
+                    <h2 class="text-success">
+                        {{ approved_listings }}
+                    </h2>
+
+                    <p>
+                        Approved Listings
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm text-center">
+
+                <div class="card-body">
+
+                    <h2 class="text-warning">
+                        {{ pending_listings }}
+                    </h2>
+
+                    <p>
+                        Pending Approval
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="mt-4">
+
+        <a
+            href="{% url 'create_listing' %}"
+            class="btn btn-primary"
+        >
+            Create Listing
+        </a>
+
+        <a
+            href="{% url 'my_listings' %}"
+            class="btn btn-secondary"
+        >
+            My Listings
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

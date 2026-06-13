@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My Listings
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+
+<h1 class="mb-4">
+    My Listings
+</h1>
+
+{% for listing in listings %}
+
+    <div class="card shadow-sm mb-3">
+
+        <div class="card-body">
+
+            <h5 class="card-title">
+                {{ listing.title }}
+            </h5>
+
+            <p class="text-muted mb-1">
+                {{ listing.location }}
+            </p>
+
+            <p class="fw-bold text-primary">
+                TZS {{ listing.price }}
+            </p>
+
+            {% if listing.is_approved %}
+
+                <span class="badge bg-success">
+                    Approved
+                </span>
+
+            {% else %}
+
+                <span class="badge bg-warning text-dark">
+                    Pending Approval
+                </span>
+
+            {% endif %}
+
+            <div class="mt-3">
+
+            <a
+                href="{% url 'listing_detail' listing.id %}"
+                class="btn btn-primary"
+            >
+                View
+            </a>
+
+            <a
+                href="{% url 'edit_listing' listing.id %}"
+                class="btn btn-warning"
+            >
+                Edit
+            </a>
+
+            <a
+                href="{% url 'delete_listing' listing.id %}"
+                class="btn btn-danger"
+            >
+                Delete
+            </a>
+
+        </div>
+
+        </div>
+
+    </div>
+
+{% empty %}
+
+    <div class="alert alert-info">
+
+        You have not created any listings yet.
+
+    </div>
+
+{% endfor %}
+
+
+</div>
+
+{% endblock %}
