@@ -8,6 +8,18 @@ from .forms import UserRegisterForm
 class UserLoginView(LoginView):
 
     template_name = 'accounts/login.html'
+    
+    def get_form(self, form_class=None):
+
+        form = super().get_form(form_class)
+
+        for field in form.fields.values():
+
+            field.widget.attrs.update({
+                'class': 'form-control'
+            })
+
+        return form
 
 
 def register(request):

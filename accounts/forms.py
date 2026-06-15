@@ -13,8 +13,16 @@ class UserRegisterForm(UserCreationForm):
         fields = (
             'username',
             'phone_number',
-            'is_owner',
-            'is_seeker',
             'password1',
             'password2',
         )
+        
+    def __init__(self, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+
+            field.widget.attrs.update({
+                'class': 'form-control'
+            })

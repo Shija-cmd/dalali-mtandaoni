@@ -1,130 +1,185 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ owner.username }}
+{{ owner.username }}
 {% endblock %}
 
 {% block content %}
 
 <div class="container py-5">
 
-    <div class="card shadow-sm mb-5">
+<!-- Owner Profile Card -->
 
-        <div class="card-body">
+<div class="card shadow border-0 mb-5">
 
-            <h2 class="fw-bold">
+    <div class="card-body p-4">
 
-                {{ owner.username }}
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
 
-            </h2>
+            <div>
 
-            {% if owner.is_verified %}
+                <h2 class="fw-bold mb-2">
 
-                <span class="badge bg-success">
+                    👤 {{ owner.username }}
 
-                    ✓ Verified Owner
+                </h2>
 
-                </span>
+                {% if owner.is_verified %}
 
-            {% endif %}
+    <span class="badge bg-success">
 
-            <p class="mt-3">
+        ✓ Verified
 
-                <strong>Phone:</strong>
-                {{ owner.phone_number }}
+    </span>
 
-            </p>
+{% else %}
 
-            <p>
+    <span class="badge bg-secondary">
 
-                <strong>Member Since:</strong>
-                {{ owner.created_at|date:"F Y" }}
+        Unverified
 
-            </p>
+    </span>
 
-            <p>
+{% endif %}
 
-                <strong>Total Listings:</strong>
-                {{ listings.count }}
+            </div>
 
-            </p>
+            <div class="text-md-end mt-3 mt-md-0">
+
+                <h4 class="text-primary fw-bold">
+
+                    {{ listings.count }}
+
+                </h4>
+
+                <small class="text-muted">
+
+                    Active Listings
+
+                </small>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+
+                    <p class="mb-0">
+
+                        📞 {{ owner.phone_number }}
+
+                    </p>
+
+                    <a
+                        href="https://wa.me/{{ whatsapp_number }}"
+                            target="_blank"
+                                class="btn btn-success btn-sm"
+                                >
+                                    💬 WhatsApp
+                    </a>
+
+                </div>
+    
+
+            </div>
+
+            <div class="col-md-6">
+
+                <p class="mb-2">
+
+                    📅 Member Since:
+                    {{ owner.created_at|date:"F Y" }}
+
+                </p>
+
+            </div>
 
         </div>
 
     </div>
 
-    <h3 class="mb-4">
+</div>
 
-        Listings by {{ owner.username }}
+<!-- Listings Section -->
 
-    </h3>
+<h3 class="fw-bold mb-4">
 
-    <div class="row">
+    Listings by {{ owner.username }}
 
-        {% for listing in listings %}
+</h3>
 
-            <div class="col-md-4 mb-4">
+<div class="row">
 
-                <div class="card shadow-sm h-100">
+    {% for listing in listings %}
 
-                    {% if listing.images.first %}
+        <div class="col-md-4 mb-4">
 
-                        <img
-                            src="{{ listing.images.first.image.url }}"
-                            class="card-img-top listing-card-image"
-                            alt="{{ listing.title }}"
-                        >
+            <div class="card shadow-sm h-100">
 
-                    {% endif %}
+                {% if listing.images.first %}
 
-                    <div class="card-body">
+                    <img
+                        src="{{ listing.images.first.image.url }}"
+                        class="card-img-top listing-card-image"
+                        alt="{{ listing.title }}"
+                    >
 
-                        <h5 class="fw-bold">
+                {% endif %}
 
-                            {{ listing.title }}
+                <div class="card-body">
 
-                        </h5>
+                    <h5 class="fw-bold">
 
-                        <p class="text-muted">
+                        {{ listing.title }}
 
-                            📍 {{ listing.location }}
+                    </h5>
 
-                        </p>
+                    <p class="text-muted mb-2">
 
-                        <p class="fw-bold text-primary">
+                        📍 {{ listing.location }}
 
-                            💰 TZS {{ listing.price }}
+                    </p>
 
-                        </p>
+                    <p class="fw-bold text-primary mb-3">
 
-                        <a
-                            href="{% url 'listing_detail' listing.id %}"
-                            class="btn btn-primary w-100"
-                        >
-                            View Details
-                        </a>
+                        💰 TZS {{ listing.price|floatformat:0 }}
 
-                    </div>
+                    </p>
 
-                </div>
-
-            </div>
-
-        {% empty %}
-
-            <div class="col-12">
-
-                <div class="alert alert-info">
-
-                    This owner has no active listings.
+                    <a
+                        href="{% url 'listing_detail' listing.id %}"
+                        class="btn btn-primary w-100"
+                    >
+                        View Details
+                    </a>
 
                 </div>
 
             </div>
 
-        {% endfor %}
+        </div>
 
-    </div>
+    {% empty %}
+
+        <div class="col-12">
+
+            <div class="alert alert-info text-center">
+
+                This owner has no active listings.
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
 
 </div>
 

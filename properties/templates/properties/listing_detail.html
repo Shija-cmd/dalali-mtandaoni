@@ -136,6 +136,14 @@
                     </a>
 
                     <a
+                        href="https://wa.me/{{ whatsapp_number }}?text=Hello,%20I%20am%20interested%20in%20{{ listing.title }}"
+                        target="_blank"
+                        class="btn btn-success owner-action-btn"
+                    >
+                        💬 WhatsApp
+                    </a>
+
+                    <a
                         href="{% url 'toggle_favorite' listing.id %}"
                         class="btn btn-outline-danger owner-action-btn"
                         >

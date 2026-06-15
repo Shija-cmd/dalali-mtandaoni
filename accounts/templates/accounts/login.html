@@ -8,42 +8,80 @@ Login
 
 <div class="container py-5">
 
-    <div class="row justify-content-center">
 
-        <div class="col-md-6">
+<div class="row justify-content-center">
 
-            <div class="card shadow-sm">
+    <div class="col-md-6 col-lg-5">
 
-                <div class="card-body">
+        <div class="card shadow border-0">
 
-                    <h2 class="text-center mb-4">
+            <div class="card-body p-4">
 
+                <h2 class="text-center fw-bold mb-4">
+
+                    Welcome Back
+
+                </h2>
+
+                <form method="post">
+
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Username
+
+                        </label>
+
+                        {{ form.username }}
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Password
+
+                        </label>
+
+                        {{ form.password }}
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary w-100"
+                    >
                         Login
+                    </button>
 
-                    </h2>
+                </form>
 
-                    <form method="post">
+                <hr>
 
-                        {% csrf_token %}
+                <p class="text-center mb-0">
 
-                        {{ form.as_p }}
+                    Don't have an account?
 
-                        <button
-                            type="submit"
-                            class="btn btn-primary w-100"
-                        >
-                            Login
-                        </button>
+                    <a href="{% url 'register' %}">
 
-                    </form>
+                        Create Account
 
-                </div>
+                    </a>
+
+                </p>
 
             </div>
 
         </div>
 
     </div>
+
+</div>
+
 
 </div>
 

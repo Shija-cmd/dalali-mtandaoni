@@ -5,16 +5,42 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from accounts.models import User
 from django.contrib import messages
+from .models import Favorite
+from django.http import HttpResponseForbidden
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import (
+    api_view,
+    permission_classes
+)
+
+
+from .serializers import (
+    CategorySerializer,
+    ListingSerializer,
+    UserRegisterSerializer,
+    ListingCreateSerializer,
+    UserSerializer
+)
 
 from .models import (
     Listing, 
     Category,
     Favorite,
+    VerificationRequest,
 
 )
 
 
+def format_whatsapp_number(phone):
 
+    if phone.startswith('0'):
+        return '255' + phone[1:]
+
+    return phone
 
 def home(request):
 
@@ -24,13 +50,39 @@ def home(request):
         is_featured=True
     )[:6]
 
+    total_listings = Listing.objects.filter(
+        is_active=True,
+        is_approved=True
+    ).count()
+
+    total_users = User.objects.count()
+
+    total_categories = Category.objects.count()
+
+    verified_owners = User.objects.filter(
+        is_verified=True
+    ).count()
+    
+    recent_listings = Listing.objects.filter(
+        is_active=True,
+        is_approved=True
+    ).order_by(
+        '-created_at'
+    )[:6]
+
     return render(
         request,
         'properties/home.html',
         {
-            'featured_listings': featured_listings
+            'featured_listings': featured_listings,
+            'total_listings': total_listings,
+            'total_users': total_users,
+            'total_categories': total_categories,
+            'verified_owners': verified_owners,
+            'recent_listings': recent_listings,
         }
     )
+    
     
 def about(request):
 
@@ -147,6 +199,10 @@ def listing_detail(request, pk):
             user=request.user,
             listing=listing
         ).exists()
+        
+    whatsapp_number = format_whatsapp_number(
+        listing.owner.phone_number
+    )
 
     return render(
         request,
@@ -154,6 +210,8 @@ def listing_detail(request, pk):
         {
             'listing': listing,
             'is_favorite': is_favorite,
+            'whatsapp_number': whatsapp_number,
+            
         }
     )
     
@@ -341,6 +399,15 @@ def dashboard(request):
         is_approved=False
     ).count()
 
+    total_favorites = Favorite.objects.filter(
+        user=request.user
+    ).count()
+    
+    pending_verification = VerificationRequest.objects.filter(
+        user=request.user,
+        status='pending'
+    ).exists()
+
     return render(
         request,
         'properties/dashboard.html',
@@ -348,6 +415,8 @@ def dashboard(request):
             'total_listings': total_listings,
             'approved_listings': approved_listings,
             'pending_listings': pending_listings,
+            'total_favorites': total_favorites,
+            'pending_verification': pending_verification,
         }
     ) 
     
@@ -363,6 +432,10 @@ def owner_profile(request, owner_id):
         is_active=True,
         is_approved=True
     )
+    
+    whatsapp_number = format_whatsapp_number(
+        owner.phone_number
+)
 
     return render(
         request,
@@ -370,6 +443,8 @@ def owner_profile(request, owner_id):
         {
             'owner': owner,
             'listings': listings,
+            'listing_count': listings.count(),
+            'whatsapp_number': whatsapp_number,
         }
     ) 
     
@@ -427,4 +502,363 @@ def my_favorites(request):
         {
             'favorites': favorites
         }
-    )       
+    ) 
+    
+@login_required
+def request_verification(request):
+
+    existing_request = VerificationRequest.objects.filter(
+        user=request.user,
+        status='pending'
+    ).exists()
+
+    if not existing_request:
+
+        VerificationRequest.objects.create(
+            user=request.user
+        )
+
+        messages.success(
+            request,
+            'Verification request submitted successfully.'
+        )
+
+    else:
+
+        messages.warning(
+            request,
+            'You already have a pending verification request.'
+        )
+
+    return redirect(
+        'dashboard'
+    ) 
+    
+
+@login_required
+def my_profile(request):
+
+    return redirect(
+        'owner_profile',
+        owner_id=request.user.id
+    )  
+    
+
+@login_required
+def verification_requests(request):
+
+    if not request.user.is_superuser:
+
+        return HttpResponseForbidden()
+
+    requests = VerificationRequest.objects.filter(
+        status='pending'
+    )
+
+    return render(
+        request,
+        'properties/verification_requests.html',
+        {
+            'requests': requests
+        }
+    ) 
+    
+    
+@login_required
+def approve_verification(request, request_id):
+
+    if not request.user.is_superuser:
+
+        return HttpResponseForbidden()
+
+    verification_request = get_object_or_404(
+        VerificationRequest,
+        id=request_id
+    )
+
+    verification_request.status = 'approved'
+    verification_request.save()
+
+    verification_request.user.is_verified = True
+    verification_request.user.save()
+    
+    messages.success(
+        request,
+        'Verification approved successfully.'
+    )
+
+    return redirect(
+        'verification_requests'
+    )
+    
+    
+@login_required
+def reject_verification(request, request_id):
+
+    if not request.user.is_superuser:
+
+        return HttpResponseForbidden()
+
+    verification_request = get_object_or_404(
+        VerificationRequest,
+        id=request_id
+    )
+
+    verification_request.status = 'rejected'
+    verification_request.save()
+
+    verification_request.user.is_verified = False
+    verification_request.user.save()
+    
+    messages.warning(
+        request,
+        'Verification request rejected.'
+    )
+
+    return redirect(
+        'verification_requests'
+    ) 
+    
+    
+@api_view(['GET'])
+def api_categories(request):
+
+    categories = Category.objects.all()
+
+    serializer = CategorySerializer(
+        categories,
+        many=True
+    )
+
+    return Response(
+        serializer.data
+    )
+    
+    
+@api_view(['GET'])
+def api_listings(request):
+
+    listings = Listing.objects.filter(
+        is_active=True,
+        is_approved=True
+    )
+
+    serializer = ListingSerializer(
+        listings,
+        many=True
+    )
+
+    return Response(
+        serializer.data
+    )
+    
+    
+@api_view(['GET'])
+def api_listing_detail(
+    request,
+    listing_id
+    ):
+
+    listing = get_object_or_404(
+        Listing,
+        id=listing_id,
+        is_active=True,
+        is_approved=True
+    )
+
+    serializer = ListingSerializer(
+        listing
+    )
+
+    return Response(
+        serializer.data
+    )
+    
+    
+@api_view(['GET'])
+def api_featured_listings(request):
+
+    listings = Listing.objects.filter(
+        is_active=True,
+        is_approved=True,
+        is_featured=True
+    )
+
+    serializer = ListingSerializer(
+        listings,
+        many=True
+    )
+
+    return Response(
+        serializer.data
+    )
+    
+
+@api_view(['GET'])
+def api_recent_listings(request):
+
+    listings = Listing.objects.filter(
+        is_active=True,
+        is_approved=True
+    ).order_by('-created_at')[:10]
+
+    serializer = ListingSerializer(
+        listings,
+        many=True
+    )
+
+    return Response(
+        serializer.data
+    )
+    
+    
+@api_view(['GET'])
+def api_search_listings(request):
+
+    query = request.GET.get(
+        'q',
+        ''
+    )
+
+    listings = Listing.objects.filter(
+        is_active=True,
+        is_approved=True
+    )
+
+    if query:
+
+        listings = listings.filter(
+
+            Q(title__icontains=query) |
+
+            Q(description__icontains=query) |
+
+            Q(location__icontains=query)
+
+        )
+
+    serializer = ListingSerializer(
+        listings,
+        many=True
+    )
+
+    return Response(
+        serializer.data
+    )
+    
+    
+@api_view(['POST'])
+def api_register(request):
+
+    serializer = UserRegisterSerializer(
+        data=request.data
+    )
+
+    if serializer.is_valid():
+
+        serializer.save()
+
+        return Response(
+            {
+                'message': 'Account created successfully.'
+            },
+            status=201
+        )
+
+    return Response(
+        serializer.errors,
+        status=400
+    )
+    
+    
+@api_view(['POST'])
+def api_login(request):
+
+    username = request.data.get(
+        'username'
+    )
+
+    password = request.data.get(
+        'password'
+    )
+
+    user = authenticate(
+        username=username,
+        password=password
+    )
+
+    if user:
+
+        token, created = Token.objects.get_or_create(
+            user=user
+        )
+
+        return Response(
+            {
+                'token': token.key,
+                'username': user.username,
+                'user_id': user.id,
+            }
+        )
+
+    return Response(
+        {
+            'error': 'Invalid credentials'
+        },
+        status=400
+    )
+    
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def api_create_listing(request):
+
+    serializer = ListingCreateSerializer(
+        data=request.data
+    )
+
+    if serializer.is_valid():
+
+        serializer.save(
+            owner=request.user
+        )
+
+        return Response(
+            serializer.data,
+            status=201
+        )
+
+    return Response(
+        serializer.errors,
+        status=400
+    )
+    
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def api_my_profile(request):
+
+    serializer = UserSerializer(
+        request.user
+    )
+
+    return Response(
+        serializer.data
+    )
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def api_my_listings(request):
+
+    listings = Listing.objects.filter(
+        owner=request.user
+    )
+
+    serializer = ListingSerializer(
+        listings,
+        many=True
+    )
+
+    return Response(
+        serializer.data
+    )

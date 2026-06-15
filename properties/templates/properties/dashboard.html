@@ -1,74 +1,46 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Dashboard
+Dashboard
 {% endblock %}
 
 {% block content %}
 
 <div class="container py-5">
 
-    <h1 class="mb-4">
+<div class="mb-4">
+
+    <h1 class="fw-bold">
         Owner Dashboard
     </h1>
 
-    <div class="row">
+    <p class="text-muted">
 
-        <div class="col-md-4">
+        Welcome back, {{ request.user.username }}
 
-            <div class="card shadow-sm text-center">
+    </p>
 
-                <div class="card-body">
+</div>
 
-                    <h2>
-                        {{ total_listings }}
-                    </h2>
+<div class="row g-4">
 
-                    <p>
-                        Total Listings
-                    </p>
+    <div class="col-md-3">
 
-                </div>
+        <div class="card shadow-sm text-center h-100">
 
-            </div>
+            <div class="card-body">
 
-        </div>
+                <h2 class="fw-bold text-primary">
 
-        <div class="col-md-4">
+                    {{ total_listings }}
 
-            <div class="card shadow-sm text-center">
+                </h2>
 
-                <div class="card-body">
+                <p class="mb-0">
 
-                    <h2 class="text-success">
-                        {{ approved_listings }}
-                    </h2>
+                    Total Listings
 
-                    <p>
-                        Approved Listings
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="card shadow-sm text-center">
-
-                <div class="card-body">
-
-                    <h2 class="text-warning">
-                        {{ pending_listings }}
-                    </h2>
-
-                    <p>
-                        Pending Approval
-                    </p>
-
-                </div>
+                </p>
 
             </div>
 
@@ -76,23 +48,157 @@
 
     </div>
 
-    <div class="mt-4">
+    <div class="col-md-3">
 
-        <a
-            href="{% url 'create_listing' %}"
-            class="btn btn-primary"
-        >
-            Create Listing
-        </a>
+        <div class="card shadow-sm text-center h-100">
 
-        <a
-            href="{% url 'my_listings' %}"
-            class="btn btn-secondary"
-        >
-            My Listings
-        </a>
+            <div class="card-body">
+
+                <h2 class="fw-bold text-success">
+
+                    {{ approved_listings }}
+
+                </h2>
+
+                <p class="mb-0">
+
+                    Approved
+
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm text-center h-100">
+
+            <div class="card-body">
+
+                <h2 class="fw-bold text-warning">
+
+                    {{ pending_listings }}
+
+                </h2>
+
+                <p class="mb-0">
+
+                    Pending
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm text-center h-100">
+
+            <div class="card-body">
+
+                <h2 class="fw-bold text-danger">
+
+                    {{ total_favorites }}
+
+                </h2>
+
+                <p class="mb-0">
+
+                    Favorites
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow-sm mt-5">
+
+    <div class="card-body">
+
+        <h5 class="fw-bold mb-3">
+
+            Account Status
+
+        </h5>
+
+        {% if request.user.is_verified %}
+
+<span class="badge bg-success fs-6">
+
+    ✓ Verified Owner
+
+</span>
+
+{% elif pending_verification %}
+
+
+<span class="badge bg-warning text-dark fs-6">
+
+    Verification Request Pending
+
+</span>
+
+{% else %}
+
+<span class="badge bg-secondary fs-6">
+
+    Not Verified
+
+</span>
+
+<div class="mt-3">
+
+    <a
+        href="{% url 'request_verification' %}"
+        class="btn btn-primary"
+    >
+        Request Verification
+    </a>
+
+</div>
+
+{% endif %}
+
+
+    </div>
+
+</div>
+
+<div class="mt-4 d-flex gap-2 flex-wrap">
+
+    <a
+        href="{% url 'create_listing' %}"
+        class="btn btn-primary"
+    >
+        Create Listing
+    </a>
+
+    <a
+        href="{% url 'my_listings' %}"
+        class="btn btn-secondary"
+    >
+        My Listings
+    </a>
+
+    <a
+        href="{% url 'my_favorites' %}"
+        class="btn btn-outline-danger"
+    >
+        My Favorites
+    </a>
+
+</div>
 
 </div>
 
