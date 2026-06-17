@@ -54,6 +54,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'properties.context_processors.verification_status',
             ],
         },
     },
@@ -128,6 +129,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
 
         'rest_framework.authentication.TokenAuthentication',
+
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+
+        'rest_framework.permissions.AllowAny',
 
     ],
 

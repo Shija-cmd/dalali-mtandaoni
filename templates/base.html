@@ -126,7 +126,7 @@
             class="dropdown-item"
             href="{% url 'dashboard' %}"
         >
-            Dashboard
+            📊 Dashboard
         </a>
 
     </li>
@@ -137,10 +137,12 @@
             class="dropdown-item"
             href="{% url 'my_profile' %}"
         >
-            My Profile
+            👤 My Profile
         </a>
 
     </li>
+
+    {% if user.is_verified %}
 
     <li>
 
@@ -148,10 +150,37 @@
             class="dropdown-item"
             href="{% url 'create_listing' %}"
         >
-            Create Listing
+            ➕ Create Listing
         </a>
 
     </li>
+
+{% elif pending_verification %}
+
+    <li>
+
+        <span
+            class="dropdown-item text-muted"
+        >
+            ⏳ Verification Pending
+        </span>
+
+    </li>
+
+{% else %}
+
+    <li>
+
+        <a
+            class="dropdown-item"
+            href="{% url 'request_verification' %}"
+        >
+            ✔ Request Verification
+        </a>
+
+    </li>
+
+{% endif %}
 
     <li>
 
@@ -159,7 +188,7 @@
             class="dropdown-item"
             href="{% url 'my_listings' %}"
         >
-            My Listings
+            📋 My Listings
         </a>
 
     </li>
@@ -185,7 +214,7 @@
 
             <h6 class="dropdown-header">
 
-                Admin
+                👑 Administrator
 
             </h6>
 
@@ -193,14 +222,55 @@
 
         <li>
 
-            <a
-                class="dropdown-item"
-                href="{% url 'verification_requests' %}"
-            >
-                Verification Requests
-            </a>
+    <a
+        class="dropdown-item d-flex justify-content-between align-items-center"
+        href="{% url 'verification_requests' %}"
+    >
+        <span>
 
-        </li>
+            ✅ User Verification Requests
+
+        </span>
+
+        {% if pending_user_requests %}
+
+            <span class="badge bg-danger rounded-pill">
+
+                {{ pending_user_requests }}
+
+            </span>
+
+        {% endif %}
+
+    </a>
+
+</li>
+
+<li>
+
+    <a
+        class="dropdown-item d-flex justify-content-between align-items-center"
+        href="{% url 'listing_approval_requests' %}"
+    >
+        <span>
+
+            🏠 Listing Approval Requests
+
+        </span>
+
+        {% if pending_listing_requests %}
+
+            <span class="badge bg-danger rounded-pill">
+
+                {{ pending_listing_requests }}
+
+            </span>
+
+        {% endif %}
+
+    </a>
+
+</li>
 
     {% endif %}
 
@@ -214,7 +284,7 @@
             class="dropdown-item text-danger"
             href="{% url 'logout' %}"
         >
-            Logout
+            🚪 Logout
         </a>
 
     </li>

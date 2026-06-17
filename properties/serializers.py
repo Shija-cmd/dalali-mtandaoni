@@ -4,6 +4,7 @@ from .models import (
     Category,
     Listing,
     ListingImage,
+    VerificationRequest,
     )
 
 class CategorySerializer(
@@ -132,5 +133,45 @@ class UserSerializer(
             'username',
             'phone_number',
             'is_verified',
+            'created_at',
+        ]
+        
+        
+class ListingImageCreateSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+
+        model = ListingImage
+
+        fields = [
+            'image',
+        ]
+        
+class UserUpdateSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+
+        model = User
+
+        fields = [
+            'username',
+            'phone_number',
+        ]
+        
+class VerificationRequestSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+
+        model = VerificationRequest
+
+        fields = [
+            'id',
+            'status',
             'created_at',
         ]

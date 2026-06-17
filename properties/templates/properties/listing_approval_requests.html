@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Listing Approval Requests
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="fw-bold mb-4">
+
+        🏠 Listing Approval Requests
+
+    </h2>
+
+    {% for listing in listings %}
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="row g-0">
+
+                <!-- Listing Image -->
+
+                <div class="col-md-3">
+
+                    {% if listing.images.first %}
+
+                        <img
+                            src="{{ listing.images.first.image.url }}"
+                            class="img-fluid rounded-start h-100 object-fit-cover"
+                            alt="{{ listing.title }}"
+                        >
+
+                    {% else %}
+
+                        <div class="d-flex align-items-center justify-content-center bg-light h-100">
+
+                            <span class="text-muted">
+
+                                No Image
+
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+                <!-- Listing Details -->
+
+                <div class="col-md-9">
+
+                    <div class="card-body">
+
+                        <h4 class="fw-bold">
+
+                            {{ listing.title }}
+
+                        </h4>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <p class="mb-2">
+
+                                    <strong>👤 Owner:</strong>
+                                    {{ listing.owner.username }}
+
+                                </p>
+
+                                <p class="mb-2">
+
+                                    <strong>📂 Category:</strong>
+                                    {{ listing.category }}
+
+                                </p>
+
+                                <p class="mb-2">
+
+                                    <strong>📍 Location:</strong>
+                                    {{ listing.location }}
+
+                                </p>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <p class="mb-2">
+
+                                    <strong>💰 Price:</strong>
+                                    TZS {{ listing.price }}
+
+                                </p>
+
+                                <p class="mb-2">
+
+                                    <strong>📅 Submitted:</strong>
+                                    {{ listing.created_at|date:"d M Y" }}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <p>
+
+                            {{ listing.description|truncatewords:30 }}
+
+                        </p>
+
+                        <div class="d-flex gap-2">
+
+                            <a
+                                href="{% url 'listing_detail' listing.id %}"
+                                class="btn btn-outline-primary"
+                            >
+                                👁 View Listing
+                            </a>
+
+                            <a
+                                href="{% url 'approve_listing' listing.id %}"
+                                class="btn btn-success"
+                            >
+                                ✅ Approve
+                            </a>
+
+                            <a
+                                href="{% url 'reject_listing' listing.id %}"
+                                class="btn btn-danger"
+                            >
+                                ❌ Reject
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="alert alert-success text-center">
+
+            🎉 There are no pending listing approval requests.
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

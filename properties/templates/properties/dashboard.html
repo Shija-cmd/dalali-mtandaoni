@@ -177,12 +177,38 @@ Dashboard
 
 <div class="mt-4 d-flex gap-2 flex-wrap">
 
+    {% if request.user.is_verified %}
+
     <a
         href="{% url 'create_listing' %}"
         class="btn btn-primary"
     >
         Create Listing
     </a>
+
+{% else %}
+
+    {% if pending_verification %}
+
+        <button
+            class="btn btn-secondary"
+            disabled
+        >
+            Verification Pending
+        </button>
+
+    {% else %}
+
+        <a
+            href="{% url 'request_verification' %}"
+            class="btn btn-warning"
+        >
+            Request Verification
+        </a>
+
+    {% endif %}
+
+{% endif %}
 
     <a
         href="{% url 'my_listings' %}"
