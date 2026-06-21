@@ -6,236 +6,72 @@ Home
 
 {% block content %}
 
-<!-- Hero Section -->
+<!-- HERO SECTION -->
+
 <section class="hero-section">
-
-    <div class="container text-center">
-
-        <h1 class="hero-title">
-
-            Find Houses, Rooms,
-            Plots & Cars Across Tanzania
-
-        </h1>
-
-        <p class="hero-subtitle">
-
-            Connect directly with property owners
-            and discover verified listings.
-
-        </p>
-
-        <div>
-
-            <a href="{% url 'listings' %}"
-            class="btn btn-primary btn-lg me-3">
-
-                Browse Listings
-
-            </a>
-
-            <a href="#"
-            class="btn btn-outline-primary btn-lg">
-
-                Become an Owner
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- Properties Section -->
-<section class="py-5 bg-light">
 
     <div class="container">
 
-        <h2 class="text-center fw-bold mb-5">
+        <div class="row align-items-center">
 
-            Browse by Category
+            <!-- LEFT -->
 
-        </h2>
+            <div class="col-lg-7">
 
-        <div class="row g-4">
+                <span class="badge bg-warning text-dark px-3 py-2 mb-3">
 
-            <div class="col-md-3">
+                    Tanzania's Trusted Marketplace
 
-                <div class="card category-card text-center shadow-sm h-100">
+                </span>
 
-                    <div class="card-body">
+                <h1 class="hero-title">
 
-                        <div class="display-4 mb-3">
-                            🏠
+                    Find Your Perfect
+
+                    <span class="text-primary">
+
+                        House, Room,
+
+                        Plot or Car
+
+                    </span>
+
+                </h1>
+
+                <p class="hero-subtitle">
+
+                    Browse verified listings from trusted owners across Tanzania.
+                    Rent, buy or sell with confidence.
+
+                </p>
+
+                <!-- Search -->
+
+                <div class="hero-search shadow">
+
+                    <div class="row g-2">
+
+                        <div class="col-md-8">
+
+                            <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                placeholder="Search by city, district or location..."
+                            >
+
                         </div>
 
-                        <h5 class="fw-bold">
-
-                            Houses
-
-                        </h5>
-
-                        <p class="text-muted">
-
-                            Find houses for rent and sale.
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="card category-card text-center shadow-sm h-100">
-
-                    <div class="card-body">
-
-                        <div class="display-4 mb-3">
-                            🛏️
-                        </div>
-
-                        <h5 class="fw-bold">
-
-                            Rooms
-
-                        </h5>
-
-                        <p class="text-muted">
-
-                            Affordable rooms across Tanzania.
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="card category-card text-center shadow-sm h-100">
-
-                    <div class="card-body">
-
-                        <div class="display-4 mb-3">
-                            🌍
-                        </div>
-
-                        <h5 class="fw-bold">
-
-                            Plots
-
-                        </h5>
-
-                        <p class="text-muted">
-
-                            Discover plots and land for sale.
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="card category-card text-center shadow-sm h-100">
-
-                    <div class="card-body">
-
-                        <div class="display-4 mb-3">
-                            🚗
-                        </div>
-
-                        <h5 class="fw-bold">
-
-                            Cars
-
-                        </h5>
-
-                        <p class="text-muted">
-
-                            Cars available for hire and sale.
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- Featured Listings Section -->
-
-<section class="py-5">
-
-<div class="container">
-
-    <h2 class="text-center fw-bold mb-5">
-
-        ⭐ Featured Listings
-
-    </h2>
-
-    <div class="row">
-
-        {% for listing in featured_listings %}
-
-            <div class="col-md-4 mb-4">
-
-                <div class="card shadow-sm h-100">
-
-                    {% if listing.images.first %}
-
-                        <img
-                            src="{{ listing.images.first.image.url }}"
-                            class="card-img-top listing-card-image"
-                            alt="{{ listing.title }}"
-                        >
-
-                    {% endif %}
-
-                    <div class="card-body">
-
-                        <h5 class="fw-bold">
-                            {{ listing.title }}
-                        </h5>
-
-                        <p class="text-muted">
-                            📍 {{ listing.location }}
-                        </p>
-
-                        <p class="fw-bold text-primary">
-                            💰 TZS {{ listing.price }}
-                        </p>
-
-                        <span class="badge bg-warning text-dark">
-
-                            Featured
-
-                        </span>
-
-                        <div class="mt-3">
+                        <div class="col-md-4">
 
                             <a
-                                href="{% url 'listing_detail' listing.id %}"
-                                class="btn btn-primary w-100"
+                                href="{% url 'listings' %}"
+                                class="btn btn-warning btn-lg w-100"
                             >
-                                View Details
+
+                                <i class="bi bi-search"></i>
+
+                                Search
+
                             </a>
 
                         </div>
@@ -244,9 +80,384 @@ Home
 
                 </div>
 
+                <div class="mt-4 d-flex flex-wrap gap-3">
+
+                    <a
+                        href="{% url 'listings' %}"
+                        class="btn btn-primary btn-lg px-4"
+                    >
+
+                        Browse Listings
+
+                    </a>
+
+                    <a
+                        href="#"
+                        class="btn btn-outline-primary btn-lg px-4"
+                    >
+
+                        Become an Owner
+
+                    </a>
+
+                </div>
+
             </div>
 
-        {% empty %}
+            <!-- RIGHT -->
+
+            <div class="col-lg-5 mt-5 mt-lg-0">
+
+                <div class="hero-stats">
+
+                    <div class="row g-3">
+
+                        <div class="col-6">
+
+                            <div class="stat-card">
+
+                                <h2>{{ total_listings }}</h2>
+
+                                <p>Active Listings</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <div class="stat-card">
+
+                                <h2>{{ verified_owners }}</h2>
+
+                                <p>Verified Owners</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <div class="stat-card">
+
+                                <h2>{{ total_users }}</h2>
+
+                                <p>Users</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <div class="stat-card">
+
+                                <h2>{{ total_categories }}</h2>
+
+                                <p>Categories</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="scroll-indicator">
+
+    <span>Scroll Down</span>
+
+    <i class="bi bi-chevron-double-down"></i>
+
+    </div>
+
+</section>
+
+<!-- Properties Section -->
+<!-- Browse by Category -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span class="badge bg-primary px-3 py-2 mb-3">
+
+                PROPERTY CATEGORIES
+
+            </span>
+
+            <h2 class="fw-bold display-6">
+
+                Browse by Category
+
+            </h2>
+
+            <p class="text-muted">
+
+                Find exactly what you're looking for across Tanzania.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="category-card text-center h-100">
+
+                    <div class="category-icon bg-primary">
+
+                        <i class="bi bi-house-door-fill"></i>
+
+                    </div>
+
+                    <h4 class="fw-bold mt-4">
+
+                        Houses
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        Buy or rent beautiful houses from verified owners.
+
+                    </p>
+
+                    <a href="{% url 'listings' %}" class="btn btn-outline-primary">
+
+                        Explore
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="category-card text-center h-100">
+
+                    <div class="category-icon bg-success">
+
+                        <i class="bi bi-door-open-fill"></i>
+
+                    </div>
+
+                    <h4 class="fw-bold mt-4">
+
+                        Rooms
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        Affordable rooms for students and professionals.
+
+                    </p>
+
+                    <a href="{% url 'listings' %}" class="btn btn-outline-success">
+
+                        Explore
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="category-card text-center h-100">
+
+                    <div class="category-icon bg-warning">
+
+                        <i class="bi bi-map-fill"></i>
+
+                    </div>
+
+                    <h4 class="fw-bold mt-4">
+
+                        Plots
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        Residential and commercial land opportunities.
+
+                    </p>
+
+                    <a href="{% url 'listings' %}" class="btn btn-outline-warning">
+
+                        Explore
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="category-card text-center h-100">
+
+                    <div class="category-icon bg-danger">
+
+                        <i class="bi bi-car-front-fill"></i>
+
+                    </div>
+
+                    <h4 class="fw-bold mt-4">
+
+                        Cars
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        Buy, sell or hire vehicles across Tanzania.
+
+                    </p>
+
+                    <a href="{% url 'listings' %}" class="btn btn-outline-danger">
+
+                        Explore
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FEATURED LISTINGS
+========================== -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span class="badge bg-warning text-dark px-3 py-2 mb-3">
+
+                FEATURED PROPERTIES
+
+            </span>
+
+            <h2 class="fw-bold display-6">
+
+                Featured Listings
+
+            </h2>
+
+            <p class="text-muted">
+
+                Discover our hand-picked premium listings from verified owners.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for listing in featured_listings %}
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="listing-card">
+
+                    <div class="listing-image-wrapper">
+
+                        {% if listing.images.first %}
+
+                        <img
+                            src="{{ listing.images.first.image.url }}"
+                            class="listing-card-image"
+                            alt="{{ listing.title }}"
+                        >
+
+                        {% endif %}
+
+                        <span class="featured-badge">
+
+                            Featured
+
+                        </span>
+
+                        <span class="price-badge">
+
+                            TZS {{ listing.price|floatformat:0 }}
+
+                        </span>
+
+                    </div>
+
+                    <div class="card-body p-4">
+
+                        <h5 class="fw-bold">
+
+                            {{ listing.title }}
+
+                        </h5>
+
+                        <p class="text-muted mb-3">
+
+                            <i class="bi bi-geo-alt-fill text-danger"></i>
+
+                            {{ listing.location }}
+
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+
+                            <span class="badge bg-success">
+
+                                Verified
+
+                            </span>
+
+                            <small class="text-muted">
+
+                                Featured Listing
+
+                            </small>
+
+                        </div>
+
+                        <a
+                            href="{% url 'listing_detail' listing.id %}"
+                            class="btn btn-primary w-100"
+                        >
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
 
             <div class="col-12">
 
@@ -258,68 +469,131 @@ Home
 
             </div>
 
-        {% endfor %}
+            {% endfor %}
+
+        </div>
 
     </div>
 
-</div>
-
 </section>
 
-<section class="py-5 bg-light">
+<!-- =========================
+     RECENT LISTINGS
+========================= -->
 
-<div class="container">
+<section class="py-5 recent-section">
 
-    <h2 class="text-center fw-bold mb-5">
+    <div class="container">
 
-        🕒 Recently Added Listings
+        <div class="d-flex justify-content-between align-items-center mb-5">
 
-    </h2>
+            <div>
 
-    <div class="row">
+                <span class="badge bg-success px-3 py-2 mb-2">
 
-        {% for listing in recent_listings %}
+                    JUST ADDED
 
-            <div class="col-md-4 mb-4">
+                </span>
 
-                <div class="card shadow-sm h-100">
+                <h2 class="fw-bold">
 
-                    {% if listing.images.first %}
+                    Recently Added Listings
 
-                        <img
-                            src="{{ listing.images.first.image.url }}"
-                            class="card-img-top listing-card-image"
-                            alt="{{ listing.title }}"
-                        >
+                </h2>
 
-                    {% endif %}
+                <p class="text-muted">
 
-                    <div class="card-body">
+                    Fresh properties recently published on Dalali Mtandaoni.
 
-                        <h5 class="fw-bold">
+                </p>
 
-                            {{ listing.title }}
+            </div>
 
-                        </h5>
+            <a
+                href="{% url 'listings' %}"
+                class="btn btn-outline-primary"
+            >
 
-                        <p class="text-muted">
+                View All
 
-                            📍 {{ listing.location }}
+            </a>
 
-                        </p>
+        </div>
 
-                        <p class="fw-bold text-primary">
+        <div class="row g-4">
 
-                            💰 TZS {{ listing.price|floatformat:0 }}
+            {% for listing in recent_listings %}
 
-                        </p>
+            <div class="col-lg-6">
 
-                        <a
-                            href="{% url 'listing_detail' listing.id %}"
-                            class="btn btn-outline-primary w-100"
-                        >
-                            View Details
-                        </a>
+                <div class="recent-card">
+
+                    <div class="row g-0">
+
+                        <div class="col-md-5">
+
+                            {% if listing.images.first %}
+
+                            <img
+                                src="{{ listing.images.first.image.url }}"
+                                class="recent-image"
+                                alt="{{ listing.title }}"
+                            >
+
+                            {% else %}
+
+                            <img
+                                src="https://placehold.co/600x400?text=No+Image"
+                                class="recent-image"
+                                alt="No Image"
+                            >
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="col-md-7">
+
+                            <div class="recent-content">
+
+                                <span class="badge bg-success mb-3">
+
+                                    New
+
+                                </span>
+
+                                <h5 class="fw-bold">
+
+                                    {{ listing.title }}
+
+                                </h5>
+
+                                <p class="text-muted">
+
+                                    <i class="bi bi-geo-alt-fill text-danger"></i>
+
+                                    {{ listing.location }}
+
+                                </p>
+
+                                <h4 class="text-primary fw-bold">
+
+                                    TZS {{ listing.price|floatformat:0 }}
+
+                                </h4>
+
+                                <a
+                                    href="{% url 'listing_detail' listing.id %}"
+                                    class="btn btn-primary mt-3"
+                                >
+
+                                    View Details
+
+                                </a>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -327,7 +601,7 @@ Home
 
             </div>
 
-        {% empty %}
+            {% empty %}
 
             <div class="col-12">
 
@@ -339,133 +613,156 @@ Home
 
             </div>
 
-        {% endfor %}
+            {% endfor %}
+
+        </div>
 
     </div>
-
-</div>
 
 </section>
 
 
-<!-- Trust Section -->
-<section class="py-5">
+<!-- =========================
+     WHY CHOOSE US
+========================= -->
 
-<div class="container">
+<section class="why-us-section py-5">
 
-    <div class="row g-4">
+    <div class="container">
 
-        <div class="col-md-3">
+        <div class="section-header">
 
-            <div class="card shadow-sm border-0 text-center h-100">
+            <span class="badge bg-primary px-3 py-2 mb-3">
 
-                <div class="card-body">
+                WHY CHOOSE US
 
-                    <div class="display-5 mb-2">
+            </span>
 
-                        🏠
+            <h2 class="display-6 fw-bold">
 
-                    </div>
+                Why Choose Dalali Mtandaoni?
 
-                    <h2 class="fw-bold text-primary">
+            </h2>
 
-                        {{ total_listings }}
+            <p class="text-muted">
 
-                    </h2>
+                We make finding, buying and renting properties across Tanzania
+                easier, safer and more transparent.
 
-                    <p class="mb-0">
-
-                        Active Listings
-
-                    </p>
-
-                </div>
-
-            </div>
+            </p>
 
         </div>
 
-        <div class="col-md-3">
+        <div class="row g-4">
 
-            <div class="card shadow-sm border-0 text-center h-100">
+            <!-- Feature 1 -->
 
-                <div class="card-body">
+            <div class="col-lg-3 col-md-6">
 
-                    <div class="display-5 mb-2">
+                <div class="feature-card">
 
-                        👤
+                    <div class="feature-icon bg-primary">
 
-                    </div>
-
-                    <h2 class="fw-bold text-success">
-
-                        {{ total_users }}
-
-                    </h2>
-
-                    <p class="mb-0">
-
-                        Registered Users
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-3">
-
-            <div class="card shadow-sm border-0 text-center h-100">
-
-                <div class="card-body">
-
-                    <div class="display-5 mb-2">
-
-                        📂
+                        <i class="bi bi-patch-check-fill"></i>
 
                     </div>
 
-                    <h2 class="fw-bold text-warning">
-
-                        {{ total_categories }}
-
-                    </h2>
-
-                    <p class="mb-0">
-
-                        Categories
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-3">
-
-            <div class="card shadow-sm border-0 text-center h-100">
-
-                <div class="card-body">
-
-                    <div class="display-5 mb-2">
-
-                        ✅
-
-                    </div>
-
-                    <h2 class="fw-bold text-danger">
-
-                        {{ verified_owners }}
-
-                    </h2>
-
-                    <p class="mb-0">
+                    <h4>
 
                         Verified Owners
+
+                    </h4>
+
+                    <p>
+
+                        Property owners are verified before receiving permission
+                        to publish listings.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Feature 2 -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon bg-success">
+
+                        <i class="bi bi-search"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Easy Search
+
+                    </h4>
+
+                    <p>
+
+                        Quickly search houses, rooms, plots and cars using
+                        powerful filters.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Feature 3 -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon bg-warning">
+
+                        <i class="bi bi-geo-alt-fill"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Nationwide Coverage
+
+                    </h4>
+
+                    <p>
+
+                        Browse listings from every region across Tanzania in one place.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Feature 4 -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon bg-danger">
+
+                        <i class="bi bi-shield-lock-fill"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Secure Platform
+
+                    </h4>
+
+                    <p>
+
+                        Connect directly with owners through a trusted and secure
+                        marketplace.
 
                     </p>
 
@@ -477,7 +774,109 @@ Home
 
     </div>
 
-</div>
+</section>
+
+<!-- =========================
+     CALL TO ACTION
+========================= -->
+
+<section class="cta-section">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-8">
+
+                    <span class="badge bg-warning text-dark px-3 py-2 mb-3">
+
+                        START TODAY
+
+                    </span>
+
+                    <h2 class="fw-bold text-white mb-3">
+
+                        Ready to Find or List Your Property?
+
+                    </h2>
+
+                    <p class="text-white-50 mb-0">
+
+                        Join thousands of Tanzanians using
+                        <strong>Dalali Mtandaoni</strong> to buy, rent,
+                        sell houses, rooms, plots and cars with confidence.
+
+                    </p>
+
+                </div>
+
+                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+
+                    {% if user.is_authenticated %}
+
+                        {% if user.is_verified %}
+
+                            <a
+                                href="{% url 'create_listing' %}"
+                                class="btn btn-warning btn-lg px-4 me-2"
+                            >
+
+                                <i class="bi bi-plus-circle-fill me-2"></i>
+
+                                Create Listing
+
+                            </a>
+
+                        {% else %}
+
+                            <a
+                                href="{% url 'request_verification' %}"
+                                class="btn btn-warning btn-lg px-4 me-2"
+                            >
+
+                                <i class="bi bi-patch-check-fill me-2"></i>
+
+                                Get Verified
+
+                            </a>
+
+                        {% endif %}
+
+                    {% else %}
+
+                        <a
+                            href="{% url 'register' %}"
+                            class="btn btn-warning btn-lg px-4 me-2"
+                        >
+
+                            <i class="bi bi-person-plus-fill me-2"></i>
+
+                            Register
+
+                        </a>
+
+                    {% endif %}
+
+                    <a
+                        href="{% url 'listings' %}"
+                        class="btn btn-outline-light btn-lg px-4 mt-2 mt-lg-0"
+                    >
+
+                        <i class="bi bi-search me-2"></i>
+
+                        Browse Listings
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 

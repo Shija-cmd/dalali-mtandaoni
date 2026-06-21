@@ -829,7 +829,10 @@ def api_listings(request):
 
     serializer = ListingSerializer(
         result,
-        many=True
+        many=True,
+        context={
+            'request': request,
+        }
     )
 
     return pagination.get_paginated_response(
@@ -851,7 +854,10 @@ def api_listing_detail(
     )
 
     serializer = ListingSerializer(
-        listing
+        listing,
+        context={
+            'request': request,
+        }
     )
 
     return Response(
@@ -870,7 +876,10 @@ def api_featured_listings(request):
 
     serializer = ListingSerializer(
         listings,
-        many=True
+        many=True,
+        context={
+            'request': request,
+        }
     )
 
     return Response(
@@ -890,7 +899,10 @@ def api_recent_listings(request):
 
     serializer = ListingSerializer(
         listings,
-        many=True
+        many=True,
+        context={
+            'request': request,
+        }
     )
 
     return Response(
@@ -923,7 +935,10 @@ def api_search_listings(request):
 
     serializer = ListingSerializer(
         listings,
-        many=True
+        many=True,
+        context={
+            'request': request,
+        }
     )
 
     return Response(
@@ -952,12 +967,18 @@ def api_home(request):
         {
             'featured_listings': ListingSerializer(
                 featured,
-                many=True
+                many=True,
+                context={
+                    'request': request,
+                }
             ).data,
 
             'recent_listings': ListingSerializer(
                 recent,
-                many=True
+                many=True,
+                context={
+                    'request': request,
+                }
             ).data,
 
             'categories': CategorySerializer(
@@ -1048,12 +1069,12 @@ def api_create_listing(request):
 
     if serializer.is_valid():
 
-        serializer.save(
+        listing = serializer.save(
             owner=request.user
         )
 
         return Response(
-            serializer.data,
+            ListingSerializer(listing).data,
             status=201
         )
 
@@ -1086,7 +1107,10 @@ def api_my_listings(request):
 
     serializer = ListingSerializer(
         listings,
-        many=True
+        many=True,
+        context={
+            'request': request,
+        }
     )
 
     return Response(
@@ -1111,7 +1135,10 @@ def api_my_favorites(request):
 
     serializer = ListingSerializer(
         listings,
-        many=True
+        many=True,
+        context={
+            'request': request,
+        }
     )
 
     return Response(
@@ -1385,7 +1412,10 @@ def api_owner_profile(
 
     listings_data = ListingSerializer(
         listings,
-        many=True
+        many=True,
+        context={
+            'request': request,
+        }
     ).data
 
     return Response(

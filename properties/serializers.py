@@ -5,21 +5,33 @@ from .models import (
     Listing,
     ListingImage,
     VerificationRequest,
-    )
+)
+
+from accounts.models import User
+
+
+# ==========================================================
+#                 CATEGORY SERIALIZER
+# ==========================================================
 
 class CategorySerializer(
     serializers.ModelSerializer
-    ):
+):
+
     class Meta:
 
         model = Category
 
         fields = '__all__'
-        
+
+
+# ==========================================================
+#              LISTING IMAGE SERIALIZER
+# ==========================================================
 
 class ListingImageSerializer(
     serializers.ModelSerializer
-    ):
+):
 
     class Meta:
 
@@ -30,43 +42,111 @@ class ListingImageSerializer(
             'image',
         ]
 
+
+# ==========================================================
+#                 LISTING SERIALIZER
+# ==========================================================
+
 class ListingSerializer(
     serializers.ModelSerializer
-    ):
+):
 
     category = serializers.StringRelatedField()
+    
+    category_id = serializers.IntegerField(
+        source='category.id',
+        read_only=True,
+    )
 
     owner = serializers.StringRelatedField()
 
     first_image = serializers.SerializerMethodField()
-    
-    images = ListingImageSerializer(
-        many=True,
-        read_only=True
-    )
+
+    images = serializers.SerializerMethodField()
 
     class Meta:
 
         model = Listing
 
-        fields = '__all__'
+        fields = [
+            'id',
+            'category',
+            'category_id',
+            'owner',
+            'first_image',
+            'images',
+            'title',
+            'description',
+            'location',
+            'price',
+            'is_approved',
+            'is_featured',
+            'is_active',
+            'created_at',
+            'updated_at',
+        ]
 
     def get_first_image(
         self,
         obj
     ):
 
+        request = self.context.get(
+            'request'
+        )
+
         image = obj.images.first()
 
         if image:
 
+            if request:
+
+                return request.build_absolute_uri(
+                    image.image.url
+                )
+
             return image.image.url
 
         return None
-    
 
-from accounts.models import User
+    def get_images(
+        self,
+        obj
+    ):
 
+        request = self.context.get(
+            'request'
+        )
+
+        image_list = []
+
+        for image in obj.images.all():
+
+            if request:
+
+                image_url = request.build_absolute_uri(
+                    image.image.url
+                )
+
+            else:
+
+                image_url = image.image.url
+
+            image_list.append(
+
+                {
+                    'id': image.id,
+                    'image': image_url,
+                }
+
+            )
+
+        return image_list
+
+
+# ==========================================================
+#            USER REGISTRATION SERIALIZER
+# ==========================================================
 
 class UserRegisterSerializer(
     serializers.ModelSerializer
@@ -102,7 +182,12 @@ class UserRegisterSerializer(
         )
 
         return user
-    
+
+
+# ==========================================================
+#            CREATE LISTING SERIALIZER
+# ==========================================================
+
 class ListingCreateSerializer(
     serializers.ModelSerializer
 ):
@@ -112,13 +197,23 @@ class ListingCreateSerializer(
         model = Listing
 
         fields = [
+
             'category',
+
             'title',
+
             'description',
+
             'location',
+
             'price',
+
         ]
-        
+
+
+# ==========================================================
+#                USER SERIALIZER
+# ==========================================================
 
 class UserSerializer(
     serializers.ModelSerializer
@@ -135,8 +230,12 @@ class UserSerializer(
             'is_verified',
             'created_at',
         ]
-        
-        
+
+
+# ==========================================================
+#         LISTING IMAGE CREATE SERIALIZER
+# ==========================================================
+
 class ListingImageCreateSerializer(
     serializers.ModelSerializer
 ):
@@ -148,7 +247,12 @@ class ListingImageCreateSerializer(
         fields = [
             'image',
         ]
-        
+
+
+# ==========================================================
+#          USER UPDATE SERIALIZER
+# ==========================================================
+
 class UserUpdateSerializer(
     serializers.ModelSerializer
 ):
@@ -161,7 +265,12 @@ class UserUpdateSerializer(
             'username',
             'phone_number',
         ]
-        
+
+
+# ==========================================================
+#       VERIFICATION REQUEST SERIALIZER
+# ==========================================================
+
 class VerificationRequestSerializer(
     serializers.ModelSerializer
 ):

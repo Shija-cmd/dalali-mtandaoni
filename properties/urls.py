@@ -44,6 +44,12 @@ urlpatterns = [
         views.owner_profile,
         name='owner_profile'
     ),
+    
+    path(
+        'api/home/',
+        views.api_home,
+        name='api_home'
+    ),
 
 
     # ======================================================
