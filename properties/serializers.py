@@ -60,6 +60,25 @@ class ListingSerializer(
 
     owner = serializers.StringRelatedField()
 
+    owner_full_name = serializers.SerializerMethodField()
+
+    owner_first_name = serializers.CharField(
+        source='owner.first_name',
+        read_only=True
+    )
+
+    owner_last_name = serializers.CharField(
+        source='owner.last_name',
+        read_only=True
+    )
+
+    owner_phone_number = serializers.CharField(
+        source='owner.phone_number',
+        read_only=True
+    )
+
+    owner_profile_picture = serializers.SerializerMethodField()
+
     first_image = serializers.SerializerMethodField()
 
     images = serializers.SerializerMethodField()
@@ -73,6 +92,11 @@ class ListingSerializer(
             'category',
             'category_id',
             'owner',
+            'owner_full_name',
+            'owner_first_name',
+            'owner_last_name',
+            'owner_phone_number',
+            'owner_profile_picture',
             'first_image',
             'images',
             'title',
@@ -85,6 +109,34 @@ class ListingSerializer(
             'created_at',
             'updated_at',
         ]
+
+    def get_owner_full_name(
+        self,
+        obj
+    ):
+
+        return obj.owner.get_full_name() or obj.owner.username
+
+    def get_owner_profile_picture(
+        self,
+        obj
+    ):
+
+        if not obj.owner.profile_picture:
+
+            return None
+
+        request = self.context.get(
+            'request'
+        )
+
+        if request:
+
+            return request.build_absolute_uri(
+                obj.owner.profile_picture.url
+            )
+
+        return obj.owner.profile_picture.url
 
     def get_first_image(
         self,
@@ -162,6 +214,8 @@ class UserRegisterSerializer(
 
         fields = [
             'username',
+            'first_name',
+            'last_name',
             'phone_number',
             'password',
         ]
@@ -174,6 +228,16 @@ class UserRegisterSerializer(
         user = User.objects.create_user(
 
             username=validated_data['username'],
+
+            first_name=validated_data.get(
+                'first_name',
+                ''
+            ),
+
+            last_name=validated_data.get(
+                'last_name',
+                ''
+            ),
 
             phone_number=validated_data['phone_number'],
 
@@ -219,6 +283,8 @@ class UserSerializer(
     serializers.ModelSerializer
 ):
 
+    profile_picture = serializers.SerializerMethodField()
+
     class Meta:
 
         model = User
@@ -226,10 +292,34 @@ class UserSerializer(
         fields = [
             'id',
             'username',
+            'first_name',
+            'last_name',
             'phone_number',
+            'profile_picture',
             'is_verified',
             'created_at',
         ]
+
+    def get_profile_picture(
+        self,
+        obj
+    ):
+
+        if not obj.profile_picture:
+
+            return None
+
+        request = self.context.get(
+            'request'
+        )
+
+        if request:
+
+            return request.build_absolute_uri(
+                obj.profile_picture.url
+            )
+
+        return obj.profile_picture.url
 
 
 # ==========================================================
@@ -263,7 +353,10 @@ class UserUpdateSerializer(
 
         fields = [
             'username',
+            'first_name',
+            'last_name',
             'phone_number',
+            'profile_picture',
         ]
 
 
@@ -282,5 +375,6 @@ class VerificationRequestSerializer(
         fields = [
             'id',
             'status',
+            'id_document',
             'created_at',
         ]

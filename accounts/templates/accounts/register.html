@@ -78,6 +78,54 @@ Register
 
                     </div>
 
+                    <!-- First Name -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-semibold">
+
+                            First Name
+
+                        </label>
+
+                        {{ form.first_name }}
+
+                        {% for error in form.first_name.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                {{ error }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <!-- Last Name -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-semibold">
+
+                            Last Name
+
+                        </label>
+
+                        {{ form.last_name }}
+
+                        {% for error in form.last_name.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                {{ error }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
                     <!-- Phone -->
 
                     <div class="mb-4">

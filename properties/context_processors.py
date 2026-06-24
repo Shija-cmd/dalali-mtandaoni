@@ -7,15 +7,18 @@ from .models import (
 def verification_status(request):
 
     pending_verification = False
+    pending_verification_request = None
     pending_user_requests = 0
     pending_listing_requests = 0
 
     if request.user.is_authenticated:
 
-        pending_verification = VerificationRequest.objects.filter(
+        pending_verification_request = VerificationRequest.objects.filter(
             user=request.user,
             status='pending'
-        ).exists()
+        ).first()
+
+        pending_verification = pending_verification_request is not None
 
         if request.user.is_superuser:
 
@@ -30,6 +33,8 @@ def verification_status(request):
     return {
 
         'pending_verification': pending_verification,
+
+        'pending_verification_request': pending_verification_request,
 
         'pending_user_requests': pending_user_requests,
 

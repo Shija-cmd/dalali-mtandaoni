@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ owner.username }}
+{{ owner.get_full_name|default:owner.username }}
 {% endblock %}
 
 {% block content %}
@@ -24,22 +24,44 @@
 
                 <div class="d-flex align-items-center gap-4 flex-wrap">
 
-                    <div
-                        class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
-                        style="width:90px;height:90px;font-size:2rem;font-weight:bold;"
-                    >
+                    {% if owner.profile_picture %}
 
-                        {{ owner.username|first|upper }}
+                        <img
+                            src="{{ owner.profile_picture.url }}"
+                            class="profile-picture-lg"
+                            alt="{{ owner.get_full_name|default:owner.username }} profile picture"
+                        >
 
-                    </div>
+                    {% else %}
+
+                        <div
+                            class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
+                            style="width:90px;height:90px;font-size:2rem;font-weight:bold;"
+                        >
+
+                            {% if owner.get_full_name %}
+                                {{ owner.get_full_name|first|upper }}
+                            {% else %}
+                                {{ owner.username|first|upper }}
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
 
                     <div>
 
                         <h2 class="fw-bold mb-2">
 
-                            {{ owner.username }}
+                            {{ owner.get_full_name|default:owner.username }}
 
                         </h2>
+
+                        <p class="text-muted mb-2">
+
+                            @{{ owner.username }}
+
+                        </p>
 
                         {% if owner.is_verified %}
 
@@ -84,6 +106,112 @@
             </div>
 
         </div>
+
+        {% if is_my_profile %}
+
+            <hr class="my-4">
+
+            <form
+                method="post"
+                enctype="multipart/form-data"
+                class="profile-edit-form"
+            >
+
+                {% csrf_token %}
+
+                <div class="row g-3 align-items-end">
+
+                    <div class="col-md-4">
+
+                        <label
+                            class="form-label fw-semibold"
+                            for="{{ form.username.id_for_label }}"
+                        >
+                            Username
+                        </label>
+
+                        {{ form.username }}
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label
+                            class="form-label fw-semibold"
+                            for="{{ form.first_name.id_for_label }}"
+                        >
+                            First Name
+                        </label>
+
+                        {{ form.first_name }}
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label
+                            class="form-label fw-semibold"
+                            for="{{ form.last_name.id_for_label }}"
+                        >
+                            Last Name
+                        </label>
+
+                        {{ form.last_name }}
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label
+                            class="form-label fw-semibold"
+                            for="{{ form.phone_number.id_for_label }}"
+                        >
+                            Phone Number
+                        </label>
+
+                        {{ form.phone_number }}
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label
+                            class="form-label fw-semibold"
+                            for="{{ form.profile_picture.id_for_label }}"
+                        >
+                            Profile Picture
+                        </label>
+
+                        {{ form.profile_picture }}
+
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary px-4"
+                        >
+                            Save Profile
+                        </button>
+
+                    </div>
+
+                </div>
+
+                {% if form.errors %}
+
+                    <div class="alert alert-danger mt-3 mb-0">
+
+                        Please correct the highlighted profile details.
+
+                    </div>
+
+                {% endif %}
+
+            </form>
+
+        {% endif %}
 
         <hr class="my-4">
 
@@ -148,7 +276,7 @@
 
         <h3 class="fw-bold mb-1">
 
-            Listings by {{ owner.username }}
+            Listings by {{ owner.get_full_name|default:owner.username }}
 
         </h3>
 

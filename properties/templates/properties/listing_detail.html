@@ -287,9 +287,17 @@
 
                 <p class="mb-3">
 
+                    <strong>Owner Name</strong><br>
+
+                    {{ listing.owner.get_full_name|default:listing.owner.username }}
+
+                </p>
+
+                <p class="mb-3">
+
                     <strong>Username</strong><br>
 
-                    {{ listing.owner.username }}
+                    @{{ listing.owner.username }}
 
                 </p>
 

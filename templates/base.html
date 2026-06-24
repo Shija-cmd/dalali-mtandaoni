@@ -48,6 +48,12 @@
     >
 
     <link
+        rel="icon"
+        type="image/png"
+        href="{% static 'images/logo.png' %}"
+    >
+
+    <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet/dist/leaflet.css"
     />
@@ -65,11 +71,17 @@
             class="navbar-brand fw-bold"
             href="{% url 'home' %}"
         >
-            <i class="bi bi-house-door-fill me-2"></i>
+            <img
+                src="{% static 'images/logo.png' %}"
+                class="site-logo"
+                alt="Dalali Mtandaoni logo"
+            >
 
-            DALALI
-            <span class="text-warning">
-                MTANDAONI
+            <span class="brand-text">
+                DALALI
+                <span class="text-warning">
+                    MTANDAONI
+                </span>
             </span>
 
         </a>
@@ -125,9 +137,21 @@
                     data-bs-toggle="dropdown"
                 >
 
-                    <i class="bi bi-person-circle me-2"></i>
+                    {% if user.profile_picture %}
 
-                    {{ user.username }}
+                        <img
+                            src="{{ user.profile_picture.url }}"
+                            class="nav-profile-picture me-2"
+                            alt="{{ user.get_full_name|default:user.username }} profile picture"
+                        >
+
+                    {% else %}
+
+                        <i class="bi bi-person-circle me-2"></i>
+
+                    {% endif %}
+
+                    {{ user.get_full_name|default:user.username }}
 
                 </button>
 
@@ -159,18 +183,29 @@
                     {% elif pending_verification %}
 
                     <li>
-                        <span class="dropdown-item text-muted">
-                            <i class="bi bi-hourglass-split me-2"></i>
-                            Verification Pending
-                        </span>
+                        {% if pending_verification_request and not pending_verification_request.id_document %}
+
+                            <a class="dropdown-item" href="{% url 'request_verification' %}">
+                                <i class="bi bi-card-image me-2"></i>
+                                Upload ID
+                            </a>
+
+                        {% else %}
+
+                            <span class="dropdown-item text-muted">
+                                <i class="bi bi-hourglass-split me-2"></i>
+                                Verification Pending
+                            </span>
+
+                        {% endif %}
                     </li>
 
                     {% else %}
 
                     <li>
                         <a class="dropdown-item" href="{% url 'request_verification' %}">
-                            <i class="bi bi-patch-check me-2"></i>
-                            Request Verification
+                            <i class="bi bi-card-image me-2"></i>
+                            Upload ID
                         </a>
                     </li>
 
@@ -338,7 +373,11 @@
 
                 <h3 class="footer-logo">
 
-                    <i class="bi bi-house-door-fill me-2"></i>
+                    <img
+                        src="{% static 'images/logo.png' %}"
+                        class="footer-site-logo"
+                        alt="Dalali Mtandaoni logo"
+                    >
 
                     DALALI
                     <span class="text-warning">

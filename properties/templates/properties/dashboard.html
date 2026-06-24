@@ -23,7 +23,7 @@ Dashboard
                 <h1 class="fw-bold mb-2">
 
                     Welcome Back,
-                    {{ request.user.username }}
+                    {{ request.user.get_full_name|default:request.user.username }}
 
                 </h1>
 
@@ -223,11 +223,24 @@ Dashboard
 
         {% elif pending_verification %}
 
-            <div class="alert alert-warning mb-0">
+            <div class="alert alert-warning {% if pending_verification_request and not pending_verification_request.id_document %}mb-3{% else %}mb-0{% endif %}">
 
                 ⏳ Your verification request is under review.
 
             </div>
+
+            {% if pending_verification_request and not pending_verification_request.id_document %}
+
+                <a
+                    href="{% url 'request_verification' %}"
+                    class="btn btn-warning"
+                >
+
+                    Upload ID
+
+                </a>
+
+            {% endif %}
 
         {% else %}
 
@@ -242,7 +255,7 @@ Dashboard
                 class="btn btn-primary"
             >
 
-                Request Verification
+                Upload ID
 
             </a>
 

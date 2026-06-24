@@ -131,7 +131,7 @@ Listing Approval Requests
                             <p class="mb-2">
 
                                 👤 <strong>Owner:</strong>
-                                {{ listing.owner.username }}
+                                {{ listing.owner.get_full_name|default:listing.owner.username }}
 
                             </p>
 

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import ListingForm, ListingImageForm
+from .forms import ListingForm, ListingImageForm, VerificationRequestForm
+from accounts.forms import UserProfileForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -17,8 +18,10 @@ from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.hashers import check_password
 from rest_framework.decorators import (
     api_view,
+    parser_classes,
     permission_classes
 )
+from rest_framework.parsers import FormParser, MultiPartParser
 
 
 from .serializers import (
@@ -575,37 +578,147 @@ def request_verification(request):
     existing_request = VerificationRequest.objects.filter(
         user=request.user,
         status='pending'
-    ).exists()
+    ).first()
 
-    if not existing_request:
+    if existing_request:
 
-        VerificationRequest.objects.create(
-            user=request.user
-        )
+        if existing_request.id_document:
 
-        messages.success(
+            messages.warning(
+                request,
+                'You already have a pending verification request.'
+            )
+
+            return redirect(
+                'dashboard'
+            )
+
+        if request.method == 'POST':
+
+            form = VerificationRequestForm(
+                request.POST,
+                request.FILES,
+                instance=existing_request
+            )
+
+            if form.is_valid():
+
+                form.save()
+
+                messages.success(
+                    request,
+                    'ID document uploaded successfully.'
+                )
+
+                return redirect(
+                    'dashboard'
+                )
+
+        else:
+
+            form = VerificationRequestForm(
+                instance=existing_request
+            )
+
+        return render(
             request,
-            'Verification request submitted successfully.'
+            'properties/request_verification.html',
+            {
+                'form': form,
+                'is_uploading_missing_id': True,
+            }
         )
+
+    if request.method == 'POST':
+
+        form = VerificationRequestForm(
+            request.POST,
+            request.FILES
+        )
+
+        if form.is_valid():
+
+            verification_request = form.save(
+                commit=False
+            )
+
+            verification_request.user = request.user
+
+            verification_request.save()
+
+            messages.success(
+                request,
+                'Verification request submitted successfully.'
+            )
+
+            return redirect(
+                'dashboard'
+            )
 
     else:
 
-        messages.warning(
-            request,
-            'You already have a pending verification request.'
-        )
+        form = VerificationRequestForm()
 
-    return redirect(
-        'dashboard'
-    ) 
+    return render(
+        request,
+        'properties/request_verification.html',
+        {
+            'form': form
+        }
+    )
     
 
 @login_required
 def my_profile(request):
 
-    return redirect(
-        'owner_profile',
-        owner_id=request.user.id
+    if request.method == 'POST':
+
+        form = UserProfileForm(
+            request.POST,
+            request.FILES,
+            instance=request.user
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                'Profile updated successfully.'
+            )
+
+            return redirect(
+                'my_profile'
+            )
+
+    else:
+
+        form = UserProfileForm(
+            instance=request.user
+        )
+
+    listings = Listing.objects.filter(
+        owner=request.user,
+        is_active=True,
+        is_approved=True
+    )
+
+    whatsapp_number = format_whatsapp_number(
+        request.user.phone_number
+    )
+
+    return render(
+        request,
+        'properties/owner_profile.html',
+        {
+            'owner': request.user,
+            'listings': listings,
+            'listing_count': listings.count(),
+            'whatsapp_number': whatsapp_number,
+            'form': form,
+            'is_my_profile': True,
+        }
     )  
     
 
@@ -1126,7 +1239,10 @@ def api_create_listing(request):
 def api_my_profile(request):
 
     serializer = UserSerializer(
-        request.user
+        request.user,
+        context={
+            'request': request,
+        }
     )
 
     return Response(
@@ -1306,6 +1422,7 @@ def api_upload_listing_image(
     
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
 def api_request_verification(request):
 
     existing_request = VerificationRequest.objects.filter(
@@ -1322,8 +1439,22 @@ def api_request_verification(request):
             status=400
         )
 
+    id_document = request.FILES.get(
+        'id_document'
+    )
+
+    if not id_document:
+
+        return Response(
+            {
+                'id_document': 'Please upload a photo of your ID.'
+            },
+            status=400
+        )
+
     VerificationRequest.objects.create(
-        user=request.user
+        user=request.user,
+        id_document=id_document
     )
 
     return Response(
@@ -1371,11 +1502,16 @@ def api_logout(request):
     
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
 def api_update_profile(request):
 
     serializer = UserUpdateSerializer(
         request.user,
-        data=request.data
+        data=request.data,
+        context={
+            'request': request,
+        },
+        partial=True
     )
 
     if serializer.is_valid():
@@ -1444,7 +1580,10 @@ def api_owner_profile(
     )
 
     owner_data = UserSerializer(
-        owner
+        owner,
+        context={
+            'request': request,
+        }
     ).data
 
     listings_data = ListingSerializer(

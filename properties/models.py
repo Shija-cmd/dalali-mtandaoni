@@ -157,6 +157,12 @@ class VerificationRequest(models.Model):
         default='pending'
     )
 
+    id_document = models.ImageField(
+        upload_to='verification_ids/',
+        blank=True,
+        null=True
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )

@@ -21,6 +21,7 @@ class VerificationRequestAdmin(admin.ModelAdmin):
     list_display = (
         'user',
         'status',
+        'id_document',
         'created_at',
     )
 

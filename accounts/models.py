@@ -5,6 +5,12 @@ from django.utils import timezone
 
 class User(AbstractUser):
 
+    profile_picture = models.ImageField(
+        upload_to='profile_pictures/',
+        blank=True,
+        null=True
+    )
+
     phone_number = models.CharField(
         max_length=20,
         unique=True

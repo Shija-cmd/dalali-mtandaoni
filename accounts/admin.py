@@ -10,6 +10,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = (
         'username',
         'phone_number',
+        'profile_picture',
         'is_owner',
         'is_seeker',
         'is_verified',
@@ -20,6 +21,7 @@ class CustomUserAdmin(UserAdmin):
             'DALALI MTANDAONI',
             {
                 'fields': (
+                    'profile_picture',
                     'phone_number',
                     'is_owner',
                     'is_seeker',
@@ -40,6 +42,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 'fields': (
                     'phone_number',
+                    'profile_picture',
                     'is_owner',
                     'is_seeker',
                 )
