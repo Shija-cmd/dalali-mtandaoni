@@ -8,25 +8,43 @@ Register
 
 <div class="container py-5">
 
-<div class="row justify-content-center">
+<div class="row justify-content-center align-items-center">
 
-    <div class="col-md-6 col-lg-5">
+    <!-- Registration Form -->
 
-        <div class="card shadow border-0">
+    <div class="col-lg-6">
 
-            <div class="card-body p-4">
+        <div class="card border-0 shadow-lg rounded-4">
 
-                <h2 class="text-center fw-bold mb-4">
+            <div class="card-body p-5">
 
-                    Create Account
+                <div class="text-center mb-4">
 
-                </h2>
+                    <div class="display-4 mb-3">
+
+                        👤
+
+                    </div>
+
+                    <h1 class="fw-bold">
+
+                        Create Account
+
+                    </h1>
+
+                    <p class="text-muted">
+
+                        Join Dalali Mtandaoni and start advertising your listings today.
+
+                    </p>
+
+                </div>
 
                 {% if form.errors %}
 
                     <div class="alert alert-danger">
 
-                        Please correct the errors below.
+                        Please correct the errors below and try again.
 
                     </div>
 
@@ -38,9 +56,9 @@ Register
 
                     <!-- Username -->
 
-                    <div class="mb-3">
+                    <div class="mb-4">
 
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
 
                             Username
 
@@ -50,7 +68,7 @@ Register
 
                         {% for error in form.username.errors %}
 
-                            <div class="text-danger small">
+                            <div class="text-danger small mt-1">
 
                                 {{ error }}
 
@@ -60,11 +78,11 @@ Register
 
                     </div>
 
-                    <!-- Phone Number -->
+                    <!-- Phone -->
 
-                    <div class="mb-3">
+                    <div class="mb-4">
 
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
 
                             Phone Number
 
@@ -74,7 +92,7 @@ Register
 
                         {% for error in form.phone_number.errors %}
 
-                            <div class="text-danger small">
+                            <div class="text-danger small mt-1">
 
                                 {{ error }}
 
@@ -86,9 +104,9 @@ Register
 
                     <!-- Password -->
 
-                    <div class="mb-3">
+                    <div class="mb-4">
 
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
 
                             Password
 
@@ -104,7 +122,7 @@ Register
 
                         {% for error in form.password1.errors %}
 
-                            <div class="text-danger small">
+                            <div class="text-danger small mt-1">
 
                                 {{ error }}
 
@@ -118,7 +136,7 @@ Register
 
                     <div class="mb-4">
 
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
 
                             Confirm Password
 
@@ -128,7 +146,7 @@ Register
 
                         {% for error in form.password2.errors %}
 
-                            <div class="text-danger small">
+                            <div class="text-danger small mt-1">
 
                                 {{ error }}
 
@@ -142,24 +160,113 @@ Register
                         type="submit"
                         class="btn btn-primary w-100"
                     >
+
                         Create Account
+
                     </button>
 
                 </form>
 
-                <hr>
+                <hr class="my-4">
 
                 <p class="text-center mb-0">
 
                     Already have an account?
 
-                    <a href="{% url 'login' %}">
+                    <a
+                        href="{% url 'login' %}"
+                        class="fw-semibold text-decoration-none"
+                    >
 
                         Login
 
                     </a>
 
                 </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Benefits Panel -->
+
+    <div class="col-lg-5 d-none d-lg-block">
+
+        <div class="card border-0 shadow-lg rounded-4">
+
+            <div class="card-body p-5">
+
+                <h3 class="fw-bold mb-4">
+
+                    Why Register?
+
+                </h3>
+
+                <div class="mb-4">
+
+                    <h6 class="fw-bold">
+
+                        🏠 Advertise Properties
+
+                    </h6>
+
+                    <p class="text-muted mb-0">
+
+                        Publish houses, rooms and plots for rent or sale.
+
+                    </p>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <h6 class="fw-bold">
+
+                        🚗 Advertise Vehicles
+
+                    </h6>
+
+                    <p class="text-muted mb-0">
+
+                        Reach people looking to buy or hire vehicles.
+
+                    </p>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <h6 class="fw-bold">
+
+                        ✔ Become Verified
+
+                    </h6>
+
+                    <p class="text-muted mb-0">
+
+                        Build trust and increase visibility through owner verification.
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h6 class="fw-bold">
+
+                        ❤️ Save Favorites
+
+                    </h6>
+
+                    <p class="text-muted mb-0">
+
+                        Keep track of listings that interest you.
+
+                    </p>
+
+                </div>
 
             </div>
 

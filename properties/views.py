@@ -131,6 +131,11 @@ def listings(request):
         'max_price',
         ''
     )
+    
+    sort = request.GET.get(
+        'sort',
+        'newest'
+    )
 
     listings = Listing.objects.filter(
         is_active=True,
@@ -163,7 +168,25 @@ def listings(request):
 
         listings = listings.filter(
             price__lte=max_price
-        )    
+        )
+        
+    # Sorting
+
+    if sort == "price_low":
+
+        listings = listings.order_by("price")
+
+    elif sort == "price_high":
+
+        listings = listings.order_by("-price")
+
+    elif sort == "oldest":
+
+        listings = listings.order_by("created_at")
+
+    else:
+
+        listings = listings.order_by("-created_at")    
 
     categories = Category.objects.all()
     
@@ -191,6 +214,7 @@ def listings(request):
             'selected_category': category_id,
             'min_price': min_price,
             'max_price': max_price,
+            'sort': sort,
         }
     ) 
 
@@ -214,6 +238,14 @@ def listing_detail(request, pk):
     whatsapp_number = format_whatsapp_number(
         listing.owner.phone_number
     )
+    
+    related_listings = Listing.objects.filter(
+        category=listing.category,
+        is_active=True,
+        is_approved=True
+    ).exclude(
+        id=listing.id
+    )[:3]
 
     return render(
         request,
@@ -222,13 +254,14 @@ def listing_detail(request, pk):
             'listing': listing,
             'is_favorite': is_favorite,
             'whatsapp_number': whatsapp_number,
+            'related_listings': related_listings,
             
         }
     )
     
 @login_required
 def create_listing(request):
-    
+
     if not request.user.is_verified:
 
         messages.warning(
@@ -242,16 +275,20 @@ def create_listing(request):
 
     if request.method == 'POST':
 
-        form = ListingForm(request.POST)
+        form = ListingForm(
+            request.POST
+        )
 
         if form.is_valid():
 
-            listing = form.save(commit=False)
+            listing = form.save(
+                commit=False
+            )
 
             listing.owner = request.user
 
             listing.save()
-            
+
             messages.success(
                 request,
                 'Listing created successfully.'

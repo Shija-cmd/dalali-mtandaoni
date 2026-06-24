@@ -47,38 +47,44 @@ Home
 
                 <!-- Search -->
 
-                <div class="hero-search shadow">
+<form
+    method="GET"
+    action="{% url 'listings' %}"
+    class="hero-search shadow"
+>
 
-                    <div class="row g-2">
+    <div class="row g-2">
 
-                        <div class="col-md-8">
+        <div class="col-md-8">
 
-                            <input
-                                type="text"
-                                class="form-control form-control-lg"
-                                placeholder="Search by city, district or location..."
-                            >
+            <input
+                type="text"
+                name="q"
+                class="form-control form-control-lg"
+                placeholder="Search by city, district or location..."
+                value="{{ request.GET.q }}"
+            >
 
-                        </div>
+        </div>
 
-                        <div class="col-md-4">
+        <div class="col-md-4">
 
-                            <a
-                                href="{% url 'listings' %}"
-                                class="btn btn-warning btn-lg w-100"
-                            >
+            <button
+                type="submit"
+                class="btn btn-warning btn-lg w-100"
+            >
 
-                                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
 
-                                Search
+                Search
 
-                            </a>
+            </button>
 
-                        </div>
+        </div>
 
-                    </div>
+    </div>
 
-                </div>
+</form>
 
                 <div class="mt-4 d-flex flex-wrap gap-3">
 
@@ -181,7 +187,6 @@ Home
 </section>
 
 <!-- Properties Section -->
-<!-- Browse by Category -->
 
 <section class="py-5">
 
@@ -347,7 +352,7 @@ Home
 
 
 <!-- =========================
-     FEATURED LISTINGS
+    FEATURED LISTINGS
 ========================== -->
 
 <section class="py-5">
@@ -478,7 +483,7 @@ Home
 </section>
 
 <!-- =========================
-     RECENT LISTINGS
+    RECENT LISTINGS
 ========================= -->
 
 <section class="py-5 recent-section">

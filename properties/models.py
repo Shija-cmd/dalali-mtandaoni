@@ -42,6 +42,20 @@ class Listing(models.Model):
     location = models.CharField(
         max_length=200
     )
+    
+    latitude = models.DecimalField(
+        max_digits=12,
+        decimal_places=8,
+        null=True,
+        blank=True
+    )
+
+    longitude = models.DecimalField(
+        max_digits=12,
+        decimal_places=8,
+        null=True,
+        blank=True
+    )
 
     price = models.DecimalField(
         max_digits=12,

@@ -8,95 +8,129 @@
 
 <div class="container py-5">
 
-<!-- Owner Profile Card -->
+<!-- ==========================================
+     Owner Profile
+========================================== -->
 
-<div class="card shadow border-0 mb-5">
+<div class="card border-0 shadow-lg rounded-4 mb-5">
 
-    <div class="card-body p-4">
+    <div class="card-body p-5">
 
-        <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div class="row align-items-center">
 
-            <div>
+            <!-- Left -->
 
-                <h2 class="fw-bold mb-2">
+            <div class="col-lg-8">
 
-                    👤 {{ owner.username }}
+                <div class="d-flex align-items-center gap-4 flex-wrap">
 
-                </h2>
+                    <div
+                        class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
+                        style="width:90px;height:90px;font-size:2rem;font-weight:bold;"
+                    >
 
-                {% if owner.is_verified %}
+                        {{ owner.username|first|upper }}
 
-    <span class="badge bg-success">
+                    </div>
 
-        ✓ Verified
+                    <div>
 
-    </span>
+                        <h2 class="fw-bold mb-2">
 
-{% else %}
+                            {{ owner.username }}
 
-    <span class="badge bg-secondary">
+                        </h2>
 
-        Unverified
+                        {% if owner.is_verified %}
 
-    </span>
+                            <span class="badge bg-success px-3 py-2">
 
-{% endif %}
+                                ✔ Verified Owner
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary px-3 py-2">
+
+                                Unverified Owner
+
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <div class="text-md-end mt-3 mt-md-0">
+            <!-- Right -->
 
-                <h4 class="text-primary fw-bold">
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+
+                <h2 class="text-primary fw-bold">
 
                     {{ listings.count }}
 
-                </h4>
+                </h2>
 
-                <small class="text-muted">
+                <p class="text-muted mb-0">
 
                     Active Listings
 
-                </small>
+                </p>
 
             </div>
 
         </div>
 
-        <hr>
+        <hr class="my-4">
 
         <div class="row">
 
             <div class="col-md-6">
 
-                <div class="d-flex align-items-center gap-3 flex-wrap">
+                <p>
 
-                    <p class="mb-0">
+                    📞 <strong>{{ owner.phone_number }}</strong>
 
-                        📞 {{ owner.phone_number }}
+                </p>
 
-                    </p>
+                <p>
 
-                    <a
-                        href="https://wa.me/{{ whatsapp_number }}"
-                            target="_blank"
-                                class="btn btn-success btn-sm"
-                                >
-                                    💬 WhatsApp
-                    </a>
+                    📅 Member Since
 
-                </div>
-    
+                    {{ owner.created_at|date:"F Y" }}
+
+                </p>
 
             </div>
 
             <div class="col-md-6">
 
-                <p class="mb-2">
+                <div class="d-flex gap-2 flex-wrap justify-content-md-end">
 
-                    📅 Member Since:
-                    {{ owner.created_at|date:"F Y" }}
+                    <a
+                        href="https://wa.me/{{ whatsapp_number }}"
+                        target="_blank"
+                        class="btn btn-success"
+                    >
 
-                </p>
+                        💬 WhatsApp
+
+                    </a>
+
+                    <a
+                        href="tel:{{ owner.phone_number }}"
+                        class="btn btn-primary"
+                    >
+
+                        📞 Call
+
+                    </a>
+
+                </div>
 
             </div>
 
@@ -108,11 +142,25 @@
 
 <!-- Listings Section -->
 
-<h3 class="fw-bold mb-4">
+<div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
 
-    Listings by {{ owner.username }}
+    <div>
 
-</h3>
+        <h3 class="fw-bold mb-1">
+
+            Listings by {{ owner.username }}
+
+        </h3>
+
+        <small class="text-muted">
+
+            {{ listings.count }} active listing{{ listings.count|pluralize }}
+
+        </small>
+
+    </div>
+
+</div>
 
 <div class="row">
 

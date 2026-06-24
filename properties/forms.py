@@ -3,6 +3,7 @@ from .models import Listing, ListingImage
 
 
 class ListingForm(forms.ModelForm):
+
     class Meta:
 
         model = Listing
@@ -12,6 +13,8 @@ class ListingForm(forms.ModelForm):
             'title',
             'description',
             'location',
+            'latitude',
+            'longitude',
             'price',
         ]
 
@@ -45,6 +48,10 @@ class ListingForm(forms.ModelForm):
                 }
             ),
 
+            'latitude': forms.HiddenInput(),
+
+            'longitude': forms.HiddenInput(),
+
             'price': forms.NumberInput(
                 attrs={
                     'class': 'form-control',
@@ -54,7 +61,7 @@ class ListingForm(forms.ModelForm):
 
         }
 
-        
+
 class ListingImageForm(forms.ModelForm):
 
     class Meta:
@@ -63,4 +70,14 @@ class ListingImageForm(forms.ModelForm):
 
         fields = [
             'image'
-        ]        
+        ]
+
+        widgets = {
+
+            'image': forms.FileInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            )
+
+        }

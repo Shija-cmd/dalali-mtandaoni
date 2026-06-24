@@ -8,137 +8,205 @@ Listing Approval Requests
 
 <div class="container py-5">
 
-    <h2 class="fw-bold mb-4">
+<!-- ==========================================
+     Header
+========================================== -->
 
-        🏠 Listing Approval Requests
+<div class="card border-0 shadow-lg rounded-4 mb-5">
 
-    </h2>
+    <div class="card-body p-4">
 
-    {% for listing in listings %}
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
 
-        <div class="card shadow-sm mb-4">
+            <div>
 
-            <div class="row g-0">
+                <h1 class="fw-bold mb-2">
 
-                <!-- Listing Image -->
+                    🏠 Listing Approval Requests
 
-                <div class="col-md-3">
+                </h1>
 
-                    {% if listing.images.first %}
+                <p class="text-muted mb-0">
 
-                        <img
-                            src="{{ listing.images.first.image.url }}"
-                            class="img-fluid rounded-start h-100 object-fit-cover"
-                            alt="{{ listing.title }}"
-                        >
+                    Review and approve newly submitted listings.
 
-                    {% else %}
+                </p>
 
-                        <div class="d-flex align-items-center justify-content-center bg-light h-100">
+            </div>
 
-                            <span class="text-muted">
+            <div>
 
-                                No Image
+                <span class="badge bg-warning text-dark fs-6 px-3 py-2">
+
+                    {{ listings|length }} Pending Listing{{ listings|length|pluralize }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     Listing Requests
+========================================== -->
+
+{% for listing in listings %}
+
+    <div class="card border-0 shadow-lg rounded-4 mb-4">
+
+        <div class="row g-0">
+
+            <!-- Image -->
+
+            <div class="col-lg-3">
+
+                {% if listing.images.first %}
+
+                    <img
+                        src="{{ listing.images.first.image.url }}"
+                        alt="{{ listing.title }}"
+                        class="img-fluid h-100 w-100 rounded-start"
+                        style="object-fit:cover; min-height:260px;"
+                    >
+
+                {% else %}
+
+                    <div
+                        class="bg-light d-flex justify-content-center align-items-center h-100 rounded-start"
+                        style="min-height:260px;"
+                    >
+
+                        <span class="text-muted">
+
+                            No Image Available
+
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            <!-- Details -->
+
+            <div class="col-lg-9">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-start flex-wrap mb-3">
+
+                        <div>
+
+                            <h3 class="fw-bold">
+
+                                {{ listing.title }}
+
+                            </h3>
+
+                            <span class="badge bg-warning text-dark">
+
+                                Pending Approval
 
                             </span>
 
                         </div>
 
-                    {% endif %}
+                        <h4 class="text-primary fw-bold">
 
-                </div>
-
-                <!-- Listing Details -->
-
-                <div class="col-md-9">
-
-                    <div class="card-body">
-
-                        <h4 class="fw-bold">
-
-                            {{ listing.title }}
+                            TZS {{ listing.price|floatformat:0 }}
 
                         </h4>
 
-                        <div class="row">
+                    </div>
 
-                            <div class="col-md-6">
+                    <div class="row">
 
-                                <p class="mb-2">
+                        <div class="col-md-6">
 
-                                    <strong>👤 Owner:</strong>
-                                    {{ listing.owner.username }}
+                            <p class="mb-2">
 
-                                </p>
+                                👤 <strong>Owner:</strong>
+                                {{ listing.owner.username }}
 
-                                <p class="mb-2">
+                            </p>
 
-                                    <strong>📂 Category:</strong>
-                                    {{ listing.category }}
+                            <p class="mb-2">
 
-                                </p>
+                                📂 <strong>Category:</strong>
+                                {{ listing.category }}
 
-                                <p class="mb-2">
+                            </p>
 
-                                    <strong>📍 Location:</strong>
-                                    {{ listing.location }}
+                            <p class="mb-2">
 
-                                </p>
+                                📍 <strong>Location:</strong>
+                                {{ listing.location }}
 
-                            </div>
-
-                            <div class="col-md-6">
-
-                                <p class="mb-2">
-
-                                    <strong>💰 Price:</strong>
-                                    TZS {{ listing.price }}
-
-                                </p>
-
-                                <p class="mb-2">
-
-                                    <strong>📅 Submitted:</strong>
-                                    {{ listing.created_at|date:"d M Y" }}
-
-                                </p>
-
-                            </div>
+                            </p>
 
                         </div>
 
-                        <hr>
+                        <div class="col-md-6">
 
-                        <p>
+                            <p class="mb-2">
 
-                            {{ listing.description|truncatewords:30 }}
+                                📅 <strong>Submitted:</strong>
+                                {{ listing.created_at|date:"d M Y" }}
 
-                        </p>
+                            </p>
 
-                        <div class="d-flex gap-2">
+                            <p class="mb-2">
 
-                            <a
-                                href="{% url 'listing_detail' listing.id %}"
-                                class="btn btn-outline-primary"
-                            >
-                                👁 View Listing
-                            </a>
+                                🆔 <strong>Listing ID:</strong>
+                                #DM{{ listing.id }}
 
-                            <a
-                                href="{% url 'approve_listing' listing.id %}"
-                                class="btn btn-success"
-                            >
-                                ✅ Approve
-                            </a>
-
-                            <a
-                                href="{% url 'reject_listing' listing.id %}"
-                                class="btn btn-danger"
-                            >
-                                ❌ Reject
-                            </a>
+                            </p>
 
                         </div>
+
+                    </div>
+
+                    <hr>
+
+                    <p class="text-muted">
+
+                        {{ listing.description|truncatewords:35 }}
+
+                    </p>
+
+                    <div class="d-flex gap-2 flex-wrap mt-4">
+
+                        <a
+                            href="{% url 'listing_detail' listing.id %}"
+                            class="btn btn-outline-primary"
+                        >
+
+                            👁 View Listing
+
+                        </a>
+
+                        <a
+                            href="{% url 'approve_listing' listing.id %}"
+                            class="btn btn-success"
+                        >
+
+                            ✅ Approve Listing
+
+                        </a>
+
+                        <a
+                            href="{% url 'reject_listing' listing.id %}"
+                            class="btn btn-outline-danger"
+                        >
+
+                            ❌ Reject Listing
+
+                        </a>
 
                     </div>
 
@@ -148,15 +216,37 @@ Listing Approval Requests
 
         </div>
 
-    {% empty %}
+    </div>
 
-        <div class="alert alert-success text-center">
+{% empty %}
 
-            🎉 There are no pending listing approval requests.
+    <div class="card border-0 shadow-lg rounded-4">
+
+        <div class="card-body text-center p-5">
+
+            <div class="display-4 mb-3">
+
+                🎉
+
+            </div>
+
+            <h3 class="fw-bold mb-3">
+
+                No Pending Listings
+
+            </h3>
+
+            <p class="text-muted mb-0">
+
+                All listing approval requests have been reviewed.
+
+            </p>
 
         </div>
 
-    {% endfor %}
+    </div>
+
+{% endfor %}
 
 </div>
 

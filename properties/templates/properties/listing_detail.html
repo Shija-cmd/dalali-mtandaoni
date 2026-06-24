@@ -9,32 +9,60 @@
 <div class="container py-5">
 
 
-<div class="row">
+<div class="row g-5">
 
-    <!-- Images -->
-    <div class="col-md-6">
+    <!-- =========================
+         Property Gallery
+    ========================== -->
 
-        <div class="row">
+    <div class="col-lg-7">
 
-            {% for image in listing.images.all %}
+        <!-- Main Image -->
 
-                <div class="col-md-4 mb-3">
+        <div class="mb-3">
 
-                    <img
-                        src="{{ image.image.url }}"
-                        alt="{{ listing.title }}"
-                        class="detail-image shadow"
-                    >
+            {% if listing.images.first %}
+
+                <img
+                    id="mainImage"
+                    src="{{ listing.images.first.image.url }}"
+                    class="img-fluid rounded-4 shadow w-100"
+                    style="height:500px; object-fit:cover;"
+                    alt="{{ listing.title }}"
+                >
+
+            {% else %}
+
+                <div class="bg-light rounded-4 d-flex align-items-center justify-content-center shadow"
+                     style="height:500px;">
+
+                    <h5 class="text-muted">
+
+                        No Image Available
+
+                    </h5>
 
                 </div>
 
-            {% empty %}
+            {% endif %}
 
-                <div class="col-12">
+        </div>
 
-                    <p class="text-muted">
-                        No images available.
-                    </p>
+        <!-- Thumbnails -->
+
+        <div class="row g-2">
+
+            {% for image in listing.images.all|slice:":4" %}
+
+                <div class="col-3">
+
+                    <img
+                        src="{{ image.image.url }}"
+                        class="img-fluid rounded-3 shadow-sm thumbnail-image"
+                        style="height:100px; width:100%; object-fit:cover; cursor:pointer;"
+                        onclick="changeImage(this)"
+                        alt="{{ listing.title }}"
+                    >
 
                 </div>
 
@@ -44,121 +72,306 @@
 
     </div>
 
-    <!-- Listing Details -->
-    <div class="col-md-6">
+    <!-- =========================
+        Property Summary
+    ========================== -->
 
-        <h1 class="fw-bold">
-            {{ listing.title }}
-        </h1>
+    <div class="col-lg-5">
 
-        <p class="text-muted">
-            {{ listing.location }}
-        </p>
+        <span class="badge bg-primary px-3 py-2 mb-3">
 
-        <h3 class="text-primary">
-            TZS {{ listing.price }}
-        </h3>
-
-        <span class="badge bg-primary mb-3">
             {{ listing.category }}
+
         </span>
 
-        <p>
+        <h1 class="fw-bold mb-3">
+
+            {{ listing.title }}
+
+        </h1>
+
+        <p class="text-muted fs-5">
+
+            📍 {{ listing.location }}
+
+        </p>
+
+        <h2 class="text-primary fw-bold my-4">
+
+            TZS {{ listing.price|floatformat:0 }}
+
+        </h2>
+
+        {% if listing.owner.is_verified %}
+
+            <span class="badge bg-success fs-6 px-3 py-2">
+
+                ✔ Verified Owner
+
+            </span>
+
+        {% else %}
+
+            <span class="badge bg-secondary fs-6 px-3 py-2">
+
+                Unverified Owner
+
+            </span>
+
+        {% endif %}
+
+        <hr class="my-4">
+
+        <h5 class="fw-bold mb-3">
+
+            Property Description
+
+        </h5>
+
+        <p class="text-muted">
+
             {{ listing.description }}
+
         </p>
 
         {% if user == listing.owner %}
 
-        <a
-            href="{% url 'upload_listing_image' listing.id %}"
-            class="btn btn-primary mt-3"
-        >
-            Upload Images
-        </a>
+            <a
+                href="{% url 'upload_listing_image' listing.id %}"
+                class="btn btn-primary mt-3"
+            >
+
+                📷 Upload More Images
+
+            </a>
 
         {% endif %}
 
-        <hr>
+    </div>
 
-        <!-- Owner Information -->
-        <div class="card shadow-sm mt-4">
+</div>
 
-            <div class="card-body">
+        <hr class="my-5">
 
-                <h4 class="mb-3">
-                    Owner Information
-                </h4>
+<!-- ==========================================
+     Property Overview
+========================================== -->
 
-                <p>
-                    <strong>Owner:</strong>
+<div class="card border-0 shadow-lg rounded-4 mt-5">
+
+    <div class="card-body p-4">
+
+        <h3 class="fw-bold mb-4">
+
+            📋 Property Overview
+
+        </h3>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <p class="mb-4">
+
+                    <strong>Category</strong><br>
+
+                    {{ listing.category }}
+
+                </p>
+
+                <p class="mb-4">
+
+                    <strong>Location</strong><br>
+
+                    {{ listing.location }}
+
+                </p>
+
+                <p class="mb-4">
+
+                    <strong>Price</strong><br>
+
+                    TZS {{ listing.price|floatformat:0 }}
+
+                </p>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <p class="mb-4">
+
+                    <strong>Listing ID</strong><br>
+
+                    #DM{{ listing.id }}
+
+                </p>
+
+                <p class="mb-4">
+
+                    <strong>Posted</strong><br>
+
+                    {{ listing.created_at|date:"d M Y" }}
+
+                </p>
+
+                <p class="mb-4">
+
+                    <strong>Status</strong><br>
+
+                    <span class="badge bg-success">
+
+                        Available
+
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     Owner Information
+========================================== -->
+
+<div class="card border-0 shadow-lg rounded-4">
+
+    <div class="card-body p-4">
+
+        <div class="d-flex justify-content-between align-items-start flex-wrap mb-4">
+
+            <div>
+
+                <h3 class="fw-bold mb-2">
+
+                    👤 Property Owner
+
+                </h3>
+
+                <p class="text-muted mb-0">
+
+                    Contact the owner directly for more information.
+
+                </p>
+
+            </div>
+
+            {% if listing.owner.is_verified %}
+
+                <span class="badge bg-success px-3 py-2">
+
+                    ✔ Verified Owner
+
+                </span>
+
+            {% else %}
+
+                <span class="badge bg-secondary px-3 py-2">
+
+                    Unverified Owner
+
+                </span>
+
+            {% endif %}
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <p class="mb-3">
+
+                    <strong>Username</strong><br>
+
                     {{ listing.owner.username }}
+
                 </p>
 
-                <p>
-                    <strong>Phone:</strong>
+                <p class="mb-3">
+
+                    <strong>Phone Number</strong><br>
+
                     {{ listing.owner.phone_number }}
+
                 </p>
 
-                <div class="d-flex gap-2 mt-3">
+                <p class="mb-0">
 
-                    {% if listing.owner.is_verified %}
+                    <strong>Category</strong><br>
 
-                        <button
-                            class="btn btn-outline-success owner-action-btn"
-                            disabled
-                        >
-                            ✓ Verified Owner
-                        </button>
+                    {{ listing.category }}
 
-                    {% else %}
+                </p>
 
-                        <button
-                            class="btn btn-outline-secondary owner-action-btn"
-                            disabled
-                        >
-                            ✗ Unverified Owner
-                        </button>
+            </div>
 
-                    {% endif %}
+            <div class="col-md-6">
 
-                    <a
-                        href="{% url 'owner_profile' listing.owner.id %}"
-                            class="btn btn-outline-primary owner-action-btn"
-                    >
-                        👤 View Profile
-                    </a>
+                <div class="d-grid gap-3">
 
                     <a
                         href="tel:{{ listing.owner.phone_number }}"
-                        class="btn btn-success owner-action-btn"
+                        class="btn btn-success btn-lg"
                     >
+
                         📞 Call Owner
+
                     </a>
 
                     <a
                         href="https://wa.me/{{ whatsapp_number }}?text=Hello,%20I%20am%20interested%20in%20{{ listing.title }}"
                         target="_blank"
-                        class="btn btn-success owner-action-btn"
+                        class="btn btn-success btn-lg"
                     >
+
                         💬 WhatsApp
+
+                    </a>
+
+                    <a
+                        href="{% url 'owner_profile' listing.owner.id %}"
+                        class="btn btn-outline-primary btn-lg"
+                    >
+
+                        👤 View Owner Profile
+
                     </a>
 
                     <a
                         href="{% url 'toggle_favorite' listing.id %}"
-                        class="btn btn-outline-danger owner-action-btn"
+                        class="btn btn-outline-danger btn-lg"
+                    >
+
+                        {% if is_favorite %}
+
+                            ❤️ Saved to Favorites
+
+                        {% else %}
+
+                            🤍 Save Listing
+
+                        {% endif %}
+
+                    </a>
+
+                    {% if user == listing.owner %}
+
+                        <a
+                            href="{% url 'upload_listing_image' listing.id %}"
+                            class="btn btn-warning btn-lg"
                         >
 
-                            {% if is_favorite %}
-
-                                ❤️ Saved
-
-                            {% else %}
-
-                                🤍 Save Listing
-
-                            {% endif %}
+                            📷 Upload More Images
 
                         </a>
+
+                    {% endif %}
 
                 </div>
 
@@ -170,7 +383,107 @@
 
 </div>
 
+<script>
 
-</div>
+function changeImage(image){
+
+    document.getElementById("mainImage").src = image.src;
+
+}
+
+</script>
+
+<!-- ==========================================
+     You May Also Like
+========================================== -->
+
+<section class="mt-5">
+
+    <h2 class="fw-bold text-center mb-5">
+
+        🏡 You May Also Like
+
+    </h2>
+
+    <div class="row">
+
+        {% for item in related_listings %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="listing-card">
+
+                <div class="listing-image-wrapper">
+
+                    {% if item.images.first %}
+
+                        <img
+                            src="{{ item.images.first.image.url }}"
+                            class="listing-card-image"
+                            alt="{{ item.title }}"
+                        >
+
+                    {% endif %}
+
+                    <div class="price-badge">
+
+                        TZS {{ item.price|floatformat:0 }}
+
+                    </div>
+
+                    <div class="featured-badge">
+
+                        {{ item.category }}
+
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+
+                        {{ item.title }}
+
+                    </h5>
+
+                    <p class="text-muted">
+
+                        📍 {{ item.location }}
+
+                    </p>
+
+                    <a
+                        href="{% url 'listing_detail' item.id %}"
+                        class="btn btn-primary w-100"
+                    >
+
+                        View Details
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-12">
+
+            <div class="alert alert-light text-center">
+
+                No related listings available.
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
 
 {% endblock %}

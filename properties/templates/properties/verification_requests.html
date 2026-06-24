@@ -8,102 +8,41 @@ User Verification Requests
 
 <div class="container py-5">
 
-    <h2 class="fw-bold mb-4">
+<!-- ==========================================
+    Header
+========================================== -->
 
-        ✅ User Verification Requests
+<div class="card border-0 shadow-lg rounded-4 mb-5">
 
-    </h2>
+    <div class="card-body p-4">
 
-    {% for verification_request in requests %}
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
 
-        <div class="card shadow-sm mb-4">
+            <div>
 
-            <div class="card-body">
+                <h1 class="fw-bold mb-2">
 
-                <div class="row">
+                    ✅ User Verification Requests
 
-                    <!-- User Information -->
+                </h1>
 
-                    <div class="col-md-8">
+                <p class="text-muted mb-0">
 
-                        <h4 class="fw-bold mb-3">
+                    Review and manage owner verification requests.
 
-                            👤 {{ verification_request.user.username }}
+                </p>
 
-                        </h4>
+            </div>
 
-                        <span class="badge bg-warning text-dark mb-3">
+            <div>
 
-                            Unverified User
+                <span class="badge bg-warning text-dark fs-6 px-3 py-2">
 
-                        </span>
+                    {{ requests|length }} Pending Request{{ requests|length|pluralize }}
 
-                        <p class="mb-2">
+                </span>
 
-                            <strong>📞 Phone:</strong>
-                            {{ verification_request.user.phone_number }}
-
-                        </p>
-
-                        <p class="mb-2">
-
-                            <strong>📅 Joined:</strong>
-                            {{ verification_request.user.created_at|date:"F Y" }}
-
-                        </p>
-
-                        <p class="mb-2">
-
-                            <strong>📨 Requested:</strong>
-                            {{ verification_request.created_at|date:"d M Y" }}
-
-                        </p>
-
-                        <div class="row mt-3">
-
-    <div class="col-md-4">
-
-        <div class="border rounded text-center p-2">
-
-            <h5 class="text-primary mb-1">
-
-                {{ verification_request.user.total_listings }}
-
-            </h5>
-
-            <small>Total Listings</small>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-4">
-
-        <div class="border rounded text-center p-2">
-
-            <h5 class="text-success mb-1">
-
-                {{ verification_request.user.approved_listings }}
-
-            </h5>
-
-            <small>Approved</small>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-4">
-
-        <div class="border rounded text-center p-2">
-
-            <h5 class="text-warning mb-1">
-
-                {{ verification_request.user.pending_listings }}
-
-            </h5>
-
-            <small>Pending</small>
+            </div>
 
         </div>
 
@@ -111,29 +50,187 @@ User Verification Requests
 
 </div>
 
-                    </div>
+<!-- ==========================================
+     Requests
+========================================== -->
 
-                    <!-- Action Buttons -->
+{% for verification_request in requests %}
 
-                    <div class="col-md-4 d-flex align-items-center justify-content-md-end mt-4 mt-md-0">
+    <div class="card border-0 shadow-lg rounded-4 mb-4">
 
-                        <div class="d-grid gap-2">
+        <div class="card-body p-4">
 
-                            <a
-                                href="{% url 'approve_verification' verification_request.id %}"
-                                class="btn btn-success"
-                            >
-                                ✅ Approve
-                            </a>
+            <div class="row">
 
-                            <a
-                                href="{% url 'reject_verification' verification_request.id %}"
-                                class="btn btn-danger"
-                            >
-                                ❌ Reject
-                            </a>
+                <!-- User Info -->
+
+                <div class="col-lg-8">
+
+                    <div class="d-flex align-items-center gap-3 mb-3">
+
+                        <div
+                            class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
+                            style="width:70px;height:70px;font-size:1.5rem;font-weight:bold;"
+                        >
+
+                            {{ verification_request.user.username|first|upper }}
 
                         </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-1">
+
+                                {{ verification_request.user.username }}
+
+                            </h4>
+
+                            <span class="badge bg-warning text-dark">
+
+                                Awaiting Verification
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <p class="mb-2">
+
+                                📞 <strong>Phone:</strong>
+                                {{ verification_request.user.phone_number }}
+
+                            </p>
+
+                            <p class="mb-2">
+
+                                📅 <strong>Joined:</strong>
+                                {{ verification_request.user.created_at|date:"F Y" }}
+
+                            </p>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <p class="mb-2">
+
+                                📨 <strong>Requested:</strong>
+                                {{ verification_request.created_at|date:"d M Y" }}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Statistics -->
+
+                    <div class="row mt-4">
+
+                        <div class="col-md-4">
+
+                            <div class="card border-0 bg-light text-center">
+
+                                <div class="card-body">
+
+                                    <h4 class="text-primary fw-bold">
+
+                                        {{ verification_request.user.total_listings }}
+
+                                    </h4>
+
+                                    <small>
+
+                                        Total Listings
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="card border-0 bg-light text-center">
+
+                                <div class="card-body">
+
+                                    <h4 class="text-success fw-bold">
+
+                                        {{ verification_request.user.approved_listings }}
+
+                                    </h4>
+
+                                    <small>
+
+                                        Approved
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="card border-0 bg-light text-center">
+
+                                <div class="card-body">
+
+                                    <h4 class="text-warning fw-bold">
+
+                                        {{ verification_request.user.pending_listings }}
+
+                                    </h4>
+
+                                    <small>
+
+                                        Pending
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Actions -->
+
+                <div class="col-lg-4 d-flex align-items-center justify-content-lg-end mt-4 mt-lg-0">
+
+                    <div class="d-grid gap-2 w-100">
+
+                        <a
+                            href="{% url 'approve_verification' verification_request.id %}"
+                            class="btn btn-success"
+                        >
+
+                            ✅ Approve User
+
+                        </a>
+
+                        <a
+                            href="{% url 'reject_verification' verification_request.id %}"
+                            class="btn btn-outline-danger"
+                        >
+
+                            ❌ Reject Request
+
+                        </a>
 
                     </div>
 
@@ -143,15 +240,37 @@ User Verification Requests
 
         </div>
 
-    {% empty %}
+    </div>
 
-        <div class="alert alert-success text-center">
+{% empty %}
 
-            🎉 There are no pending user verification requests.
+    <div class="card border-0 shadow-lg rounded-4">
+
+        <div class="card-body text-center p-5">
+
+            <div class="display-4 mb-3">
+
+                🎉
+
+            </div>
+
+            <h3 class="fw-bold mb-3">
+
+                No Pending Requests
+
+            </h3>
+
+            <p class="text-muted mb-0">
+
+                All user verification requests have been reviewed.
+
+            </p>
 
         </div>
 
-    {% endfor %}
+    </div>
+
+{% endfor %}
 
 </div>
 
