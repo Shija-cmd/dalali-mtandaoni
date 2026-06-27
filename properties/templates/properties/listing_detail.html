@@ -34,7 +34,7 @@
             {% else %}
 
                 <div class="bg-light rounded-4 d-flex align-items-center justify-content-center shadow"
-                     style="height:500px;">
+                    style="height:500px;">
 
                     <h5 class="text-muted">
 
@@ -102,23 +102,44 @@
 
         </h2>
 
-        {% if listing.owner.is_verified %}
+        {% if user == listing.owner or user.is_superuser %}
 
-            <span class="badge bg-success fs-6 px-3 py-2">
+            {% if not listing.is_approved %}
 
-                ✔ Verified Owner
+                <div class="alert alert-info">
+                    This listing is waiting for admin approval.
+                </div>
 
-            </span>
+            {% endif %}
 
-        {% else %}
+            {% if listing.is_featured_active %}
 
-            <span class="badge bg-secondary fs-6 px-3 py-2">
+                <div class="alert alert-warning">
+                    This listing is featured{% if listing.featured_until %} until {{ listing.featured_until|date:"d M Y" }}{% endif %}.
+                </div>
 
-                Unverified Owner
+            {% elif user == listing.owner and listing.is_approved %}
 
-            </span>
+                <div class="alert alert-success d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <span>
+                        Promote this listing with a featured package for more visibility.
+                    </span>
+                    <a
+                        href="{% url 'feature_listing' listing.id %}"
+                        class="btn btn-success"
+                    >
+                        Feature Listing
+                    </a>
+                </div>
+
+            {% endif %}
 
         {% endif %}
+            <span class="badge bg-primary px-3 py-2">
+
+                Listing Owner
+
+            </span>
 
         <hr class="my-4">
 
@@ -154,7 +175,7 @@
         <hr class="my-5">
 
 <!-- ==========================================
-     Property Overview
+    Property Overview
 ========================================== -->
 
 <div class="card border-0 shadow-lg rounded-4 mt-5">
@@ -186,6 +207,18 @@
                     {{ listing.location }}
 
                 </p>
+
+                {% if listing.location_description %}
+
+                    <p class="mb-4">
+
+                        <strong>Extra Location Details</strong><br>
+
+                        {{ listing.location_description }}
+
+                    </p>
+
+                {% endif %}
 
                 <p class="mb-4">
 
@@ -236,7 +269,7 @@
 </div>
 
 <!-- ==========================================
-     Owner Information
+    Owner Information
 ========================================== -->
 
 <div class="card border-0 shadow-lg rounded-4">
@@ -260,24 +293,11 @@
                 </p>
 
             </div>
+            <span class="badge bg-primary px-3 py-2">
 
-            {% if listing.owner.is_verified %}
+                Listing Owner
 
-                <span class="badge bg-success px-3 py-2">
-
-                    ✔ Verified Owner
-
-                </span>
-
-            {% else %}
-
-                <span class="badge bg-secondary px-3 py-2">
-
-                    Unverified Owner
-
-                </span>
-
-            {% endif %}
+            </span>
 
         </div>
 
@@ -301,13 +321,93 @@
 
                 </p>
 
-                <p class="mb-3">
+                {% if can_view_contact %}
 
-                    <strong>Phone Number</strong><br>
+                    <p class="mb-3">
 
-                    {{ listing.owner.phone_number }}
+                        <strong>Phone Number</strong><br>
 
-                </p>
+                        {{ listing.owner.phone_number }}
+
+                    </p>
+
+                    {% if contact_unlock %}
+
+                        <div class="alert alert-success">
+
+                            Contact unlocked until
+                            {{ contact_unlock.expires_at|date:"d M Y H:i" }}.
+
+                        </div>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <div class="alert alert-warning border-0 rounded-4 shadow-sm">
+
+    <h5 class="fw-bold mb-2">
+
+        <i class="bi bi-unlock-fill me-2"></i>
+
+        Skip the Broker(Dalali)!
+
+    </h5>
+
+    <p class="mb-3">
+
+        Pay only
+        <strong>TZS {{ contact_unlock_fee|floatformat:0 }}</strong>
+        to contact the owner directly.
+
+    </p>
+
+    <ul class="small mb-3">
+
+        <li>📞 Call the owner</li>
+
+        <li>💬 WhatsApp instantly</li>
+
+        <li>⏳ Access for {{ contact_unlock_days }} days</li>
+
+        <li>💰 No broker commission</li>
+
+    </ul>
+
+</div>
+
+                    {% if contact_unlock.payment_status == 'pending' %}
+
+                        <div class="alert alert-info">
+
+                            Your contact unlock payment is awaiting admin
+                            confirmation.
+
+                        </div>
+
+                    {% elif contact_unlock.payment_status == 'rejected' %}
+
+                        <div class="alert alert-danger">
+
+                            Your contact unlock payment was rejected.
+                            {% if contact_unlock.payment_rejection_reason %}
+                                {{ contact_unlock.payment_rejection_reason }}
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
+
+                    <p class="text-muted">
+
+                        Unlock fee:
+                        <strong>TZS {{ contact_unlock_fee|floatformat:0 }}</strong><br>
+                        Access duration:
+                        <strong>{{ contact_unlock_days }} days</strong>
+
+                    </p>
+
+                {% endif %}
 
                 <p class="mb-0">
 
@@ -323,24 +423,58 @@
 
                 <div class="d-grid gap-3">
 
-                    <a
-                        href="tel:{{ listing.owner.phone_number }}"
-                        class="btn btn-success btn-lg"
-                    >
+                    {% if can_view_contact %}
 
-                        📞 Call Owner
+                        <a
+                            href="tel:{{ listing.owner.phone_number }}"
+                            class="btn btn-success btn-lg"
+                        >
 
-                    </a>
+                            Call Owner
 
-                    <a
-                        href="https://wa.me/{{ whatsapp_number }}?text=Hello,%20I%20am%20interested%20in%20{{ listing.title }}"
-                        target="_blank"
-                        class="btn btn-success btn-lg"
-                    >
+                        </a>
 
-                        💬 WhatsApp
+                        <a
+                            href="https://wa.me/{{ whatsapp_number }}?text=Hello,%20I%20am%20interested%20in%20{{ listing.title }}"
+                            target="_blank"
+                            class="btn btn-success btn-lg"
+                        >
 
-                    </a>
+                            WhatsApp
+
+                        </a>
+
+                    {% else %}
+
+                        {% if user.is_authenticated %}
+
+                            <a
+                                href="{% url 'unlock_contact' listing.id %}"
+                                class="btn {% if contact_unlock.payment_status == 'pending' %}btn-outline-warning{% else %}btn-warning{% endif %} btn-lg"
+                            >
+
+                                {% if contact_unlock.payment_status == 'pending' %}
+                                    Update Contact Unlock Payment
+                                {% else %}
+                                    Unlock Contact - TZS {{ contact_unlock_fee|floatformat:0 }}
+                                {% endif %}
+
+                            </a>
+
+                        {% else %}
+
+                            <a
+                                href="{% url 'login' %}"
+                                class="btn btn-primary btn-lg"
+                            >
+
+                                Login to Unlock Contact
+
+                            </a>
+
+                        {% endif %}
+
+                    {% endif %}
 
                     <a
                         href="{% url 'owner_profile' listing.owner.id %}"
@@ -493,5 +627,6 @@ function changeImage(image){
     </div>
 
 </section>
+</div>
 
 {% endblock %}

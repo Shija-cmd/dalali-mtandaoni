@@ -62,24 +62,11 @@
                             @{{ owner.username }}
 
                         </p>
+            <span class="badge bg-primary px-3 py-2">
 
-                        {% if owner.is_verified %}
+                Listing Owner
 
-                            <span class="badge bg-success px-3 py-2">
-
-                                ✔ Verified Owner
-
-                            </span>
-
-                        {% else %}
-
-                            <span class="badge bg-secondary px-3 py-2">
-
-                                Unverified Owner
-
-                            </span>
-
-                        {% endif %}
+            </span>
 
                     </div>
 
@@ -219,11 +206,24 @@
 
             <div class="col-md-6">
 
-                <p>
+                {% if can_view_owner_contact %}
 
-                    📞 <strong>{{ owner.phone_number }}</strong>
+                    <p>
 
-                </p>
+                        📞 <strong>{{ owner.phone_number }}</strong>
+
+                    </p>
+
+                {% else %}
+
+                    <div class="alert alert-warning mb-3">
+
+                        Owner contact is locked. Open a listing and unlock
+                        contact to call or WhatsApp this owner.
+
+                    </div>
+
+                {% endif %}
 
                 <p>
 
@@ -239,24 +239,28 @@
 
                 <div class="d-flex gap-2 flex-wrap justify-content-md-end">
 
-                    <a
-                        href="https://wa.me/{{ whatsapp_number }}"
-                        target="_blank"
-                        class="btn btn-success"
-                    >
+                    {% if can_view_owner_contact %}
 
-                        💬 WhatsApp
+                        <a
+                            href="https://wa.me/{{ whatsapp_number }}"
+                            target="_blank"
+                            class="btn btn-success"
+                        >
 
-                    </a>
+                            WhatsApp
 
-                    <a
-                        href="tel:{{ owner.phone_number }}"
-                        class="btn btn-primary"
-                    >
+                        </a>
 
-                        📞 Call
+                        <a
+                            href="tel:{{ owner.phone_number }}"
+                            class="btn btn-primary"
+                        >
 
-                    </a>
+                            Call
+
+                        </a>
+
+                    {% endif %}
 
                 </div>
 

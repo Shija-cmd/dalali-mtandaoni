@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Unlock Contact
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-lg rounded-4">
+
+                <div class="card-body p-5">
+
+                    <span class="badge bg-warning text-dark px-3 py-2 mb-3">
+                        Digital Dalali
+                    </span>
+
+                    <h1 class="fw-bold mb-3">
+                        Unlock Owner Contact
+                    </h1>
+
+                    <p class="text-muted">
+                        Pay the contact unlock fee, then enter your transaction reference for admin confirmation. The owner phone number will unlock after payment is approved.
+                    </p>
+
+                    <div class="alert alert-info">
+                        Contact access lasts {{ contact_unlock_days }} days after admin confirmation.
+                    </div>
+
+                    <div class="border rounded-4 p-3 mb-4">
+
+                        <h5 class="fw-bold mb-2">
+                            {{ listing.title }}
+                        </h5>
+
+                        <p class="mb-1">
+                            <strong>Listing ID:</strong> #DM{{ listing.id }}
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Owner:</strong>
+                            {{ listing.owner.get_full_name|default:listing.owner.username }}
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Unlock Fee:</strong>
+                            TZS {{ contact_unlock_fee|floatformat:0 }}
+                        </p>
+
+                        <p class="mb-0">
+                            <strong>Status:</strong>
+                            {{ unlock.get_payment_status_display }}
+                        </p>
+
+                    </div>
+
+                    {% if unlock.payment_rejection_reason %}
+
+                        <div class="alert alert-danger">
+                            <strong>Previous rejection reason:</strong>
+                            {{ unlock.payment_rejection_reason }}
+                        </div>
+
+                    {% endif %}
+
+                    <form method="post">
+
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+
+                            <label
+                                class="form-label fw-semibold"
+                                for="{{ form.payment_method.id_for_label }}"
+                            >
+                                Payment Method
+                            </label>
+
+                            {{ form.payment_method }}
+
+                        </div>
+
+                        <div
+                            id="payment-method-details"
+                            class="alert alert-secondary d-none"
+                        >
+
+                            <h5
+                                id="payment-method-title"
+                                class="fw-bold mb-3"
+                            >
+                            </h5>
+
+                            <p class="mb-2">
+                                <strong>Amount:</strong>
+                                TZS {{ contact_unlock_fee|floatformat:0 }}
+                            </p>
+
+                            <p
+                                id="payment-method-number-row"
+                                class="mb-2"
+                            >
+                                <strong>Lipa Number:</strong>
+                                <span id="payment-method-number"></span>
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Reference/Account:</strong>
+                                #DM{{ listing.id }}-CONTACT
+                            </p>
+
+                            <p
+                                id="payment-method-instructions"
+                                class="mb-0"
+                            >
+                            </p>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label
+                                class="form-label fw-semibold"
+                                for="{{ form.payment_reference.id_for_label }}"
+                            >
+                                Payment Reference
+                            </label>
+
+                            {{ form.payment_reference }}
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label
+                                class="form-label fw-semibold"
+                                for="{{ form.payment_note.id_for_label }}"
+                            >
+                                Note
+                            </label>
+
+                            {{ form.payment_note }}
+
+                        </div>
+
+                        {% if form.errors %}
+
+                            <div class="alert alert-danger">
+                                Please correct the payment details.
+                            </div>
+
+                        {% endif %}
+
+                        <div class="d-flex gap-3 flex-wrap">
+
+                            <button
+                                type="submit"
+                                class="btn btn-warning"
+                            >
+                                Submit Contact Unlock Payment
+                            </button>
+
+                            <a
+                                href="{% url 'listing_detail' listing.id %}"
+                                class="btn btn-outline-secondary"
+                            >
+                                Back to Listing
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{{ payment_methods_json|json_script:"payment-methods-data" }}
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const methodSelect = document.getElementById(
+            "{{ form.payment_method.id_for_label }}"
+        );
+
+        const detailsPanel = document.getElementById(
+            "payment-method-details"
+        );
+
+        const title = document.getElementById(
+            "payment-method-title"
+        );
+
+        const numberRow = document.getElementById(
+            "payment-method-number-row"
+        );
+
+        const number = document.getElementById(
+            "payment-method-number"
+        );
+
+        const instructions = document.getElementById(
+            "payment-method-instructions"
+        );
+
+        const paymentMethods = JSON.parse(
+            document.getElementById("payment-methods-data").textContent
+        );
+
+        const paymentDetails = paymentMethods.reduce(
+            function(methodsByCode, method){
+                methodsByCode[method.code] = {
+                    title: "Pay with " + method.name,
+                    lipaNumber: method.lipa_number,
+                    instructions: method.instructions
+                };
+                return methodsByCode;
+            },
+            {}
+        );
+
+        function updatePaymentDetails(){
+
+            const selectedMethod = methodSelect.value;
+            const selectedDetails = paymentDetails[selectedMethod];
+
+            if(!selectedDetails){
+                detailsPanel.classList.add("d-none");
+                return;
+            }
+
+            title.textContent = selectedDetails.title;
+            instructions.textContent = selectedDetails.instructions;
+
+            if(selectedDetails.lipaNumber){
+                number.textContent = selectedDetails.lipaNumber;
+                numberRow.classList.remove("d-none");
+            } else {
+                number.textContent = "";
+                numberRow.classList.add("d-none");
+            }
+
+            detailsPanel.classList.remove("d-none");
+
+        }
+
+        methodSelect.addEventListener(
+            "change",
+            updatePaymentDetails
+        );
+
+        updatePaymentDetails();
+
+    }
+);
+
+</script>
+
+{% endblock %}

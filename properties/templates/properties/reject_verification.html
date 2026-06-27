@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Reject Verification
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-lg rounded-4">
+
+        <div class="card-body p-5">
+
+            <h1 class="fw-bold mb-3">Reject Verification</h1>
+
+            <p class="text-muted">
+                Provide a clear reason for rejecting
+                <strong>{{ verification_request.user.get_full_name|default:verification_request.user.username }}</strong>.
+            </p>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="mb-4">
+                    {{ form.reason.label_tag }}
+                    {{ form.reason }}
+                    {% for error in form.reason.errors %}
+                        <div class="text-danger small mt-1">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="d-flex gap-2 justify-content-end">
+
+                    <a
+                        href="{% url 'verification_requests' %}"
+                        class="btn btn-outline-secondary"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger"
+                    >
+                        Reject Verification
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

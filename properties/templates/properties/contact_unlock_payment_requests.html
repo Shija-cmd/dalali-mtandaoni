@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Contact Unlock Payment Requests
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-lg rounded-4 mb-5">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                <div>
+
+                    <h1 class="fw-bold mb-2">
+                        Contact Unlock Payment Requests
+                    </h1>
+
+                    <p class="text-muted mb-0">
+                        Confirm Digital Dalali payments before contact details unlock.
+                    </p>
+
+                </div>
+
+                <span class="badge bg-warning text-dark fs-6 px-3 py-2">
+                    {{ unlocks|length }} Pending Contact Unlock{{ unlocks|length|pluralize }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% include 'properties/includes/admin_approval_nav.html' with active_admin_tab='contact_unlocks' %}
+
+    {% for unlock in unlocks %}
+
+        <div class="card border-0 shadow-lg rounded-4 mb-4">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+
+                    <div>
+
+                        <h3 class="fw-bold mb-2">
+                            {{ unlock.listing.title }}
+                        </h3>
+
+                        <p class="mb-1">
+                            <strong>Customer:</strong>
+                            {{ unlock.user.get_full_name|default:unlock.user.username }}
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Listing Owner:</strong>
+                            {{ unlock.listing.owner.get_full_name|default:unlock.listing.owner.username }}
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Listing ID:</strong>
+                            #DM{{ unlock.listing.id }}
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Unlock Fee:</strong>
+                            TZS {{ unlock.amount|floatformat:0 }}
+                        </p>
+
+                        <p class="mb-0">
+                            <strong>Submitted:</strong>
+                            {{ unlock.payment_submitted_at|date:"d M Y H:i" }}
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-warning text-dark px-3 py-2">
+                        {{ unlock.get_payment_status_display }}
+                    </span>
+
+                </div>
+
+                <hr>
+
+                <p class="mb-2">
+                    <strong>Payment Method:</strong>
+                    {{ unlock.get_payment_method_display }}
+                </p>
+
+                <p class="mb-2">
+                    <strong>Payment Reference:</strong>
+                    {{ unlock.payment_reference }}
+                </p>
+
+                {% if unlock.payment_note %}
+
+                    <p class="text-muted">
+                        {{ unlock.payment_note }}
+                    </p>
+
+                {% endif %}
+
+                <div class="d-flex gap-2 flex-wrap mt-4">
+
+                    <a
+                        href="{% url 'listing_detail' unlock.listing.id %}"
+                        class="btn btn-outline-primary"
+                    >
+                        View Listing
+                    </a>
+
+                    <a
+                        href="{% url 'approve_contact_unlock_payment' unlock.id %}"
+                        class="btn btn-success"
+                        onclick="return confirm('Confirm this contact unlock payment?');"
+                    >
+                        Confirm Payment
+                    </a>
+
+                    <a
+                        href="{% url 'reject_contact_unlock_payment' unlock.id %}"
+                        class="btn btn-outline-danger"
+                        onclick="return confirm('Reject this contact unlock payment reference?');"
+                    >
+                        Reject Payment
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="card border-0 shadow-lg rounded-4">
+
+            <div class="card-body text-center p-5">
+
+                <h3 class="fw-bold mb-3">
+                    No Pending Contact Unlock Payments
+                </h3>
+
+                <p class="text-muted mb-0">
+                    All submitted contact unlock payments have been reviewed.
+                </p>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

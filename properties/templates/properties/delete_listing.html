@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Delete Listing
+    Remove Listing
 {% endblock %}
 
 {% block content %}
@@ -17,16 +17,20 @@
                 <div class="card-body">
 
                     <h2 class="text-danger">
-                        Delete Listing
+                        Remove Listing
                     </h2>
 
                     <p>
-                        Are you sure you want to delete:
+                        Are you sure you want to remove this listing from public view?
                     </p>
 
                     <h5>
                         {{ listing.title }}
                     </h5>
+
+                    <p class="text-muted">
+                        This will hide the listing from customers, but it will remain in your account history.
+                    </p>
 
                     <form method="post">
 
@@ -36,7 +40,7 @@
                             type="submit"
                             class="btn btn-danger"
                         >
-                            Yes, Delete
+                            Yes, Remove
                         </button>
 
                         <a

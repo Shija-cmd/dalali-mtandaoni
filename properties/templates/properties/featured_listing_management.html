@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Manage Featured Listings
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-lg rounded-4 mb-5">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                <div>
+
+                    <h1 class="fw-bold mb-2">Manage Featured Listings</h1>
+
+                    <p class="text-muted mb-0">
+                        Mark approved listings as featured or remove them from the featured section.
+                    </p>
+
+                </div>
+
+                <span class="badge bg-warning text-dark fs-6 px-3 py-2">
+                    {{ listings|length }} Approved Listing{{ listings|length|pluralize }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% include 'properties/includes/admin_approval_nav.html' with active_admin_tab='featured' %}
+
+    {% for listing in listings %}
+
+        <div class="card border-0 shadow-lg rounded-4 mb-4">
+
+            <div class="row g-0">
+
+                <div class="col-lg-3">
+
+                    {% if listing.images.first %}
+
+                        <img
+                            src="{{ listing.images.first.image.url }}"
+                            alt="{{ listing.title }}"
+                            class="img-fluid h-100 w-100 rounded-start"
+                            style="object-fit:cover; min-height:220px;"
+                        >
+
+                    {% else %}
+
+                        <div
+                            class="bg-light d-flex justify-content-center align-items-center h-100 rounded-start"
+                            style="min-height:220px;"
+                        >
+                            <span class="text-muted">No Image Available</span>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="card-body p-4">
+
+                        <div class="d-flex justify-content-between align-items-start flex-wrap mb-3">
+
+                            <div>
+
+                                <h3 class="fw-bold">{{ listing.title }}</h3>
+
+                                {% if listing.is_featured %}
+                                    {% if listing.is_featured_active %}
+                                        <span class="badge bg-warning text-dark">Featured</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Featured Expired</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="badge bg-secondary">Not Featured</span>
+                                {% endif %}
+
+                                <span class="badge bg-success">Approved</span>
+
+                            </div>
+
+                            <h4 class="text-primary fw-bold">
+                                TZS {{ listing.price|floatformat:0 }}
+                            </h4>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <p class="mb-2">
+                                    <strong>Owner:</strong>
+                                    {{ listing.owner.get_full_name|default:listing.owner.username }}
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Category:</strong>
+                                    {{ listing.category }}
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Package:</strong>
+                                    {{ listing.get_featured_package_display|default:"Manual featured" }}
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Featured Until:</strong>
+                                    {{ listing.featured_until|date:"d M Y"|default:"No expiry" }}
+                                </p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p class="mb-2">
+                                    <strong>Location:</strong>
+                                    {{ listing.location }}
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Listing ID:</strong>
+                                    #DM{{ listing.id }}
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex gap-2 flex-wrap mt-4">
+
+                            <a
+                                href="{% url 'listing_detail' listing.id %}"
+                                class="btn btn-outline-primary"
+                            >
+                                View Listing
+                            </a>
+
+                            {% if listing.is_featured %}
+
+                                <form
+                                    method="post"
+                                    action="{% url 'toggle_featured_listing' listing.id %}"
+                                    class="d-flex gap-2 flex-wrap align-items-end"
+                                >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="mark">
+
+                                    <div>
+                                        <label class="form-label small mb-1">Package</label>
+                                        <select
+                                            name="featured_package"
+                                            class="form-select form-select-sm"
+                                            required
+                                        >
+                                            {% for value, label in featured_package_choices %}
+                                                <option
+                                                    value="{{ value }}"
+                                                    {% if listing.featured_package == value %}selected{% endif %}
+                                                >
+                                                    {{ label }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label class="form-label small mb-1">Featured Until</label>
+                                        <input
+                                            type="datetime-local"
+                                            name="featured_until"
+                                            class="form-control form-control-sm"
+                                            value="{{ listing.featured_until|date:'Y-m-d\TH:i' }}"
+                                        >
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-outline-primary"
+                                        onclick="return confirm('Update this featured listing time limit?');"
+                                    >
+                                        Update Featured
+                                    </button>
+                                </form>
+
+                                <form
+                                    method="post"
+                                    action="{% url 'toggle_featured_listing' listing.id %}"
+                                >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="remove">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-warning"
+                                        onclick="return confirm('Remove this listing from featured listings?');"
+                                    >
+                                        Remove Featured
+                                    </button>
+                                </form>
+
+                            {% else %}
+
+                                <form
+                                    method="post"
+                                    action="{% url 'toggle_featured_listing' listing.id %}"
+                                    class="d-flex gap-2 flex-wrap align-items-end"
+                                >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="mark">
+
+                                    <div>
+                                        <label class="form-label small mb-1">Package</label>
+                                        <select
+                                            name="featured_package"
+                                            class="form-select form-select-sm"
+                                            required
+                                        >
+                                            {% for value, label in featured_package_choices %}
+                                                <option value="{{ value }}">{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label class="form-label small mb-1">Featured Until</label>
+                                        <input
+                                            type="datetime-local"
+                                            name="featured_until"
+                                            class="form-control form-control-sm"
+                                        >
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-outline-warning"
+                                        onclick="return confirm('Mark this listing as featured?');"
+                                    >
+                                        Mark Featured
+                                    </button>
+                                </form>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="card border-0 shadow-lg rounded-4">
+
+            <div class="card-body text-center p-5">
+
+                <h3 class="fw-bold mb-3">No Approved Listings</h3>
+
+                <p class="text-muted mb-0">
+                    Approved paid listings will appear here for featured management.
+                </p>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

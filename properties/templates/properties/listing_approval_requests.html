@@ -28,7 +28,7 @@ Listing Approval Requests
 
                 <p class="text-muted mb-0">
 
-                    Review and approve newly submitted listings.
+                    Review free listing submissions before they appear publicly.
 
                 </p>
 
@@ -49,6 +49,8 @@ Listing Approval Requests
     </div>
 
 </div>
+
+{% include 'properties/includes/admin_approval_nav.html' with active_admin_tab='listings' %}
 
 <!-- ==========================================
      Listing Requests
@@ -167,6 +169,23 @@ Listing Approval Requests
 
                             </p>
 
+                            <p class="mb-2">
+
+                                <strong>Owner ID:</strong>
+                                {% if listing.owner_id_document %}
+                                    <a
+                                        href="{{ listing.owner_id_document.url }}"
+                                        target="_blank"
+                                        rel="noopener"
+                                    >
+                                        View uploaded ID
+                                    </a>
+                                {% else %}
+                                    <span class="text-danger">Not uploaded</span>
+                                {% endif %}
+
+                            </p>
+
                         </div>
 
                     </div>
@@ -193,15 +212,122 @@ Listing Approval Requests
                         <a
                             href="{% url 'approve_listing' listing.id %}"
                             class="btn btn-success"
+                            onclick="return confirm('Approve this listing and publish it publicly?');"
                         >
 
                             ✅ Approve Listing
 
                         </a>
 
+                        {% if listing.is_featured %}
+
+                            <form
+                                method="post"
+                                action="{% url 'toggle_featured_listing' listing.id %}"
+                                class="d-flex gap-2 flex-wrap align-items-end"
+                            >
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="mark">
+
+                                <div>
+                                    <label class="form-label small mb-1">Package</label>
+                                    <select
+                                        name="featured_package"
+                                        class="form-select form-select-sm"
+                                        required
+                                    >
+                                        {% for value, label in featured_package_choices %}
+                                            <option
+                                                value="{{ value }}"
+                                                {% if listing.featured_package == value %}selected{% endif %}
+                                            >
+                                                {{ label }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="form-label small mb-1">Featured Until</label>
+                                    <input
+                                        type="datetime-local"
+                                        name="featured_until"
+                                        class="form-control form-control-sm"
+                                        value="{{ listing.featured_until|date:'Y-m-d\TH:i' }}"
+                                    >
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-outline-primary"
+                                    onclick="return confirm('Update this featured listing time limit?');"
+                                >
+                                    Update Featured
+                                </button>
+                            </form>
+
+                            <form
+                                method="post"
+                                action="{% url 'toggle_featured_listing' listing.id %}"
+                            >
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="remove">
+                                <button
+                                    type="submit"
+                                    class="btn btn-warning"
+                                    onclick="return confirm('Remove this listing from featured listings?');"
+                                >
+                                    Remove Featured
+                                </button>
+                            </form>
+
+                        {% else %}
+
+                            <form
+                                method="post"
+                                action="{% url 'toggle_featured_listing' listing.id %}"
+                                class="d-flex gap-2 flex-wrap align-items-end"
+                            >
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="mark">
+
+                                <div>
+                                    <label class="form-label small mb-1">Package</label>
+                                    <select
+                                        name="featured_package"
+                                        class="form-select form-select-sm"
+                                        required
+                                    >
+                                        {% for value, label in featured_package_choices %}
+                                            <option value="{{ value }}">{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="form-label small mb-1">Featured Until</label>
+                                    <input
+                                        type="datetime-local"
+                                        name="featured_until"
+                                        class="form-control form-control-sm"
+                                    >
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-outline-warning"
+                                    onclick="return confirm('Mark this listing as featured?');"
+                                >
+                                    Mark Featured
+                                </button>
+                            </form>
+
+                        {% endif %}
+
                         <a
                             href="{% url 'reject_listing' listing.id %}"
                             class="btn btn-outline-danger"
+                            onclick="return confirm('Reject and delete this listing?');"
                         >
 
                             ❌ Reject Listing

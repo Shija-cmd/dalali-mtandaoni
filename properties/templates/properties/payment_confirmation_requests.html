@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Featured Payment Requests
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-lg rounded-4 mb-5">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                <div>
+
+                    <h1 class="fw-bold mb-2">
+                        Featured Payment Requests
+                    </h1>
+
+                    <p class="text-muted mb-0">
+                        Confirm payments for featured listing promotions.
+                    </p>
+
+                </div>
+
+                <span class="badge bg-warning text-dark fs-6 px-3 py-2">
+                    {{ listings|length }} Pending Featured Payment{{ listings|length|pluralize }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% include 'properties/includes/admin_approval_nav.html' with active_admin_tab='payments' %}
+
+    {% for listing in listings %}
+
+        <div class="card border-0 shadow-lg rounded-4 mb-4">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+
+                    <div>
+
+                        <h3 class="fw-bold mb-2">
+                            {{ listing.title }}
+                        </h3>
+
+                        <p class="mb-1">
+                            <strong>Owner:</strong>
+                            {{ listing.owner.get_full_name|default:listing.owner.username }}
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Phone:</strong>
+                            {{ listing.owner.phone_number }}
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Listing ID:</strong>
+                            #DM{{ listing.id }}
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Selling Price:</strong>
+                            TZS {{ listing.price|floatformat:0 }}
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Featured Package Fee:</strong>
+                            TZS {{ listing.publishing_fee|floatformat:0 }}
+                        </p>
+
+                        <p class="mb-0">
+                            <strong>Submitted:</strong>
+                            {{ listing.payment_submitted_at|date:"d M Y H:i" }}
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-warning text-dark px-3 py-2">
+                        {{ listing.get_payment_status_display }}
+                    </span>
+
+                </div>
+
+                <hr>
+
+                <p class="mb-2">
+                    <strong>Payment Method:</strong>
+                    {{ listing.get_payment_method_display }}
+                </p>
+
+                <p class="mb-2">
+                    <strong>Payment Reference:</strong>
+                    {{ listing.payment_reference }}
+                </p>
+
+                {% if listing.payment_note %}
+
+                    <p class="text-muted">
+                        {{ listing.payment_note }}
+                    </p>
+
+                {% endif %}
+
+                <div class="d-flex gap-2 flex-wrap mt-4">
+
+                    <a
+                        href="{% url 'listing_detail' listing.id %}"
+                        class="btn btn-outline-primary"
+                    >
+                        View Listing
+                    </a>
+
+                    <a
+                        href="{% url 'approve_listing_payment' listing.id %}"
+                        class="btn btn-success"
+                        onclick="return confirm('Confirm this featured listing payment?');"
+                    >
+                        Confirm Payment
+                    </a>
+
+                    <a
+                        href="{% url 'reject_listing_payment' listing.id %}"
+                        class="btn btn-outline-danger"
+                        onclick="return confirm('Reject this featured listing payment reference?');"
+                    >
+                        Reject Payment
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="card border-0 shadow-lg rounded-4">
+
+            <div class="card-body text-center p-5">
+
+                <h3 class="fw-bold mb-3">
+                    No Pending Featured Payment Requests
+                </h3>
+
+                <p class="text-muted mb-0">
+                    All submitted featured listing payments have been reviewed.
+                </p>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

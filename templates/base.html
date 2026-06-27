@@ -171,45 +171,12 @@
                         </a>
                     </li>
 
-                    {% if user.is_verified %}
-
                     <li>
                         <a class="dropdown-item" href="{% url 'create_listing' %}">
                             <i class="bi bi-plus-circle me-2"></i>
                             Create Listing
                         </a>
                     </li>
-
-                    {% elif pending_verification %}
-
-                    <li>
-                        {% if pending_verification_request and not pending_verification_request.id_document %}
-
-                            <a class="dropdown-item" href="{% url 'request_verification' %}">
-                                <i class="bi bi-card-image me-2"></i>
-                                Upload ID
-                            </a>
-
-                        {% else %}
-
-                            <span class="dropdown-item text-muted">
-                                <i class="bi bi-hourglass-split me-2"></i>
-                                Verification Pending
-                            </span>
-
-                        {% endif %}
-                    </li>
-
-                    {% else %}
-
-                    <li>
-                        <a class="dropdown-item" href="{% url 'request_verification' %}">
-                            <i class="bi bi-card-image me-2"></i>
-                            Upload ID
-                        </a>
-                    </li>
-
-                    {% endif %}
 
                     <li>
                         <a class="dropdown-item" href="{% url 'my_listings' %}">
@@ -243,14 +210,14 @@
 
                         <a
                             class="dropdown-item d-flex justify-content-between align-items-center"
-                            href="{% url 'verification_requests' %}"
+                            href="{% url 'payment_confirmation_requests' %}"
                         >
 
-                            User Verification
+                            Payment Confirmation
 
-                            {% if pending_user_requests %}
+                            {% if pending_payment_requests %}
                                 <span class="badge bg-danger rounded-pill">
-                                    {{ pending_user_requests }}
+                                    {{ pending_payment_requests }}
                                 </span>
                             {% endif %}
 
@@ -272,6 +239,19 @@
                                     {{ pending_listing_requests }}
                                 </span>
                             {% endif %}
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a
+                            class="dropdown-item"
+                            href="{% url 'featured_listing_management' %}"
+                        >
+
+                            Featured Listings
 
                         </a>
 
@@ -473,6 +453,36 @@
                         <a href="{% url 'contact' %}">
 
                             Contact
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="{% url 'listing_rules' %}">
+
+                            Listing Rules
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="{% url 'terms' %}">
+
+                            Terms
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="{% url 'privacy' %}">
+
+                            Privacy
 
                         </a>
 

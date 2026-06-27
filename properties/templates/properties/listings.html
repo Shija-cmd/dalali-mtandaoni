@@ -192,6 +192,106 @@ Browse Listings Header
 
             </div>
 
+            <div class="row g-3 mt-2">
+
+                <div class="col-md-3">
+
+                    <label class="form-label fw-semibold">
+                        Region
+                    </label>
+
+                    <select
+                        id="id_region"
+                        name="region"
+                        class="form-select"
+                    >
+                        <option value="">All Regions</option>
+                        {% for region in regions %}
+                            <option
+                                value="{{ region.id }}"
+                                {% if selected_region == region.id|stringformat:"s" %}selected{% endif %}
+                            >
+                                {{ region.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label class="form-label fw-semibold">
+                        District
+                    </label>
+
+                    <select
+                        id="id_district"
+                        name="district"
+                        class="form-select"
+                    >
+                        <option value="">All Districts</option>
+                        {% for district in districts %}
+                            <option
+                                value="{{ district.id }}"
+                                {% if selected_district == district.id|stringformat:"s" %}selected{% endif %}
+                            >
+                                {{ district.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label class="form-label fw-semibold">
+                        Ward
+                    </label>
+
+                    <select
+                        id="id_ward"
+                        name="ward"
+                        class="form-select"
+                    >
+                        <option value="">All Wards</option>
+                        {% for ward in wards %}
+                            <option
+                                value="{{ ward.id }}"
+                                {% if selected_ward == ward.id|stringformat:"s" %}selected{% endif %}
+                            >
+                                {{ ward.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label class="form-label fw-semibold">
+                        Street/Area
+                    </label>
+
+                    <select
+                        id="id_street_area"
+                        name="street_area"
+                        class="form-select"
+                    >
+                        <option value="">All Streets/Areas</option>
+                        {% for street in streets %}
+                            <option
+                                value="{{ street.id }}"
+                                {% if selected_street_area == street.id|stringformat:"s" %}selected{% endif %}
+                            >
+                                {{ street.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+
+            </div>
+
             <!-- Footer -->
 
             <hr class="my-4">
@@ -214,7 +314,7 @@ Browse Listings Header
 
                 </div>
 
-                {% if query or selected_category or min_price or max_price %}
+                {% if query or selected_category or selected_region or selected_district or selected_ward or selected_street_area or min_price or max_price %}
 
                     <span class="badge bg-success">
 
@@ -269,6 +369,14 @@ Browse Listings Header
         <input type="hidden" name="q" value="{{ query }}">
 
         <input type="hidden" name="category" value="{{ selected_category }}">
+
+        <input type="hidden" name="region" value="{{ selected_region }}">
+
+        <input type="hidden" name="district" value="{{ selected_district }}">
+
+        <input type="hidden" name="ward" value="{{ selected_ward }}">
+
+        <input type="hidden" name="street_area" value="{{ selected_street_area }}">
 
         <input type="hidden" name="min_price" value="{{ min_price }}">
 
@@ -359,6 +467,16 @@ Browse Listings Header
                 {{ listing.category }}
 
             </div>
+
+            {% if listing.is_featured_active %}
+
+                <div class="position-absolute top-0 start-0 m-2 badge bg-warning text-dark shadow-sm">
+
+                    Featured
+
+                </div>
+
+            {% endif %}
 
         </div>
 
@@ -491,5 +609,7 @@ Browse Listings Header
 </div>
 
 </div>
+
+{% include 'properties/includes/location_dropdowns_script.html' %}
 
 {% endblock %}

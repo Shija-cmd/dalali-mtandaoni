@@ -22,11 +22,93 @@ Edit Listing
 
                     </h2>
 
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
 
                         {% csrf_token %}
 
-                        {{ form.as_p }}
+                        <div class="mb-3">
+                            {{ form.category.label_tag }}
+                            {{ form.category }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.title.label_tag }}
+                            {{ form.title }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.description.label_tag }}
+                            {{ form.description }}
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Location
+                            </label>
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    {{ form.region.label_tag }}
+                                    {{ form.region }}
+                                    {{ form.region.errors }}
+                                </div>
+
+                                <div class="col-md-6">
+                                    {{ form.district.label_tag }}
+                                    {{ form.district }}
+                                    {{ form.district.errors }}
+                                </div>
+
+                                <div class="col-md-6">
+                                    {{ form.ward.label_tag }}
+                                    {{ form.ward }}
+                                    {{ form.ward.errors }}
+                                </div>
+
+                                <div class="col-md-6">
+                                    {{ form.street_area.label_tag }}
+                                    {{ form.street_area }}
+                                    {{ form.street_area.errors }}
+                                </div>
+
+                                <div class="col-12">
+                                    {{ form.location_description.label_tag }}
+                                    {{ form.location_description }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.price.label_tag }}
+                            {{ form.price }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.owner_id_document.label_tag }}
+                            {{ form.owner_id_document }}
+                            {{ form.owner_id_document.errors }}
+                            {% if listing.owner_id_document %}
+                                <small class="text-muted d-block mt-1">
+                                    Current ID document is uploaded. Choose a new file only if you want to replace it.
+                                </small>
+                            {% else %}
+                                <small class="text-muted d-block mt-1">
+                                    Upload a clear photo of your ID for listing review.
+                                </small>
+                            {% endif %}
+                        </div>
+
+                        {% if form.errors %}
+
+                            <div class="alert alert-danger">
+                                Please correct the highlighted listing details.
+                            </div>
+
+                        {% endif %}
 
                         <button
                             type="submit"
@@ -46,5 +128,7 @@ Edit Listing
     </div>
 
 </div>
+
+{% include 'properties/includes/location_dropdowns_script.html' %}
 
 {% endblock %}

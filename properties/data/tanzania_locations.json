@@ -1,0 +1,1538 @@
+[
+  {
+    "region": "Arusha",
+    "districts": [
+      {
+        "name": "Arusha City",
+        "wards": [
+          {
+            "name": "Kaloleni",
+            "streets": []
+          },
+          {
+            "name": "Kati",
+            "streets": []
+          },
+          {
+            "name": "Sekei",
+            "streets": []
+          },
+          {
+            "name": "Themi",
+            "streets": []
+          }
+        ]
+      },
+      {
+        "name": "Arumeru",
+        "wards": []
+      },
+      {
+        "name": "Karatu",
+        "wards": []
+      },
+      {
+        "name": "Longido",
+        "wards": []
+      },
+      {
+        "name": "Monduli",
+        "wards": []
+      },
+      {
+        "name": "Ngorongoro",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Dar es Salaam",
+    "districts": [
+      {
+        "name": "Ilala",
+        "wards": [
+          {
+            "name": "Buguruni",
+            "streets": []
+          },
+          {
+            "name": "Gerezani",
+            "streets": []
+          },
+          {
+            "name": "Jangwani",
+            "streets": []
+          },
+          {
+            "name": "Kariakoo",
+            "streets": [
+              "Kariakoo",
+              "Mchikichini"
+            ]
+          },
+          {
+            "name": "Kisutu",
+            "streets": []
+          },
+          {
+            "name": "Mchafukoge",
+            "streets": []
+          },
+          {
+            "name": "Upanga Mashariki",
+            "streets": []
+          },
+          {
+            "name": "Upanga Magharibi",
+            "streets": []
+          }
+        ]
+      },
+      {
+        "name": "Kinondoni",
+        "wards": [
+          {
+            "name": "Kijitonyama",
+            "streets": [
+              "Mpakani",
+              "Sayansi"
+            ]
+          },
+          {
+            "name": "Kimara",
+            "streets": [
+              "Kimara Baruti",
+              "Kimara Korogwe",
+              "Kimara Mwisho",
+              "Temboni"
+            ]
+          },
+          {
+            "name": "Kinondoni",
+            "streets": []
+          },
+          {
+            "name": "Magomeni",
+            "streets": []
+          },
+          {
+            "name": "Makumbusho",
+            "streets": []
+          },
+          {
+            "name": "Mikocheni",
+            "streets": [
+              "Mikocheni A",
+              "Mikocheni B"
+            ]
+          },
+          {
+            "name": "Msasani",
+            "streets": [
+              "Masaki",
+              "Oysterbay"
+            ]
+          },
+          {
+            "name": "Mwananyamala",
+            "streets": []
+          },
+          {
+            "name": "Sinza",
+            "streets": [
+              "Sinza A",
+              "Sinza B",
+              "Sinza C",
+              "Sinza D",
+              "Sinza E"
+            ]
+          },
+          {
+            "name": "Tandale",
+            "streets": []
+          }
+        ]
+      },
+      {
+        "name": "Temeke",
+        "wards": [
+          {
+            "name": "Azimio",
+            "streets": []
+          },
+          {
+            "name": "Chang'ombe",
+            "streets": []
+          },
+          {
+            "name": "Keko",
+            "streets": []
+          },
+          {
+            "name": "Kibada",
+            "streets": []
+          },
+          {
+            "name": "Kigamboni",
+            "streets": []
+          },
+          {
+            "name": "Kurasini",
+            "streets": []
+          },
+          {
+            "name": "Mbagala",
+            "streets": []
+          },
+          {
+            "name": "Mtoni",
+            "streets": []
+          },
+          {
+            "name": "Tandika",
+            "streets": []
+          }
+        ]
+      },
+      {
+        "name": "Ubungo",
+        "wards": [
+          {
+            "name": "Goba",
+            "streets": []
+          },
+          {
+            "name": "Kibamba",
+            "streets": []
+          },
+          {
+            "name": "Mbezi",
+            "streets": [
+              "Mbezi Beach",
+              "Mbezi Juu"
+            ]
+          },
+          {
+            "name": "Ubungo",
+            "streets": []
+          }
+        ]
+      },
+      {
+        "name": "Kigamboni",
+        "wards": [
+          {
+            "name": "Kigamboni",
+            "streets": []
+          },
+          {
+            "name": "Kimbiji",
+            "streets": []
+          },
+          {
+            "name": "Mjimwema",
+            "streets": []
+          },
+          {
+            "name": "Somangila",
+            "streets": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Dodoma",
+    "districts": [
+      {
+        "name": "Dodoma City",
+        "wards": [
+          {
+            "name": "Chamwino",
+            "streets": []
+          },
+          {
+            "name": "Kikuyu Kaskazini",
+            "streets": []
+          },
+          {
+            "name": "Kikuyu Kusini",
+            "streets": []
+          },
+          {
+            "name": "Madukani",
+            "streets": []
+          },
+          {
+            "name": "Makole",
+            "streets": []
+          },
+          {
+            "name": "Tambukareli",
+            "streets": []
+          }
+        ]
+      },
+      {
+        "name": "Bahi",
+        "wards": []
+      },
+      {
+        "name": "Chamwino",
+        "wards": []
+      },
+      {
+        "name": "Chemba",
+        "wards": []
+      },
+      {
+        "name": "Kondoa",
+        "wards": []
+      },
+      {
+        "name": "Kongwa",
+        "wards": []
+      },
+      {
+        "name": "Mpwapwa",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Geita",
+    "districts": [
+      {
+        "name": "Bukombe",
+        "wards": []
+      },
+      {
+        "name": "Chato",
+        "wards": []
+      },
+      {
+        "name": "Geita",
+        "wards": []
+      },
+      {
+        "name": "Mbogwe",
+        "wards": []
+      },
+      {
+        "name": "Nyang'hwale",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Iringa",
+    "districts": [
+      {
+        "name": "Iringa Municipal",
+        "wards": []
+      },
+      {
+        "name": "Iringa",
+        "wards": []
+      },
+      {
+        "name": "Kilolo",
+        "wards": []
+      },
+      {
+        "name": "Mafinga Town",
+        "wards": []
+      },
+      {
+        "name": "Mufindi",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Kagera",
+    "districts": [
+      {
+        "name": "Biharamulo",
+        "wards": []
+      },
+      {
+        "name": "Bukoba Municipal",
+        "wards": []
+      },
+      {
+        "name": "Bukoba",
+        "wards": []
+      },
+      {
+        "name": "Karagwe",
+        "wards": []
+      },
+      {
+        "name": "Kyerwa",
+        "wards": []
+      },
+      {
+        "name": "Missenyi",
+        "wards": []
+      },
+      {
+        "name": "Muleba",
+        "wards": []
+      },
+      {
+        "name": "Ngara",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Katavi",
+    "districts": [
+      {
+        "name": "Mlele",
+        "wards": []
+      },
+      {
+        "name": "Mpanda Municipal",
+        "wards": []
+      },
+      {
+        "name": "Mpanda",
+        "wards": []
+      },
+      {
+        "name": "Tanganyika",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Kigoma",
+    "districts": [
+      {
+        "name": "Buhigwe",
+        "wards": []
+      },
+      {
+        "name": "Kakonko",
+        "wards": []
+      },
+      {
+        "name": "Kasulu",
+        "wards": []
+      },
+      {
+        "name": "Kasulu Town",
+        "wards": []
+      },
+      {
+        "name": "Kibondo",
+        "wards": []
+      },
+      {
+        "name": "Kigoma Municipal",
+        "wards": []
+      },
+      {
+        "name": "Kigoma",
+        "wards": []
+      },
+      {
+        "name": "Uvinza",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Kilimanjaro",
+    "districts": [
+      {
+        "name": "Hai",
+        "wards": []
+      },
+      {
+        "name": "Moshi Municipal",
+        "wards": []
+      },
+      {
+        "name": "Moshi",
+        "wards": []
+      },
+      {
+        "name": "Mwanga",
+        "wards": []
+      },
+      {
+        "name": "Rombo",
+        "wards": []
+      },
+      {
+        "name": "Same",
+        "wards": []
+      },
+      {
+        "name": "Siha",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Lindi",
+    "districts": [
+      {
+        "name": "Kilwa",
+        "wards": []
+      },
+      {
+        "name": "Lindi Municipal",
+        "wards": []
+      },
+      {
+        "name": "Lindi",
+        "wards": []
+      },
+      {
+        "name": "Liwale",
+        "wards": []
+      },
+      {
+        "name": "Nachingwea",
+        "wards": []
+      },
+      {
+        "name": "Ruangwa",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Manyara",
+    "districts": [
+      {
+        "name": "Babati Town",
+        "wards": []
+      },
+      {
+        "name": "Babati",
+        "wards": []
+      },
+      {
+        "name": "Hanang",
+        "wards": []
+      },
+      {
+        "name": "Kiteto",
+        "wards": []
+      },
+      {
+        "name": "Mbulu",
+        "wards": []
+      },
+      {
+        "name": "Simanjiro",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Mara",
+    "districts": [
+      {
+        "name": "Bunda",
+        "wards": []
+      },
+      {
+        "name": "Butiama",
+        "wards": []
+      },
+      {
+        "name": "Musoma Municipal",
+        "wards": []
+      },
+      {
+        "name": "Musoma",
+        "wards": []
+      },
+      {
+        "name": "Rorya",
+        "wards": []
+      },
+      {
+        "name": "Serengeti",
+        "wards": []
+      },
+      {
+        "name": "Tarime",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Mbeya",
+    "districts": [
+      {
+        "name": "Busokelo",
+        "wards": []
+      },
+      {
+        "name": "Chunya",
+        "wards": []
+      },
+      {
+        "name": "Kyela",
+        "wards": []
+      },
+      {
+        "name": "Mbarali",
+        "wards": []
+      },
+      {
+        "name": "Mbeya City",
+        "wards": []
+      },
+      {
+        "name": "Mbeya",
+        "wards": []
+      },
+      {
+        "name": "Rungwe",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Morogoro",
+    "districts": [
+      {
+        "name": "Gairo",
+        "wards": []
+      },
+      {
+        "name": "Kilombero",
+        "wards": []
+      },
+      {
+        "name": "Kilosa",
+        "wards": []
+      },
+      {
+        "name": "Morogoro Municipal",
+        "wards": []
+      },
+      {
+        "name": "Morogoro",
+        "wards": []
+      },
+      {
+        "name": "Mvomero",
+        "wards": []
+      },
+      {
+        "name": "Ulanga",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Mtwara",
+    "districts": [
+      {
+        "name": "Masasi",
+        "wards": []
+      },
+      {
+        "name": "Masasi Town",
+        "wards": []
+      },
+      {
+        "name": "Mtwara Municipal",
+        "wards": []
+      },
+      {
+        "name": "Mtwara",
+        "wards": []
+      },
+      {
+        "name": "Nanyumbu",
+        "wards": []
+      },
+      {
+        "name": "Newala",
+        "wards": []
+      },
+      {
+        "name": "Tandahimba",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Mwanza",
+    "districts": [
+      {
+        "name": "Buchosa",
+        "wards": []
+      },
+      {
+        "name": "Ilemela Municipal",
+        "wards": []
+      },
+      {
+        "name": "Kwimba",
+        "wards": []
+      },
+      {
+        "name": "Magu",
+        "wards": []
+      },
+      {
+        "name": "Misungwi",
+        "wards": []
+      },
+      {
+        "name": "Nyamagana Municipal",
+        "wards": []
+      },
+      {
+        "name": "Sengerema",
+        "wards": []
+      },
+      {
+        "name": "Ukerewe",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Njombe",
+    "districts": [
+      {
+        "name": "Ludewa",
+        "wards": []
+      },
+      {
+        "name": "Makambako Town",
+        "wards": []
+      },
+      {
+        "name": "Makete",
+        "wards": []
+      },
+      {
+        "name": "Njombe Town",
+        "wards": []
+      },
+      {
+        "name": "Njombe",
+        "wards": []
+      },
+      {
+        "name": "Wanging'ombe",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Pwani",
+    "districts": [
+      {
+        "name": "Bagamoyo",
+        "wards": []
+      },
+      {
+        "name": "Kibaha Town",
+        "wards": []
+      },
+      {
+        "name": "Kibaha",
+        "wards": []
+      },
+      {
+        "name": "Kisarawe",
+        "wards": []
+      },
+      {
+        "name": "Mafia",
+        "wards": []
+      },
+      {
+        "name": "Mkuranga",
+        "wards": []
+      },
+      {
+        "name": "Rufiji",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Rukwa",
+    "districts": [
+      {
+        "name": "Kalambo",
+        "wards": []
+      },
+      {
+        "name": "Nkasi",
+        "wards": []
+      },
+      {
+        "name": "Sumbawanga Municipal",
+        "wards": [
+          {
+            "name": "Chanji",
+            "streets": [
+              "Sokodogo",
+              "Mianzi",
+              "Kawama",
+              "Chanji A",
+              "Kichangani",
+              "Namteketa",
+              "Nankasi",
+              "Kati",
+              "Bondeni",
+              "Bombani",
+              "K/Mazoezi",
+              "Hali Ya Hewa",
+              "St Theresia",
+              "Vodacom",
+              "Mkuyuni"
+            ]
+          },
+          {
+            "name": "Izia",
+            "streets": [
+              "Halmashauri",
+              "Izia",
+              "Mtoni",
+              "Makaza",
+              "Manzitiswe",
+              "Shule",
+              "Bangwe",
+              "Masimba",
+              "Kati",
+              "Zimamoto",
+              "U/Ndege",
+              "Burudani",
+              "Soko",
+              "Kaozya",
+              "Mbugani",
+              "Reginamundi",
+              "Yatima"
+            ]
+          },
+          {
+            "name": "Kasense",
+            "streets": [
+              "Kasense Tala",
+              "Mwenge",
+              "Nakupamba",
+              "Naupangala",
+              "Nkasha",
+              "Mombo",
+              "Chipu",
+              "Sesela",
+              "Msongwa",
+              "Kasekela",
+              "Wingi",
+              "Katandala",
+              "Mwanga",
+              "Kopela",
+              "Kamalawi",
+              "Mtimbwa",
+              "Kibolye",
+              "Kingombe",
+              "Majengo",
+              "Mbala",
+              "Kalole",
+              "Magomeni",
+              "Kamsisi",
+              "Tyula",
+              "Lyachitala",
+              "Ilambila",
+              "Nakatete",
+              "Maweni",
+              "Mawenzusi",
+              "Kati",
+              "Landani",
+              "Bangwe",
+              "Dafco",
+              "Senkenya",
+              "Jangwani",
+              "Ndua",
+              "Ibonde",
+              "Yelusalem",
+              "Nkokwa",
+              "Isesa",
+              "Mtakuja",
+              "Lusanzi",
+              "Amani",
+              "Newland",
+              "Utengule",
+              "Tanki",
+              "Ghala",
+              "Bangwe A",
+              "Bangwe B",
+              "Mkasa",
+              "Makuka",
+              "Chasi",
+              "Kinamwanga"
+            ]
+          },
+          {
+            "name": "Katandala",
+            "streets": [
+              "Katandala C",
+              "Katandala D",
+              "Bomani",
+              "Bomani B",
+              "Mbizi C",
+              "Mbizi B",
+              "Comunity Center",
+              "Jangwani",
+              "NHC",
+              "Sokomatola",
+              "Anglikan A",
+              "Anglikan B",
+              "Mbizi A",
+              "Katandala A",
+              "Katandala B",
+              "Kasakalawe"
+            ]
+          },
+          {
+            "name": "Kizwite",
+            "streets": [
+              "Senti",
+              "Kalangasa",
+              "Mbugani",
+              "Kawama",
+              "Bible",
+              "Sokolo",
+              "Vuta",
+              "Otc",
+              "Nantacha",
+              "Ndua",
+              "Majengo",
+              "Kizwite",
+              "Trm",
+              "Makwasa",
+              "Mtumbuka"
+            ]
+          },
+          {
+            "name": "Lwiche",
+            "streets": [
+              "Utengule",
+              "Lwiche",
+              "Shengetela",
+              "Kaungwa",
+              "Majumbasita",
+              "Katai",
+              "Kafumbusi",
+              "Magomeni"
+            ]
+          },
+          {
+            "name": "Mafulala",
+            "streets": [
+              "Mafulala",
+              "K.K.K.T",
+              "TANESCO",
+              "SIDO",
+              "Malechela",
+              "Transfoma",
+              "Nkana",
+              "Kanisa",
+              "Jola",
+              "Maduka",
+              "Momoka",
+              "Sekondari"
+            ]
+          },
+          {
+            "name": "Majengo",
+            "streets": [
+              "Mponda",
+              "Namabangasa",
+              "Highway",
+              "Majengo B",
+              "Bwawani A",
+              "Bwawani B",
+              "Majengo A",
+              "Majengo C",
+              "Majengo D",
+              "Mtakuja A",
+              "Mtakuja B",
+              "Kristu Mfalme",
+              "Kaloleni",
+              "Kingombe"
+            ]
+          },
+          {
+            "name": "Malangali",
+            "streets": [
+              "Nyengele",
+              "Muhama",
+              "Mji Mwema",
+              "Isofu",
+              "Kilimahewa A",
+              "Kilimahewa B",
+              "Katindi",
+              "Malangali",
+              "Makazi Mapya"
+            ]
+          },
+          {
+            "name": "Matanga",
+            "streets": [
+              "Matanga",
+              "Kaloleni",
+              "Mkuyuni",
+              "Masomo",
+              "Malengwa",
+              "Natene A",
+              "Natene B",
+              "Kikoma A",
+              "Kikoma B",
+              "Kisumba",
+              "Naliliwa",
+              "Ngulumo",
+              "Malwilo",
+              "Nakupamba",
+              "Mwene Kapufi",
+              "Suwenda",
+              "Zahanati",
+              "Chelenganya",
+              "Kametenje",
+              "Mbulo",
+              "Lyangalile",
+              "Majengo",
+              "Songabele",
+              "Matula",
+              "Masipa"
+            ]
+          },
+          {
+            "name": "Mazwi",
+            "streets": [
+              "RTC",
+              "Tukuyu",
+              "NHC",
+              "Clinic",
+              "Lwiche",
+              "Msikitini",
+              "Kimiti",
+              "Chitepo",
+              "Lyangalile",
+              "Nmc",
+              "Zambezi",
+              "Viwanda Vidogo",
+              "Mashine",
+              "Mandela",
+              "Karume",
+              "Itwelele",
+              "Nkasi",
+              "Rurecu",
+              "Majengo"
+            ]
+          },
+          {
+            "name": "Milanzi",
+            "streets": [
+              "Mlanda B",
+              "Tafula",
+              "Kafima",
+              "Katete",
+              "Kisa",
+              "Mlimani",
+              "Mbita",
+              "Nkole",
+              "Kintakwa",
+              "Milanzi",
+              "Ilambila",
+              "Mlangalua asili",
+              "Katongwa",
+              "Senga",
+              "Misese",
+              "Kilangala",
+              "Kasisiwe",
+              "Nambogo",
+              "Kiwele",
+              "Wasimba",
+              "Makutano",
+              "Nadofya",
+              "Chiluka",
+              "Namatanda"
+            ]
+          },
+          {
+            "name": "Mollo",
+            "streets": [
+              "Malonje",
+              "Maweni",
+              "Mawenzusi",
+              "Kati",
+              "Landani",
+              "Bangwe",
+              "Ulinji",
+              "Dafco",
+              "Senkenya",
+              "Jangwani",
+              "Ndua",
+              "Ibonde",
+              "Isesa",
+              "Yelusalem",
+              "Nkokwa",
+              "Mtakuja",
+              "Magomeni",
+              "Lusanzi",
+              "Amani",
+              "Newland",
+              "Utengule",
+              "Tanki",
+              "Ghala",
+              "Bangwe A",
+              "Bangwe B",
+              "Mkasa",
+              "Makuka",
+              "Chasi",
+              "Kinamwanga"
+            ]
+          },
+          {
+            "name": "Momoka",
+            "streets": [
+              "Kashai",
+              "Retco",
+              "Edeni A",
+              "Edeni B",
+              "Mtakumbuka"
+            ]
+          },
+          {
+            "name": "Msua",
+            "streets": [
+              "Msua",
+              "Maweni",
+              "Chemchem",
+              "Chemka",
+              "Kingombe",
+              "Kisiwani",
+              "Kilimani",
+              "Mzee Nyanya",
+              "Shule",
+              "Fr. Luka",
+              "Kichangani",
+              "Malinga"
+            ]
+          },
+          {
+            "name": "Ntendo",
+            "streets": [
+              "Luwa Namwele",
+              "Kande",
+              "Mtukula",
+              "Katukanyeze",
+              "Kingombe A",
+              "Mtakuja",
+              "Kingombe B",
+              "Katecha",
+              "Katandala",
+              "Ntendo Kitesi",
+              "Galugila",
+              "Kingombe",
+              "Mnazi",
+              "Mtumbuka",
+              "Katete",
+              "Mkuyuni",
+              "Kasu",
+              "Fyengelezya",
+              "Katai",
+              "Ongwe",
+              "Ondokeni",
+              "Kalemasha",
+              "Kanondo",
+              "Pito",
+              "Ndului",
+              "Kati",
+              "Mwenge",
+              "Ndulu II"
+            ]
+          },
+          {
+            "name": "Pito",
+            "streets": [
+              "Katumba",
+              "Azimio",
+              "Godauni",
+              "Zanzibar",
+              "Kilombero",
+              "RC",
+              "CCM",
+              "Dalini",
+              "Mtakuja",
+              "Tamasenga",
+              "Mpwita",
+              "Kafichoni",
+              "Nandeka",
+              "Micheche",
+              "Wasukasuka",
+              "Nselwa",
+              "Malgano-ntuchi",
+              "Katecha",
+              "Galilaya",
+              "Godown",
+              "Malagano",
+              "Nawimi",
+              "Kamwela",
+              "Ipepa",
+              "Miputu",
+              "Movu",
+              "Kawando",
+              "Lwiche",
+              "Pito",
+              "Itiswe",
+              "Lyangalua",
+              "Nanka",
+              "Tumbunwe",
+              "Mpoto",
+              "Misheni"
+            ]
+          },
+          {
+            "name": "Senga",
+            "streets": [
+              "Senga Kififi",
+              "Ilemba",
+              "Muva",
+              "Kaloleni",
+              "Mtakuja",
+              "Kankwale",
+              "Kingombe",
+              "Mamba",
+              "Kasisiwe",
+              "Kachese",
+              "Ushirika",
+              "Lwiche",
+              "Malumbili",
+              "Uzunguni",
+              "Wipanga",
+              "Wasambo A",
+              "Wasambo B",
+              "Konkola",
+              "Ondokeni",
+              "Timbu",
+              "Natoka"
+            ]
+          },
+          {
+            "name": "Sumbawanga",
+            "streets": [
+              "Sumbawanga",
+              "Kaswepepe",
+              "Mpasi",
+              "Yeswe",
+              "Kamita",
+              "Tambasi",
+              "Katuma",
+              "Mbalika",
+              "Hija",
+              "Makutano",
+              "Ufipa",
+              "Chisicha Mfipa",
+              "Wakuunganga",
+              "Isachi",
+              "Kasoni",
+              "Kiatu",
+              "Kimalaunga",
+              "Kapufi",
+              "Katolile",
+              "Momoka",
+              "Mtumbuka",
+              "Katusa",
+              "Ngalu"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sumbawanga",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Ruvuma",
+    "districts": [
+      {
+        "name": "Mbinga",
+        "wards": []
+      },
+      {
+        "name": "Namtumbo",
+        "wards": []
+      },
+      {
+        "name": "Nyasa",
+        "wards": []
+      },
+      {
+        "name": "Songea Municipal",
+        "wards": []
+      },
+      {
+        "name": "Songea",
+        "wards": []
+      },
+      {
+        "name": "Tunduru",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Shinyanga",
+    "districts": [
+      {
+        "name": "Kahama Town",
+        "wards": []
+      },
+      {
+        "name": "Kishapu",
+        "wards": []
+      },
+      {
+        "name": "Shinyanga Municipal",
+        "wards": []
+      },
+      {
+        "name": "Shinyanga",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Simiyu",
+    "districts": [
+      {
+        "name": "Bariadi",
+        "wards": []
+      },
+      {
+        "name": "Busega",
+        "wards": []
+      },
+      {
+        "name": "Itilima",
+        "wards": []
+      },
+      {
+        "name": "Maswa",
+        "wards": []
+      },
+      {
+        "name": "Meatu",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Singida",
+    "districts": [
+      {
+        "name": "Ikungi",
+        "wards": []
+      },
+      {
+        "name": "Iramba",
+        "wards": []
+      },
+      {
+        "name": "Manyoni",
+        "wards": []
+      },
+      {
+        "name": "Mkalama",
+        "wards": []
+      },
+      {
+        "name": "Singida Municipal",
+        "wards": []
+      },
+      {
+        "name": "Singida",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Songwe",
+    "districts": [
+      {
+        "name": "Ileje",
+        "wards": []
+      },
+      {
+        "name": "Mbozi",
+        "wards": []
+      },
+      {
+        "name": "Momba",
+        "wards": []
+      },
+      {
+        "name": "Songwe",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Tabora",
+    "districts": [
+      {
+        "name": "Igunga",
+        "wards": []
+      },
+      {
+        "name": "Kaliua",
+        "wards": []
+      },
+      {
+        "name": "Nzega",
+        "wards": []
+      },
+      {
+        "name": "Sikonge",
+        "wards": []
+      },
+      {
+        "name": "Tabora Municipal",
+        "wards": []
+      },
+      {
+        "name": "Urambo",
+        "wards": []
+      },
+      {
+        "name": "Uyui",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Tanga",
+    "districts": [
+      {
+        "name": "Handeni",
+        "wards": []
+      },
+      {
+        "name": "Handeni Town",
+        "wards": []
+      },
+      {
+        "name": "Kilindi",
+        "wards": []
+      },
+      {
+        "name": "Korogwe",
+        "wards": []
+      },
+      {
+        "name": "Korogwe Town",
+        "wards": []
+      },
+      {
+        "name": "Lushoto",
+        "wards": []
+      },
+      {
+        "name": "Muheza",
+        "wards": []
+      },
+      {
+        "name": "Mkinga",
+        "wards": []
+      },
+      {
+        "name": "Pangani",
+        "wards": []
+      },
+      {
+        "name": "Tanga City",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Zanzibar North",
+    "districts": [
+      {
+        "name": "Kaskazini A",
+        "wards": []
+      },
+      {
+        "name": "Kaskazini B",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Zanzibar South and Central",
+    "districts": [
+      {
+        "name": "Kati",
+        "wards": []
+      },
+      {
+        "name": "Kusini",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Zanzibar Urban West",
+    "districts": [
+      {
+        "name": "Mjini",
+        "wards": []
+      },
+      {
+        "name": "Magharibi A",
+        "wards": []
+      },
+      {
+        "name": "Magharibi B",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Pemba North",
+    "districts": [
+      {
+        "name": "Micheweni",
+        "wards": []
+      },
+      {
+        "name": "Wete",
+        "wards": []
+      }
+    ]
+  },
+  {
+    "region": "Pemba South",
+    "districts": [
+      {
+        "name": "Chake Chake",
+        "wards": []
+      },
+      {
+        "name": "Mkoani",
+        "wards": []
+      }
+    ]
+  }
+]

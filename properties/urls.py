@@ -28,6 +28,24 @@ urlpatterns = [
     ),
 
     path(
+        'terms/',
+        views.terms,
+        name='terms'
+    ),
+
+    path(
+        'privacy/',
+        views.privacy,
+        name='privacy'
+    ),
+
+    path(
+        'listing-rules/',
+        views.listing_rules,
+        name='listing_rules'
+    ),
+
+    path(
         'listings/',
         views.listings,
         name='listings'
@@ -40,6 +58,12 @@ urlpatterns = [
     ),
 
     path(
+        'listings/<int:pk>/unlock-contact/',
+        views.unlock_contact,
+        name='unlock_contact'
+    ),
+
+    path(
         'owner/<int:owner_id>/',
         views.owner_profile,
         name='owner_profile'
@@ -49,6 +73,24 @@ urlpatterns = [
         'api/home/',
         views.api_home,
         name='api_home'
+    ),
+
+    path(
+        'location/districts/',
+        views.location_districts,
+        name='location_districts'
+    ),
+
+    path(
+        'location/wards/',
+        views.location_wards,
+        name='location_wards'
+    ),
+
+    path(
+        'location/streets/',
+        views.location_streets,
+        name='location_streets'
     ),
 
 
@@ -87,6 +129,18 @@ urlpatterns = [
     ),
 
     path(
+        'listings/<int:pk>/submit-payment/',
+        views.submit_listing_payment,
+        name='submit_listing_payment'
+    ),
+
+    path(
+        'listings/<int:pk>/feature/',
+        views.submit_listing_payment,
+        name='feature_listing'
+    ),
+
+    path(
         'listings/<int:pk>/edit/',
         views.edit_listing,
         name='edit_listing'
@@ -96,6 +150,12 @@ urlpatterns = [
         'listings/<int:pk>/delete/',
         views.delete_listing,
         name='delete_listing'
+    ),
+
+    path(
+        'listings/<int:pk>/availability/<str:status>/',
+        views.update_listing_availability,
+        name='update_listing_availability'
     ),
 
 
@@ -161,6 +221,48 @@ urlpatterns = [
     ),
 
     path(
+        'featured-listings/manage/',
+        views.featured_listing_management,
+        name='featured_listing_management'
+    ),
+
+    path(
+        'payment-confirmation-requests/',
+        views.payment_confirmation_requests,
+        name='payment_confirmation_requests'
+    ),
+
+    path(
+        'contact-unlock-payment-requests/',
+        views.contact_unlock_payment_requests,
+        name='contact_unlock_payment_requests'
+    ),
+
+    path(
+        'contact-unlock-payment/<int:unlock_id>/approve/',
+        views.approve_contact_unlock_payment,
+        name='approve_contact_unlock_payment'
+    ),
+
+    path(
+        'contact-unlock-payment/<int:unlock_id>/reject/',
+        views.reject_contact_unlock_payment,
+        name='reject_contact_unlock_payment'
+    ),
+
+    path(
+        'listing/<int:listing_id>/payment/approve/',
+        views.approve_listing_payment,
+        name='approve_listing_payment'
+    ),
+
+    path(
+        'listing/<int:listing_id>/payment/reject/',
+        views.reject_listing_payment,
+        name='reject_listing_payment'
+    ),
+
+    path(
         'listing/<int:listing_id>/approve/',
         views.approve_listing,
         name='approve_listing'
@@ -170,6 +272,12 @@ urlpatterns = [
         'listing/<int:listing_id>/reject/',
         views.reject_listing,
         name='reject_listing'
+    ),
+
+    path(
+        'listing/<int:listing_id>/featured/toggle/',
+        views.toggle_featured_listing,
+        name='toggle_featured_listing'
     ),
 
 
@@ -184,6 +292,30 @@ urlpatterns = [
     ),
 
     path(
+        'api/regions/',
+        views.api_regions,
+        name='api_regions'
+    ),
+
+    path(
+        'api/districts/',
+        views.api_districts,
+        name='api_districts'
+    ),
+
+    path(
+        'api/wards/',
+        views.api_wards,
+        name='api_wards'
+    ),
+
+    path(
+        'api/streets/',
+        views.api_streets,
+        name='api_streets'
+    ),
+
+    path(
         'api/listings/',
         views.api_listings,
         name='api_listings'
@@ -193,6 +325,12 @@ urlpatterns = [
         'api/listings/<int:listing_id>/',
         views.api_listing_detail,
         name='api_listing_detail'
+    ),
+
+    path(
+        'api/listings/<int:listing_id>/unlock-contact/',
+        views.api_unlock_contact,
+        name='api_unlock_contact'
     ),
 
     path(
@@ -276,11 +414,29 @@ urlpatterns = [
         views.api_delete_listing,
         name='api_delete_listing'
     ),
+
+    path(
+        'api/listings/<int:listing_id>/availability/',
+        views.api_update_listing_availability,
+        name='api_update_listing_availability'
+    ),
     
     path(
         'api/listings/<int:listing_id>/upload-image/',
         views.api_upload_listing_image,
         name='api_upload_listing_image'
+    ),
+
+    path(
+        'api/listings/<int:listing_id>/submit-payment/',
+        views.api_submit_listing_payment,
+        name='api_submit_listing_payment'
+    ),
+
+    path(
+        'api/payment-methods/',
+        views.api_payment_methods,
+        name='api_payment_methods'
     ),
     
     path(
@@ -344,6 +500,90 @@ urlpatterns = [
         'api/admin/statistics/',
         views.api_admin_statistics,
         name='api_admin_statistics'
+    ),
+
+    path(
+        'api/admin/verification-requests/',
+        views.api_admin_verification_requests,
+        name='api_admin_verification_requests'
+    ),
+
+    path(
+        'api/admin/verification-requests/<int:request_id>/approve/',
+        views.api_admin_approve_verification,
+        name='api_admin_approve_verification'
+    ),
+
+    path(
+        'api/admin/verification-requests/<int:request_id>/reject/',
+        views.api_admin_reject_verification,
+        name='api_admin_reject_verification'
+    ),
+
+    path(
+        'api/admin/listing-approval-requests/',
+        views.api_admin_listing_approval_requests,
+        name='api_admin_listing_approval_requests'
+    ),
+
+    path(
+        'api/admin/featured-listings/manage/',
+        views.api_admin_featured_listing_management,
+        name='api_admin_featured_listing_management'
+    ),
+
+    path(
+        'api/admin/listings/<int:listing_id>/approve/',
+        views.api_admin_approve_listing,
+        name='api_admin_approve_listing'
+    ),
+
+    path(
+        'api/admin/listings/<int:listing_id>/reject/',
+        views.api_admin_reject_listing,
+        name='api_admin_reject_listing'
+    ),
+
+    path(
+        'api/admin/listings/<int:listing_id>/featured/toggle/',
+        views.api_admin_toggle_featured_listing,
+        name='api_admin_toggle_featured_listing'
+    ),
+
+    path(
+        'api/admin/payment-confirmation-requests/',
+        views.api_admin_payment_confirmation_requests,
+        name='api_admin_payment_confirmation_requests'
+    ),
+
+    path(
+        'api/admin/contact-unlock-payment-requests/',
+        views.api_admin_contact_unlock_payment_requests,
+        name='api_admin_contact_unlock_payment_requests'
+    ),
+
+    path(
+        'api/admin/listings/<int:listing_id>/payment/approve/',
+        views.api_admin_approve_listing_payment,
+        name='api_admin_approve_listing_payment'
+    ),
+
+    path(
+        'api/admin/listings/<int:listing_id>/payment/reject/',
+        views.api_admin_reject_listing_payment,
+        name='api_admin_reject_listing_payment'
+    ),
+
+    path(
+        'api/admin/contact-unlock-payments/<int:unlock_id>/approve/',
+        views.api_admin_approve_contact_unlock_payment,
+        name='api_admin_approve_contact_unlock_payment'
+    ),
+
+    path(
+        'api/admin/contact-unlock-payments/<int:unlock_id>/reject/',
+        views.api_admin_reject_contact_unlock_payment,
+        name='api_admin_reject_contact_unlock_payment'
     ),
     
     path(

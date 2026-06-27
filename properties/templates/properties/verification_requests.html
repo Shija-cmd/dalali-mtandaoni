@@ -50,6 +50,8 @@ User Verification Requests
 
 </div>
 
+{% include 'properties/includes/admin_approval_nav.html' with active_admin_tab='users' %}
+
 <!-- ==========================================
      Requests
 ========================================== -->
@@ -257,6 +259,7 @@ User Verification Requests
                         <a
                             href="{% url 'approve_verification' verification_request.id %}"
                             class="btn btn-success"
+                            onclick="return confirm('Approve this user verification request?');"
                         >
 
                             ✅ Approve User
@@ -266,6 +269,7 @@ User Verification Requests
                         <a
                             href="{% url 'reject_verification' verification_request.id %}"
                             class="btn btn-outline-danger"
+                            onclick="return confirm('Reject this user verification request?');"
                         >
 
                             ❌ Reject Request

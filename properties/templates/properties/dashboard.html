@@ -37,33 +37,13 @@ Dashboard
 
             <div>
 
-                {% if request.user.is_verified %}
+                    <span class="badge bg-primary fs-6 px-3 py-2">
 
-                    <span class="badge bg-success fs-6 px-3 py-2">
-
-                        ✔ Verified Owner
+                        Listing Owner
 
                     </span>
 
-                {% elif pending_verification %}
-
-                    <span class="badge bg-warning text-dark fs-6 px-3 py-2">
-
-                        Verification Pending
-
-                    </span>
-
-                {% else %}
-
-                    <span class="badge bg-secondary fs-6 px-3 py-2">
-
-                        Not Verified
-
-                    </span>
-
-                {% endif %}
-
-            </div>
+                </div>
 
         </div>
 
@@ -199,8 +179,66 @@ Dashboard
 
 </div>
 
+<div class="row g-4 mt-1">
+
+    <div class="col-md-3">
+
+        <div class="card border-0 shadow-sm text-center h-100">
+
+            <div class="card-body">
+
+                <div class="display-5 mb-2">
+
+                    🔓
+
+                </div>
+
+                <h2 class="fw-bold text-info">
+
+                    {{ contact_unlock_count }}
+
+                </h2>
+
+                <p class="mb-1">
+
+                    Contact Unlocks
+
+                </p>
+
+                <small class="text-muted">
+
+                    People who unlocked your listing contacts.
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% if pending_payment_listings %}
+
+<div class="alert alert-info mt-4">
+
+    <strong>Featured promotions:</strong>
+    {{ pending_payment_listings }} featured payment{{ pending_payment_listings|pluralize }} awaiting admin confirmation.
+
+    <a
+        href="{% url 'my_listings' %}"
+        class="alert-link"
+    >
+        Review my listings
+    </a>
+
+</div>
+
+{% endif %}
+
 <!-- ==========================================
-    Account Status
+    Listing Review Status
 ========================================== -->
 
 <div class="card border-0 shadow-lg mt-5">
@@ -209,57 +247,15 @@ Dashboard
 
         <h4 class="fw-bold mb-3">
 
-            Account Status
+            Listing Review
 
         </h4>
 
-        {% if request.user.is_verified %}
+        <div class="alert alert-info mb-0">
 
-            <div class="alert alert-success mb-0">
+            You can create listings immediately. Upload your ID inside each listing submission, then admin will review and approve the listing before it appears publicly.
 
-                ✔ Your account is verified and you can create listings.
-
-            </div>
-
-        {% elif pending_verification %}
-
-            <div class="alert alert-warning {% if pending_verification_request and not pending_verification_request.id_document %}mb-3{% else %}mb-0{% endif %}">
-
-                ⏳ Your verification request is under review.
-
-            </div>
-
-            {% if pending_verification_request and not pending_verification_request.id_document %}
-
-                <a
-                    href="{% url 'request_verification' %}"
-                    class="btn btn-warning"
-                >
-
-                    Upload ID
-
-                </a>
-
-            {% endif %}
-
-        {% else %}
-
-            <div class="alert alert-secondary">
-
-                Your account has not been verified yet.
-
-            </div>
-
-            <a
-                href="{% url 'request_verification' %}"
-                class="btn btn-primary"
-            >
-
-                Upload ID
-
-            </a>
-
-        {% endif %}
+        </div>
 
     </div>
 
@@ -281,9 +277,7 @@ Dashboard
 
         <div class="d-flex gap-3 flex-wrap">
 
-            {% if request.user.is_verified %}
-
-                <a
+            <a
                     href="{% url 'create_listing' %}"
                     class="btn btn-primary"
                 >
@@ -291,8 +285,6 @@ Dashboard
                     ➕ Create Listing
 
                 </a>
-
-            {% endif %}
 
             <a
                 href="{% url 'my_listings' %}"
@@ -311,19 +303,6 @@ Dashboard
                 ❤️ My Favorites
 
             </a>
-
-            {% if not request.user.is_verified and not pending_verification %}
-
-                <a
-                    href="{% url 'request_verification' %}"
-                    class="btn btn-warning"
-                >
-
-                    ✔ Request Verification
-
-                </a>
-
-            {% endif %}
 
         </div>
 

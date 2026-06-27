@@ -115,6 +115,26 @@ My Listings
 
                     </p>
 
+                    {% if listing.featured_package %}
+
+                        <p class="text-muted mb-2">
+
+                            Featured package: {{ listing.get_featured_package_display }}
+
+                        </p>
+
+                    {% endif %}
+
+                    {% if listing.payment_method %}
+
+                        <p class="text-muted mb-2">
+
+                            Payment method: {{ listing.get_payment_method_display }}
+
+                        </p>
+
+                    {% endif %}
+
                     {% if listing.is_approved %}
 
                         <span class="badge bg-success">
@@ -130,6 +150,96 @@ My Listings
                             ⏳ Pending Approval
 
                         </span>
+
+                    {% endif %}
+
+                    <div class="mt-2">
+
+                        {% if not listing.is_active %}
+
+                            <span class="badge bg-dark">
+                                Removed from Public
+                            </span>
+
+                        {% elif listing.availability_status == 'available' %}
+
+                            <span class="badge bg-success">
+                                Available
+                            </span>
+
+                        {% elif listing.availability_status == 'rented' %}
+
+                            <span class="badge bg-secondary">
+                                Rented
+                            </span>
+
+                        {% elif listing.availability_status == 'sold' %}
+
+                            <span class="badge bg-secondary">
+                                Sold
+                            </span>
+
+                        {% elif listing.availability_status == 'hired' %}
+
+                            <span class="badge bg-secondary">
+                                Hired
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary">
+                                Unavailable
+                            </span>
+
+                        {% endif %}
+
+                        {% if listing.payment_status == 'paid' %}
+
+                            <span class="badge bg-success">
+                                Featured Payment Confirmed
+                            </span>
+
+                        {% elif listing.payment_status == 'pending' %}
+
+                            <span class="badge bg-info text-dark">
+                                Featured Payment Submitted
+                            </span>
+
+                        {% elif listing.payment_status == 'rejected' %}
+
+                            <span class="badge bg-danger">
+                                Featured Payment Rejected
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary">
+                                Not Featured
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                    {% if listing.payment_rejection_reason %}
+
+                        <div class="alert alert-danger mt-3 mb-0">
+
+                            <strong>Featured payment rejection reason:</strong>
+                            {{ listing.payment_rejection_reason }}
+
+                        </div>
+
+                    {% endif %}
+
+                    {% if listing.listing_rejection_reason %}
+
+                        <div class="alert alert-danger mt-3 mb-0">
+
+                            <strong>Listing rejection reason:</strong>
+                            {{ listing.listing_rejection_reason }}
+
+                        </div>
 
                     {% endif %}
 
@@ -150,6 +260,42 @@ My Listings
 
                         </a>
 
+                        {% if listing.is_approved and not listing.is_featured_active and listing.payment_status != 'pending' %}
+
+                            <a
+                                href="{% url 'feature_listing' listing.id %}"
+                                class="btn btn-success"
+                            >
+
+                                Feature Listing
+
+                            </a>
+
+                        {% elif listing.payment_status == 'pending' %}
+
+                            <a
+                                href="{% url 'feature_listing' listing.id %}"
+                                class="btn btn-outline-success"
+                            >
+
+                                Update Featured Payment
+
+                            </a>
+
+                        {% elif listing.is_approved and listing.is_featured_active %}
+
+                            <a
+                                href="{% url 'feature_listing' listing.id %}"
+                                class="btn btn-outline-success disabled"
+                                aria-disabled="true"
+                            >
+
+                                Already Featured
+
+                            </a>
+
+                        {% endif %}
+
                         <a
                             href="{% url 'edit_listing' listing.id %}"
                             class="btn btn-outline-warning"
@@ -159,12 +305,64 @@ My Listings
 
                         </a>
 
+                        <form
+                            method="post"
+                            action="{% url 'update_listing_availability' listing.id 'available' %}"
+                        >
+                            {% csrf_token %}
+                            <button
+                                type="submit"
+                                class="btn btn-outline-success w-100"
+                            >
+                                Make Available
+                            </button>
+                        </form>
+
+                        <form
+                            method="post"
+                            action="{% url 'update_listing_availability' listing.id 'rented' %}"
+                        >
+                            {% csrf_token %}
+                            <button
+                                type="submit"
+                                class="btn btn-outline-secondary w-100"
+                            >
+                                Mark Rented
+                            </button>
+                        </form>
+
+                        <form
+                            method="post"
+                            action="{% url 'update_listing_availability' listing.id 'sold' %}"
+                        >
+                            {% csrf_token %}
+                            <button
+                                type="submit"
+                                class="btn btn-outline-secondary w-100"
+                            >
+                                Mark Sold
+                            </button>
+                        </form>
+
+                        <form
+                            method="post"
+                            action="{% url 'update_listing_availability' listing.id 'hired' %}"
+                        >
+                            {% csrf_token %}
+                            <button
+                                type="submit"
+                                class="btn btn-outline-secondary w-100"
+                            >
+                                Mark Hired
+                            </button>
+                        </form>
+
                         <a
                             href="{% url 'delete_listing' listing.id %}"
                             class="btn btn-outline-danger"
                         >
 
-                            🗑 Delete Listing
+                            Remove Listing
 
                         </a>
 
@@ -202,9 +400,7 @@ My Listings
 
             </p>
 
-            {% if request.user.is_verified %}
-
-                <a
+            <a
                     href="{% url 'create_listing' %}"
                     class="btn btn-primary"
                 >
@@ -212,19 +408,6 @@ My Listings
                     ➕ Create Your First Listing
 
                 </a>
-
-            {% else %}
-
-                <a
-                    href="{% url 'request_verification' %}"
-                    class="btn btn-warning"
-                >
-
-                    ✔ Request Verification
-
-                </a>
-
-            {% endif %}
 
         </div>
 

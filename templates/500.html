@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Server Error
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-lg rounded-4">
+
+        <div class="card-body text-center p-5">
+
+            <h1 class="fw-bold mb-3">Something Went Wrong</h1>
+
+            <p class="text-muted mb-4">
+                We could not complete your request right now. Please try again later.
+            </p>
+
+            <a
+                href="{% url 'home' %}"
+                class="btn btn-primary"
+            >
+                Go Home
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

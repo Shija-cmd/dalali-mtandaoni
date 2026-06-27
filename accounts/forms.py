@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
 from .models import User
+from properties.validators import validate_image_upload
 
 
 class UserRegisterForm(UserCreationForm):
@@ -81,3 +82,15 @@ class UserProfileForm(forms.ModelForm):
             ),
 
         }
+
+    def clean_profile_picture(self):
+
+        profile_picture = self.cleaned_data.get(
+            'profile_picture'
+        )
+
+        validate_image_upload(
+            profile_picture
+        )
+
+        return profile_picture

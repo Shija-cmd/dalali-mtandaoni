@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Reject Contact Unlock Payment
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-lg rounded-4">
+
+        <div class="card-body p-5">
+
+            <h1 class="fw-bold mb-3">
+                Reject Contact Unlock Payment
+            </h1>
+
+            <p class="text-muted">
+                Provide a clear reason for rejecting payment reference
+                <strong>{{ unlock.payment_reference }}</strong>.
+            </p>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="mb-4">
+                    {{ form.reason.label_tag }}
+                    {{ form.reason }}
+                </div>
+
+                {% if form.errors %}
+
+                    <div class="alert alert-danger">
+                        Please enter a rejection reason.
+                    </div>
+
+                {% endif %}
+
+                <div class="d-flex gap-2 flex-wrap">
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger"
+                    >
+                        Reject Payment
+                    </button>
+
+                    <a
+                        href="{% url 'contact_unlock_payment_requests' %}"
+                        class="btn btn-outline-secondary"
+                    >
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

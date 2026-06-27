@@ -1,0 +1,98 @@
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const regionSelect = document.getElementById("id_region");
+        const districtSelect = document.getElementById("id_district");
+        const wardSelect = document.getElementById("id_ward");
+        const streetSelect = document.getElementById("id_street_area");
+
+        if(!regionSelect || !districtSelect || !wardSelect || !streetSelect){
+            return;
+        }
+
+        function resetSelect(select, label){
+            select.innerHTML = "";
+            const option = document.createElement("option");
+            option.value = "";
+            option.textContent = label;
+            select.appendChild(option);
+        }
+
+        function appendOptions(select, results){
+            results.forEach(
+                function(item){
+                    const option = document.createElement("option");
+                    option.value = item.id;
+                    option.textContent = item.name;
+                    select.appendChild(option);
+                }
+            );
+        }
+
+        async function loadOptions(url, select, label){
+            resetSelect(select, label);
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            appendOptions(
+                select,
+                data.results || []
+            );
+        }
+
+        regionSelect.addEventListener(
+            "change",
+            function(){
+                resetSelect(districtSelect, "Choose district");
+                resetSelect(wardSelect, "Choose ward");
+                resetSelect(streetSelect, "Choose street/area");
+
+                if(regionSelect.value){
+                    loadOptions(
+                        "{% url 'location_districts' %}?region=" + regionSelect.value,
+                        districtSelect,
+                        "Choose district"
+                    );
+                }
+            }
+        );
+
+        districtSelect.addEventListener(
+            "change",
+            function(){
+                resetSelect(wardSelect, "Choose ward");
+                resetSelect(streetSelect, "Choose street/area");
+
+                if(districtSelect.value){
+                    loadOptions(
+                        "{% url 'location_wards' %}?district=" + districtSelect.value,
+                        wardSelect,
+                        "Choose ward"
+                    );
+                }
+            }
+        );
+
+        wardSelect.addEventListener(
+            "change",
+            function(){
+                resetSelect(streetSelect, "Choose street/area");
+
+                if(wardSelect.value){
+                    loadOptions(
+                        "{% url 'location_streets' %}?ward=" + wardSelect.value,
+                        streetSelect,
+                        "Choose street/area"
+                    );
+                }
+            }
+        );
+
+    }
+);
+
+</script>

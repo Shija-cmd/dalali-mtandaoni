@@ -38,6 +38,20 @@ Login
 
                 </div>
 
+                {% if form.non_field_errors %}
+
+                    <div class="alert alert-danger">
+
+                        {% for error in form.non_field_errors %}
+
+                            <div>{{ error }}</div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
                 <form method="post">
 
                     {% csrf_token %}
@@ -52,6 +66,16 @@ Login
 
                         {{ form.username }}
 
+                        {% for error in form.username.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                {{ error }}
+
+                            </div>
+
+                        {% endfor %}
+
                     </div>
 
                     <div class="mb-4">
@@ -63,6 +87,16 @@ Login
                         </label>
 
                         {{ form.password }}
+
+                        {% for error in form.password.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                {{ error }}
+
+                            </div>
+
+                        {% endfor %}
 
                     </div>
 

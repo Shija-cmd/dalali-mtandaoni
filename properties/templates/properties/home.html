@@ -134,9 +134,9 @@ Home
 
                             <div class="stat-card">
 
-                                <h2>{{ verified_owners }}</h2>
+                                <h2>{{ approved_listings }}</h2>
 
-                                <p>Verified Owners</p>
+                                <p>Approved Listings</p>
 
                             </div>
 
@@ -375,7 +375,7 @@ Home
 
             <p class="text-muted">
 
-                Discover our hand-picked premium listings from verified owners.
+                Discover listings promoted for extra visibility from active owners.
 
             </p>
 
@@ -674,14 +674,14 @@ Home
 
                     <h4>
 
-                        Verified Owners
+                        Reviewed Listings
 
                     </h4>
 
                     <p>
 
-                        Property owners are verified before receiving permission
-                        to publish listings.
+                        Owners upload ID when submitting listings, and admins
+                        review listings before they appear publicly.
 
                     </p>
 
@@ -821,9 +821,7 @@ Home
 
                     {% if user.is_authenticated %}
 
-                        {% if user.is_verified %}
-
-                            <a
+                        <a
                                 href="{% url 'create_listing' %}"
                                 class="btn btn-warning btn-lg px-4 me-2"
                             >
@@ -833,21 +831,6 @@ Home
                                 Create Listing
 
                             </a>
-
-                        {% else %}
-
-                            <a
-                                href="{% url 'request_verification' %}"
-                                class="btn btn-warning btn-lg px-4 me-2"
-                            >
-
-                                <i class="bi bi-patch-check-fill me-2"></i>
-
-                                Get Verified
-
-                            </a>
-
-                        {% endif %}
 
                     {% else %}
 
