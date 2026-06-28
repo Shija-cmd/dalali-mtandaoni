@@ -1203,7 +1203,27 @@ def my_profile(request):
 
         if form.is_valid():
 
-            user = form.save()
+            user = form.save(commit=False)
+
+            profile_picture = request.FILES.get('profile_picture')
+
+            if profile_picture:
+                cloudinary_url = upload_image_to_cloudinary(
+                    profile_picture,
+                    'profile_pictures'
+                )
+
+                if cloudinary_url:
+                    user.profile_picture_url = cloudinary_url
+
+            user.save()
+
+            messages.success(
+                request,
+                'Profile updated successfully.'
+            )
+
+            return redirect('my_profile')
 
             profile_picture_url = upload_image_to_cloudinary(
                 form.cleaned_data.get('profile_picture'),
