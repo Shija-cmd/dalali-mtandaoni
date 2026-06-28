@@ -1201,17 +1201,11 @@ def my_profile(request):
 
         if form.is_valid():
 
-            user = request.user
-
-            user.username = form.cleaned_data.get('username')
-            user.first_name = form.cleaned_data.get('first_name')
-            user.last_name = form.cleaned_data.get('last_name')
-            user.phone_number = form.cleaned_data.get('phone_number')
+            user = form.save(commit=False)
 
             profile_picture = request.FILES.get('profile_picture')
 
             if profile_picture:
-
                 cloudinary_url = upload_image_to_cloudinary(
                     profile_picture,
                     'profile_pictures'
@@ -1229,10 +1223,24 @@ def my_profile(request):
 
             return redirect('my_profile')
 
-        messages.error(
-            request,
-            'Please correct the highlighted profile details.'
-        )
+            profile_picture_url = upload_image_to_cloudinary(
+                form.cleaned_data.get('profile_picture'),
+                'profile_pictures'
+            )
+
+            if profile_picture_url:
+
+                user.profile_picture_url = profile_picture_url
+                user.save(update_fields=['profile_picture_url'])
+
+            messages.success(
+                request,
+                'Profile updated successfully.'
+            )
+
+            return redirect(
+                'my_profile'
+            )
 
     else:
 
@@ -1244,6 +1252,7 @@ def my_profile(request):
         owner=request.user,
         is_active=True,
         is_approved=True,
+
         availability_status='available'
     )
 
