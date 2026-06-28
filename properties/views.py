@@ -7,7 +7,6 @@ from .forms import (
     ListingPaymentForm,
     ManualFeaturedListingForm,
     RejectionReasonForm,
-    VerificationRequestForm,
 )
 from accounts.forms import UserProfileForm
 from django.contrib.auth.decorators import login_required
@@ -50,11 +49,10 @@ from .serializers import (
     UserSerializer,
     UserUpdateSerializer,
     ListingImageCreateSerializer,
-    VerificationRequestSerializer,
 )
 
 from .models import (
-    Listing, 
+    Listing,
     Category,
     ContactUnlock,
     District,
@@ -62,7 +60,6 @@ from .models import (
     PublishingPaymentMethod,
     Region,
     StreetArea,
-    VerificationRequest,
     Ward,
 
 )
@@ -1185,103 +1182,6 @@ def my_favorites(request):
     )
 
 
-# ==========================================================
-#                VERIFICATION VIEWS
-# ==========================================================
-@login_required
-def request_verification(request):
-
-    existing_request = VerificationRequest.objects.filter(
-        user=request.user,
-        status='pending'
-    ).first()
-
-    if existing_request:
-
-        if existing_request.id_document:
-
-            messages.warning(
-                request,
-                'You already have a pending verification request.'
-            )
-
-            return redirect(
-                'dashboard'
-            )
-
-        if request.method == 'POST':
-
-            form = VerificationRequestForm(
-                request.POST,
-                request.FILES,
-                instance=existing_request
-            )
-
-            if form.is_valid():
-
-                form.save()
-
-                messages.success(
-                    request,
-                    'ID document uploaded successfully.'
-                )
-
-                return redirect(
-                    'dashboard'
-                )
-
-        else:
-
-            form = VerificationRequestForm(
-                instance=existing_request
-            )
-
-        return render(
-            request,
-            'properties/request_verification.html',
-            {
-                'form': form,
-                'is_uploading_missing_id': True,
-            }
-        )
-
-    if request.method == 'POST':
-
-        form = VerificationRequestForm(
-            request.POST,
-            request.FILES
-        )
-
-        if form.is_valid():
-
-            verification_request = form.save(
-                commit=False
-            )
-
-            verification_request.user = request.user
-
-            verification_request.save()
-
-            messages.success(
-                request,
-                'Verification request submitted successfully.'
-            )
-
-            return redirect(
-                'dashboard'
-            )
-
-    else:
-
-        form = VerificationRequestForm()
-
-    return render(
-        request,
-        'properties/request_verification.html',
-        {
-            'form': form
-        }
-    )
 
 
 @login_required
@@ -1341,118 +1241,6 @@ def my_profile(request):
     )
 
 
-@login_required
-def verification_requests(request):
-
-    if not request.user.is_superuser:
-
-        return HttpResponseForbidden()
-
-    requests = VerificationRequest.objects.filter(
-        status='pending'
-    ).select_related(
-        'user'
-    )
-
-    for verification_request in requests:
-
-        user = verification_request.user
-
-        user.total_listings = user.listing_set.count()
-
-        user.approved_listings = user.listing_set.filter(
-            is_approved=True
-        ).count()
-
-        user.pending_listings = user.listing_set.filter(
-            is_approved=False
-        ).count()
-
-    return render(
-        request,
-        'properties/verification_requests.html',
-        {
-            'requests': requests
-        }
-    )
-
-
-@login_required
-def approve_verification(request, request_id):
-
-    if not request.user.is_superuser:
-
-        return HttpResponseForbidden()
-
-    verification_request = get_object_or_404(
-        VerificationRequest,
-        id=request_id
-    )
-
-    verification_request.status = 'approved'
-    verification_request.save()
-
-    verification_request.user.is_verified = True
-    verification_request.user.save()
-
-    messages.success(
-        request,
-        'Verification approved successfully.'
-    )
-
-    return redirect(
-        'verification_requests'
-    )
-
-
-@login_required
-def reject_verification(request, request_id):
-
-    if not request.user.is_superuser:
-
-        return HttpResponseForbidden()
-
-    verification_request = get_object_or_404(
-        VerificationRequest,
-        id=request_id
-    )
-
-    if request.method == 'POST':
-
-        form = RejectionReasonForm(
-            request.POST
-        )
-
-        if form.is_valid():
-
-            verification_request.status = 'rejected'
-            verification_request.rejection_reason = form.cleaned_data['reason']
-            verification_request.save()
-
-            verification_request.user.is_verified = False
-            verification_request.user.save()
-
-            messages.warning(
-                request,
-                'Verification request rejected.'
-            )
-
-            return redirect(
-                'verification_requests'
-            )
-
-    else:
-
-        form = RejectionReasonForm()
-
-    return render(
-        request,
-        'properties/reject_verification.html',
-        {
-            'form': form,
-            'verification_request': verification_request,
-        }
-    )
 
 # ==========================================================
 #                LISTING APPROVAL VIEWS
@@ -2811,88 +2599,7 @@ def api_upload_listing_image(
     )
 
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@parser_classes([MultiPartParser, FormParser])
-@rate_limit('api-request-verification', limit=5, window=600)
-def api_request_verification(request):
 
-    existing_request = VerificationRequest.objects.filter(
-        user=request.user,
-        status='pending'
-    ).exists()
-
-    if existing_request:
-
-        return Response(
-            {
-                'message': 'You already have a pending verification request.'
-            },
-            status=400
-        )
-
-    id_document = request.FILES.get(
-        'id_document'
-    )
-
-    if not id_document:
-
-        return Response(
-            {
-                'id_document': 'Please upload a photo of your ID.'
-            },
-            status=400
-        )
-
-    try:
-
-        validate_image_upload(
-            id_document
-        )
-
-    except ValidationError as error:
-
-        return Response(
-            {
-                'id_document': error.messages[0]
-            },
-            status=400
-        )
-
-    VerificationRequest.objects.create(
-        user=request.user,
-        id_document=id_document
-    )
-
-    return Response(
-        {
-            'message': 'Verification request submitted successfully.'
-        },
-        status=201
-    )
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def api_verification_status(request):
-
-    verification_request = VerificationRequest.objects.filter(
-        user=request.user
-    ).order_by(
-        '-created_at'
-    ).first()
-
-    status = None
-
-    if verification_request:
-
-        status = verification_request.status
-
-    return Response(
-        {
-            'is_verified': request.user.is_verified,
-            'verification_status': status
-        }
-    )
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -3038,28 +2745,9 @@ def api_dashboard(request):
             'total_favorites': Favorite.objects.filter(
                 user=request.user
             ).count(),
-            'is_verified': request.user.is_verified,
         }
     )
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def api_my_verification_requests(request):
-
-    requests = VerificationRequest.objects.filter(
-        user=request.user
-    ).order_by(
-        '-created_at'
-    )
-
-    serializer = VerificationRequestSerializer(
-        requests,
-        many=True
-    )
-
-    return Response(
-        serializer.data
-    )
 
 # ==========================================================
 #                    ADMIN APIs
@@ -3135,148 +2823,6 @@ def api_admin_statistics(request):
     )
 
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def api_admin_verification_requests(request):
-
-    permission_error = _require_admin_api(
-        request
-    )
-
-    if permission_error is not None:
-
-        return permission_error
-
-    requests = VerificationRequest.objects.filter(
-        status='pending'
-    ).select_related(
-        'user'
-    ).order_by(
-        '-created_at'
-    )
-
-    serializer = VerificationRequestSerializer(
-        requests,
-        many=True,
-        context={
-            'request': request,
-        }
-    )
-
-    return Response(
-        serializer.data
-    )
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def api_admin_approve_verification(
-    request,
-    request_id
-):
-
-    permission_error = _require_admin_api(
-        request
-    )
-
-    if permission_error is not None:
-
-        return permission_error
-
-    verification_request = get_object_or_404(
-        VerificationRequest,
-        id=request_id
-    )
-
-    verification_request.status = 'approved'
-    verification_request.save()
-
-    verification_request.user.is_verified = True
-    verification_request.user.save()
-
-    return Response(
-        {
-            'message': 'Verification approved successfully.'
-        }
-    )
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def api_admin_reject_verification(
-    request,
-    request_id
-):
-
-    permission_error = _require_admin_api(
-        request
-    )
-
-    if permission_error is not None:
-
-        return permission_error
-
-    verification_request = get_object_or_404(
-        VerificationRequest,
-        id=request_id
-    )
-
-    reason, error_response = _get_required_rejection_reason(
-        request
-    )
-
-    if error_response is not None:
-
-        return error_response
-
-    verification_request.status = 'rejected'
-    verification_request.rejection_reason = reason
-    verification_request.save()
-
-    verification_request.user.is_verified = False
-    verification_request.user.save()
-
-    return Response(
-        {
-            'message': 'Verification request rejected.'
-        }
-    )
-
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def api_admin_listing_approval_requests(request):
-
-    permission_error = _require_admin_api(
-        request
-    )
-
-    if permission_error is not None:
-
-        return permission_error
-
-    listings = Listing.objects.filter(
-        is_approved=False,
-
-        availability_status='available'
-    ).select_related(
-        'owner',
-        'category'
-    ).order_by(
-        '-created_at'
-    )
-
-    serializer = ListingSerializer(
-        listings,
-        many=True,
-        context={
-            'request': request,
-        }
-    )
-
-    return Response(
-        serializer.data
-    )
 
 
 @api_view(['GET'])

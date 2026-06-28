@@ -98,7 +98,7 @@ Home
                     </a>
 
                     <a
-                        href="#"
+                        href="{% if user.is_authenticated %}{% url 'create_listing' %}{% else %}{% url 'register' %}{% endif %}"
                         class="btn btn-outline-primary btn-lg px-4"
                     >
 

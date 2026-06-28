@@ -8,7 +8,6 @@ from .models import (
     PublishingPaymentMethod,
     Region,
     StreetArea,
-    VerificationRequest,
     Ward,
 )
 from .validators import validate_image_upload
@@ -285,70 +284,6 @@ class ListingPaymentForm(forms.ModelForm):
         }
 
         labels = {
-            'street_area': 'Street/Area',
-            'location_description': 'Extra Location Description',
-        }
-
-    def clean(self):
-
-        cleaned_data = super().clean()
-        region = cleaned_data.get('region')
-        district = cleaned_data.get('district')
-        ward = cleaned_data.get('ward')
-        street_area = cleaned_data.get('street_area')
-
-        if not region:
-
-            self.add_error(
-                'region',
-                'Please choose a region.'
-            )
-
-        if not district:
-
-            self.add_error(
-                'district',
-                'Please choose a district.'
-            )
-
-        elif region and district.region_id != region.id:
-
-            self.add_error(
-                'district',
-                'Please choose a district in the selected region.'
-            )
-
-        if not ward:
-
-            self.add_error(
-                'ward',
-                'Please choose a ward.'
-            )
-
-        elif district and ward.district_id != district.id:
-
-            self.add_error(
-                'ward',
-                'Please choose a ward in the selected district.'
-            )
-
-        if not street_area:
-
-            self.add_error(
-                'street_area',
-                'Please choose a street or area.'
-            )
-
-        elif ward and street_area.ward_id != ward.id:
-
-            self.add_error(
-                'street_area',
-                'Please choose a street or area in the selected ward.'
-            )
-
-        return cleaned_data
-
-        labels = {
             'featured_package': 'Featured Package',
             'payment_method': 'Payment Method',
             'payment_reference': 'Payment Reference',
@@ -535,51 +470,6 @@ class ContactUnlockPaymentForm(forms.ModelForm):
             )
 
         return payment_reference
-
-
-class VerificationRequestForm(forms.ModelForm):
-
-    class Meta:
-
-        model = VerificationRequest
-
-        fields = [
-            'id_document',
-        ]
-
-        widgets = {
-
-            'id_document': forms.FileInput(
-                attrs={
-                    'class': 'form-control',
-                    'accept': 'image/*',
-                    'required': True
-                }
-            )
-
-        }
-
-        labels = {
-            'id_document': 'Verification ID Document'
-        }
-
-    def clean_id_document(self):
-
-        id_document = self.cleaned_data.get(
-            'id_document'
-        )
-
-        if not id_document:
-
-            raise forms.ValidationError(
-                'Please upload a photo of your ID.'
-            )
-
-        validate_image_upload(
-            id_document
-        )
-
-        return id_document
 
 
 class RejectionReasonForm(forms.Form):

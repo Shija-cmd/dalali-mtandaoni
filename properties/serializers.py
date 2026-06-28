@@ -11,7 +11,6 @@ from .models import (
     PublishingPaymentMethod,
     Region,
     StreetArea,
-    VerificationRequest,
     Ward,
 )
 
@@ -124,7 +123,7 @@ class ListingSerializer(
 ):
 
     category = serializers.StringRelatedField()
-    
+
     category_id = serializers.IntegerField(
         source='category.id',
         read_only=True,
@@ -255,7 +254,15 @@ class ListingSerializer(
             'request'
         )
 
-        if not obj.owner_id_document:
+        if (
+            not request
+            or not request.user.is_authenticated
+            or (
+                request.user != obj.owner
+                and not request.user.is_superuser
+            )
+            or not obj.owner_id_document
+        ):
 
             return ''
 
@@ -459,6 +466,11 @@ class ListingSerializer(
 
             data.pop(
                 'listing_rejection_reason',
+                None
+            )
+
+            data.pop(
+                'owner_id_document_url',
                 None
             )
 
@@ -774,7 +786,6 @@ class UserSerializer(
             'last_name',
             'phone_number',
             'profile_picture',
-            'is_verified',
             'created_at',
         ]
 
@@ -880,38 +891,6 @@ class UserUpdateSerializer(
         ]
 
     def validate_profile_picture(
-        self,
-        value
-    ):
-
-        validate_image_upload(
-            value
-        )
-
-        return value
-
-
-# ==========================================================
-#       VERIFICATION REQUEST SERIALIZER
-# ==========================================================
-
-class VerificationRequestSerializer(
-    serializers.ModelSerializer
-):
-
-    class Meta:
-
-        model = VerificationRequest
-
-        fields = [
-            'id',
-            'status',
-            'id_document',
-            'rejection_reason',
-            'created_at',
-        ]
-
-    def validate_id_document(
         self,
         value
     ):

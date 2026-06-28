@@ -12,7 +12,6 @@ from .models import (
     District,
     Ward,
     StreetArea,
-    VerificationRequest
 )
 
 admin.site.register(Category)
@@ -188,43 +187,3 @@ class PublishingPaymentMethodAdmin(admin.ModelAdmin):
         'sort_order',
         'name',
     )
-
-
-@admin.register(VerificationRequest)
-class VerificationRequestAdmin(admin.ModelAdmin):
-
-    list_display = (
-        'user',
-        'status',
-        'id_document',
-        'created_at',
-    )
-
-    list_filter = (
-        'status',
-    )
-
-    def save_model(
-        self,
-        request,
-        obj,
-        form,
-        change
-    ):
-
-        super().save_model(
-            request,
-            obj,
-            form,
-            change
-        )
-
-        if obj.status == 'approved':
-
-            obj.user.is_verified = True
-            obj.user.save()
-
-        elif obj.status == 'rejected':
-
-            obj.user.is_verified = False
-            obj.user.save()

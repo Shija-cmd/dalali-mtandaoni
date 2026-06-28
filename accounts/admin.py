@@ -13,7 +13,6 @@ class CustomUserAdmin(UserAdmin):
         'profile_picture',
         'is_owner',
         'is_seeker',
-        'is_verified',
     )
 
     fieldsets = UserAdmin.fieldsets + (
@@ -25,7 +24,6 @@ class CustomUserAdmin(UserAdmin):
                     'phone_number',
                     'is_owner',
                     'is_seeker',
-                    'is_verified',
                     'created_at',
                 )
             },

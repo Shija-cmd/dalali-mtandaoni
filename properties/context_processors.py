@@ -1,16 +1,8 @@
-from .models import (
-    VerificationRequest,
-    Listing,
-    ContactUnlock,
-)
+from .models import ContactUnlock, Listing
 
 
 def verification_status(request):
 
-    pending_verification = False
-    pending_verification_request = None
-
-    pending_user_requests = 0
     pending_listing_requests = 0
     pending_featured_payment_requests = 0
     pending_contact_unlock_requests = 0
@@ -18,18 +10,7 @@ def verification_status(request):
 
     if request.user.is_authenticated:
 
-        pending_verification_request = VerificationRequest.objects.filter(
-            user=request.user,
-            status='pending'
-        ).first()
-
-        pending_verification = pending_verification_request is not None
-
         if request.user.is_superuser:
-
-            pending_user_requests = VerificationRequest.objects.filter(
-                status='pending'
-            ).count()
 
             pending_listing_requests = Listing.objects.filter(
                 is_approved=False
@@ -49,9 +30,6 @@ def verification_status(request):
             )
 
     return {
-        'pending_verification': pending_verification,
-        'pending_verification_request': pending_verification_request,
-        'pending_user_requests': pending_user_requests,
         'pending_listing_requests': pending_listing_requests,
         'pending_featured_payment_requests': pending_featured_payment_requests,
         'pending_contact_unlock_requests': pending_contact_unlock_requests,

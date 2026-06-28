@@ -68,7 +68,7 @@ urlpatterns = [
         views.owner_profile,
         name='owner_profile'
     ),
-    
+
     path(
         'api/home/',
         views.api_home,
@@ -175,41 +175,6 @@ urlpatterns = [
         name='my_favorites'
     ),
 
-
-    # ======================================================
-    #                  VERIFICATION
-    # ======================================================
-
-    path(
-        'request-verification/',
-        views.request_verification,
-        name='request_verification'
-    ),
-
-    path(
-        'verification-requests/',
-        views.verification_requests,
-        name='verification_requests'
-    ),
-
-    path(
-        'verification-request/<int:request_id>/approve/',
-        views.approve_verification,
-        name='approve_verification'
-    ),
-
-    path(
-        'verification-request/<int:request_id>/reject/',
-        views.reject_verification,
-        name='reject_verification'
-    ),
-    
-    path(
-        'api/my-verification-requests/',
-        views.api_my_verification_requests,
-        name='api_my_verification_requests'
-    ),
-    
     # ======================================================
     #               LISTING APPROVAL
     # ======================================================
@@ -396,19 +361,19 @@ urlpatterns = [
         views.api_my_favorites,
         name='api_my_favorites'
     ),
-    
+
     path(
         'api/favorite/<int:listing_id>/',
         views.api_toggle_favorite,
         name='api_toggle_favorite'
     ),
-    
+
     path(
         'api/listings/<int:listing_id>/edit/',
         views.api_update_listing,
         name='api_edit_listing'
     ),
-    
+
     path(
         'api/listings/<int:listing_id>/delete/',
         views.api_delete_listing,
@@ -420,7 +385,7 @@ urlpatterns = [
         views.api_update_listing_availability,
         name='api_update_listing_availability'
     ),
-    
+
     path(
         'api/listings/<int:listing_id>/upload-image/',
         views.api_upload_listing_image,
@@ -438,61 +403,49 @@ urlpatterns = [
         views.api_payment_methods,
         name='api_payment_methods'
     ),
-    
-    path(
-        'api/request-verification/',
-        views.api_request_verification,
-        name='api_request_verification'
-    ),
-    
-    path(
-        'api/verification-status/',
-        views.api_verification_status,
-        name='api_verification_status'
-    ),
-    
+
     path(
         'api/logout/',
         views.api_logout,
         name='api_logout'
     ),
-    
+
     path(
         'api/listings/<int:listing_id>/update/',
         views.api_update_listing,
         name='api_update_listing'
     ),
-    
+
     path(
         'api/my-profile/update/',
         views.api_update_profile,
         name='api_update_profile'
     ),
-    
+
     path(
         'api/change-password/',
         views.api_change_password,
         name='api_change_password'
     ),
-    
+
     path(
         'api/owners/<int:owner_id>/',
         views.api_owner_profile,
         name='api_owner_profile'
     ),
-    
+
     path(
         'api/dashboard/',
         views.api_dashboard,
         name='api_dashboard'
     ),
-    
+
     path(
         'api/home/',
         views.api_home,
         name='api_home'
     ),
-    
+
     # ======================================================
     #                     ADMIN APIs
     # ======================================================
@@ -503,26 +456,8 @@ urlpatterns = [
     ),
 
     path(
-        'api/admin/verification-requests/',
-        views.api_admin_verification_requests,
-        name='api_admin_verification_requests'
-    ),
-
-    path(
-        'api/admin/verification-requests/<int:request_id>/approve/',
-        views.api_admin_approve_verification,
-        name='api_admin_approve_verification'
-    ),
-
-    path(
-        'api/admin/verification-requests/<int:request_id>/reject/',
-        views.api_admin_reject_verification,
-        name='api_admin_reject_verification'
-    ),
-
-    path(
         'api/admin/listing-approval-requests/',
-        views.api_admin_listing_approval_requests,
+        views.listing_approval_requests,
         name='api_admin_listing_approval_requests'
     ),
 
@@ -585,7 +520,7 @@ urlpatterns = [
         views.api_admin_reject_contact_unlock_payment,
         name='api_admin_reject_contact_unlock_payment'
     ),
-    
+
     path(
         'api/listing-status/',
         views.api_listing_status,
