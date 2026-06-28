@@ -13,7 +13,11 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Case, IntegerField, Q, Value, When
 from django.core.paginator import Paginator
 from accounts.models import User
-from dalalimtandaoni.cloudinary_uploads import upload_image_to_cloudinary
+from dalalimtandaoni.cloudinary_uploads import (
+    CloudinaryUploadError,
+    cloudinary_is_configured,
+    upload_image_to_cloudinary,
+)
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.utils import timezone
@@ -1201,37 +1205,55 @@ def my_profile(request):
 
         if form.is_valid():
 
-            user = request.user
-
-            user.username = form.cleaned_data.get('username')
-            user.first_name = form.cleaned_data.get('first_name')
-            user.last_name = form.cleaned_data.get('last_name')
-            user.phone_number = form.cleaned_data.get('phone_number')
-
+            user = form.save(commit=False)
             profile_picture = request.FILES.get('profile_picture')
+            cloudinary_url = ''
 
             if profile_picture:
 
-                cloudinary_url = upload_image_to_cloudinary(
-                    profile_picture,
-                    'profile_pictures'
-                )
+                try:
+
+                    cloudinary_url = upload_image_to_cloudinary(
+                        profile_picture,
+                        'profile_pictures'
+                    )
+
+                except CloudinaryUploadError as exc:
+
+                    form.add_error(
+                        'profile_picture',
+                        str(exc)
+                    )
+
+                    messages.error(
+                        request,
+                        'Profile picture upload failed. Please check Cloudinary settings and try again.'
+                    )
+
+                    cloudinary_url = ''
 
                 if cloudinary_url:
+
                     user.profile_picture_url = cloudinary_url
+                    user.profile_picture = ''
 
-            if profile_picture and cloudinary_url:
-                user.profile_picture_url = cloudinary_url
-                user.profile_picture = None
+                elif not cloudinary_is_configured():
 
-            user.save()
+                    messages.warning(
+                        request,
+                        'Profile updated locally, but Cloudinary is not configured yet.'
+                    )
 
-            messages.success(
-                request,
-                'Profile updated successfully.'
-            )
+            if not form.errors:
 
-            return redirect('my_profile')
+                user.save()
+
+                messages.success(
+                    request,
+                    'Profile updated successfully.'
+                )
+
+                return redirect('my_profile')
 
         messages.error(
             request,

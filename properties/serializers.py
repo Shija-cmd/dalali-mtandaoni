@@ -15,7 +15,10 @@ from .models import (
 )
 
 from accounts.models import User
-from dalalimtandaoni.cloudinary_uploads import upload_image_to_cloudinary
+from dalalimtandaoni.cloudinary_uploads import (
+    CloudinaryUploadError,
+    upload_image_to_cloudinary,
+)
 from .validators import validate_image_upload
 
 
@@ -902,18 +905,32 @@ class ListingImageCreateSerializer(
     def create(self, validated_data):
 
         image = validated_data.get('image')
+        image_url = ''
 
-        instance = super().create(validated_data)
+        try:
 
-        image_url = upload_image_to_cloudinary(
-            image,
-            'listing_images'
-        )
+            image_url = upload_image_to_cloudinary(
+                image,
+                'listing_images'
+            )
+
+        except CloudinaryUploadError as exc:
+
+            raise serializers.ValidationError(
+                {
+                    'image': str(exc)
+                }
+            ) from exc
 
         if image_url:
 
-            instance.image_url = image_url
-            instance.save(update_fields=['image_url'])
+            validated_data.pop(
+                'image',
+                None
+            )
+            validated_data['image_url'] = image_url
+
+        instance = super().create(validated_data)
 
         return instance
 
@@ -959,17 +976,43 @@ class UserUpdateSerializer(
     def update(self, instance, validated_data):
 
         profile_picture = validated_data.get('profile_picture')
+        profile_picture_url = ''
+
+        if profile_picture:
+
+            try:
+
+                profile_picture_url = upload_image_to_cloudinary(
+                    profile_picture,
+                    'profile_pictures'
+                )
+
+            except CloudinaryUploadError as exc:
+
+                raise serializers.ValidationError(
+                    {
+                        'profile_picture': str(exc)
+                    }
+                ) from exc
+
+        if profile_picture_url:
+
+            validated_data.pop(
+                'profile_picture',
+                None
+            )
 
         instance = super().update(instance, validated_data)
-
-        profile_picture_url = upload_image_to_cloudinary(
-            profile_picture,
-            'profile_pictures'
-        )
 
         if profile_picture_url:
 
             instance.profile_picture_url = profile_picture_url
-            instance.save(update_fields=['profile_picture_url'])
+            instance.profile_picture = ''
+            instance.save(
+                update_fields=[
+                    'profile_picture_url',
+                    'profile_picture',
+                ]
+            )
 
         return instance

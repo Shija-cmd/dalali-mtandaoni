@@ -3,6 +3,11 @@ import os
 import cloudinary.uploader
 
 
+class CloudinaryUploadError(Exception):
+
+    pass
+
+
 def cloudinary_is_configured():
 
     return all(
@@ -25,12 +30,18 @@ def upload_image_to_cloudinary(uploaded_file, folder):
 
         uploaded_file.seek(0)
 
-    result = cloudinary.uploader.upload(
-        uploaded_file,
-        folder=folder,
-        resource_type='image',
-    )
-    
-    print("CLOUDINARY RESULT:", result)
+    try:
+
+        result = cloudinary.uploader.upload(
+            uploaded_file,
+            folder=folder,
+            resource_type='image',
+        )
+
+    except Exception as exc:
+
+        raise CloudinaryUploadError(
+            f'Cloudinary upload failed: {exc}'
+        ) from exc
 
     return result.get('secure_url') or result.get('url') or ''
