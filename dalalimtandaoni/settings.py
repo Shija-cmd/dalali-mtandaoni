@@ -61,7 +61,7 @@ if not SECRET_KEY:
 
 ALLOWED_HOSTS = os.environ.get(
     'DJANGO_ALLOWED_HOSTS',
-    '127.0.0.1,localhost,10.0.2.2,10.59.246.20'
+    '127.0.0.1,localhost,10.0.2.2'
 ).split(',')
 
 ADMIN_URL = os.environ.get(
