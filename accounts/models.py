@@ -41,11 +41,12 @@ class User(AbstractUser):
     def profile_picture_display_url(self):
 
         if self.profile_picture_url:
-
             return self.profile_picture_url
 
-        if self.profile_picture:
+        if not self.profile_picture:
+            return ''
 
+        try:
             return self.profile_picture.url
-
-        return ''
+        except Exception:
+            return ''
