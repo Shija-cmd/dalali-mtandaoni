@@ -1191,12 +1191,6 @@ def my_favorites(request):
 @login_required
 def my_profile(request):
 
-    owner = request.user
-
-    listings = Listing.objects.filter(
-        owner=owner
-    )
-
     if request.method == 'POST':
 
         form = UserProfileForm(
@@ -1207,26 +1201,37 @@ def my_profile(request):
 
         if form.is_valid():
 
-            user = form.save(
-                commit=False
-            )
+            user = form.save(commit=False)
 
-            profile_picture = request.FILES.get(
-                'profile_picture'
-            )
+            profile_picture = request.FILES.get('profile_picture')
 
             if profile_picture:
-
                 cloudinary_url = upload_image_to_cloudinary(
                     profile_picture,
                     'profile_pictures'
                 )
 
                 if cloudinary_url:
-
                     user.profile_picture_url = cloudinary_url
 
             user.save()
+
+            messages.success(
+                request,
+                'Profile updated successfully.'
+            )
+
+            return redirect('my_profile')
+
+            profile_picture_url = upload_image_to_cloudinary(
+                form.cleaned_data.get('profile_picture'),
+                'profile_pictures'
+            )
+
+            if profile_picture_url:
+
+                user.profile_picture_url = profile_picture_url
+                user.save(update_fields=['profile_picture_url'])
 
             messages.success(
                 request,
@@ -1237,31 +1242,35 @@ def my_profile(request):
                 'my_profile'
             )
 
-        else:
-
-            messages.error(
-                request,
-                form.errors
-            )
-
     else:
 
         form = UserProfileForm(
             instance=request.user
         )
 
+    listings = Listing.objects.filter(
+        owner=request.user,
+        is_active=True,
+        is_approved=True,
+
+        availability_status='available'
+    )
+
+    whatsapp_number = format_whatsapp_number(
+        request.user.phone_number
+    )
+
     return render(
         request,
         'properties/owner_profile.html',
         {
-            'owner': owner,
-            'form': form,
+            'owner': request.user,
             'listings': listings,
+            'listing_count': listings.count(),
+            'whatsapp_number': whatsapp_number,
+            'form': form,
             'is_my_profile': True,
             'can_view_owner_contact': True,
-            'whatsapp_number': format_whatsapp_number(
-                owner.phone_number
-            ),
         }
     )
 
