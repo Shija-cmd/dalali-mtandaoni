@@ -1220,6 +1220,10 @@ def my_profile(request):
                 if cloudinary_url:
                     user.profile_picture_url = cloudinary_url
 
+            if profile_picture and cloudinary_url:
+                user.profile_picture_url = cloudinary_url
+                user.profile_picture = None
+
             user.save()
 
             messages.success(

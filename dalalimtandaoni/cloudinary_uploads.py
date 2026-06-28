@@ -30,5 +30,7 @@ def upload_image_to_cloudinary(uploaded_file, folder):
         folder=folder,
         resource_type='image',
     )
+    
+    print("CLOUDINARY RESULT:", result)
 
     return result.get('secure_url') or result.get('url') or ''
