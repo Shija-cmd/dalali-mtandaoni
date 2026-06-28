@@ -1,5 +1,8 @@
 from django.urls import path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from . import views
 
 
@@ -527,3 +530,9 @@ urlpatterns = [
         name='api_listing_status'
     ),
 ]
+
+if settings.DEBUG or settings.DJANGO_SERVE_MEDIA:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
