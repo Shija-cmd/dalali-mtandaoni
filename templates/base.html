@@ -137,10 +137,10 @@
                     data-bs-toggle="dropdown"
                 >
 
-                    {% if user.profile_picture %}
+                    {% if user.profile_picture_display_url %}
 
                         <img
-                            src="{{ user.profile_picture.url }}"
+                            src="{{ user.profile_picture_display_url }}"
                             class="nav-profile-picture me-2"
                             alt="{{ user.get_full_name|default:user.username }} profile picture"
                         >

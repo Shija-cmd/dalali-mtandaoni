@@ -11,6 +11,11 @@ class User(AbstractUser):
         null=True
     )
 
+    profile_picture_url = models.URLField(
+        blank=True,
+        null=True
+    )
+
     phone_number = models.CharField(
         max_length=20,
         unique=True
@@ -31,3 +36,16 @@ class User(AbstractUser):
     created_at = models.DateTimeField(
         default=timezone.now
     )
+
+    @property
+    def profile_picture_display_url(self):
+
+        if self.profile_picture_url:
+
+            return self.profile_picture_url
+
+        if self.profile_picture:
+
+            return self.profile_picture.url
+
+        return ''

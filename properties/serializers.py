@@ -15,7 +15,30 @@ from .models import (
 )
 
 from accounts.models import User
+from dalalimtandaoni.cloudinary_uploads import upload_image_to_cloudinary
 from .validators import validate_image_upload
+
+
+def absolute_media_url(request, url):
+
+    if not url:
+
+        return None
+
+    if url.startswith(
+        (
+            'http://',
+            'https://',
+        )
+    ):
+
+        return url
+
+    if request:
+
+        return request.build_absolute_uri(url)
+
+    return url
 
 
 # ==========================================================
@@ -104,6 +127,8 @@ class ListingImageSerializer(
     serializers.ModelSerializer
 ):
 
+    image = serializers.SerializerMethodField()
+
     class Meta:
 
         model = ListingImage
@@ -112,6 +137,13 @@ class ListingImageSerializer(
             'id',
             'image',
         ]
+
+    def get_image(self, obj):
+
+        return absolute_media_url(
+            self.context.get('request'),
+            obj.display_url
+        )
 
 
 # ==========================================================
@@ -281,7 +313,7 @@ class ListingSerializer(
         obj
     ):
 
-        if not obj.owner.profile_picture:
+        if not obj.owner.profile_picture_display_url:
 
             return None
 
@@ -291,11 +323,12 @@ class ListingSerializer(
 
         if request:
 
-            return request.build_absolute_uri(
-                obj.owner.profile_picture.url
+            return absolute_media_url(
+                request,
+                obj.owner.profile_picture_display_url
             )
 
-        return obj.owner.profile_picture.url
+        return obj.owner.profile_picture_display_url
 
     def _get_active_contact_unlock(
         self,
@@ -487,15 +520,12 @@ class ListingSerializer(
 
         image = obj.images.first()
 
-        if image:
+        if image and image.display_url:
 
-            if request:
-
-                return request.build_absolute_uri(
-                    image.image.url
-                )
-
-            return image.image.url
+            return absolute_media_url(
+                request,
+                image.display_url
+            )
 
         return None
 
@@ -512,15 +542,14 @@ class ListingSerializer(
 
         for image in obj.images.all():
 
-            if request:
+            image_url = absolute_media_url(
+                request,
+                image.display_url
+            )
 
-                image_url = request.build_absolute_uri(
-                    image.image.url
-                )
+            if not image_url:
 
-            else:
-
-                image_url = image.image.url
+                continue
 
             image_list.append(
 
@@ -794,7 +823,7 @@ class UserSerializer(
         obj
     ):
 
-        if not obj.profile_picture:
+        if not obj.profile_picture_display_url:
 
             return None
 
@@ -804,11 +833,12 @@ class UserSerializer(
 
         if request:
 
-            return request.build_absolute_uri(
-                obj.profile_picture.url
+            return absolute_media_url(
+                request,
+                obj.profile_picture_display_url
             )
 
-        return obj.profile_picture.url
+        return obj.profile_picture_display_url
 
     def to_representation(
         self,
@@ -869,6 +899,31 @@ class ListingImageCreateSerializer(
 
         return value
 
+    def create(self, validated_data):
+
+        image = validated_data.get('image')
+
+        instance = super().create(validated_data)
+
+        image_url = upload_image_to_cloudinary(
+            image,
+            'listing_images'
+        )
+
+        if image_url:
+
+            instance.image_url = image_url
+            instance.save(update_fields=['image_url'])
+
+        return instance
+
+    def to_representation(self, instance):
+
+        return ListingImageSerializer(
+            instance,
+            context=self.context
+        ).data
+
 
 # ==========================================================
 #          USER UPDATE SERIALIZER
@@ -900,3 +955,21 @@ class UserUpdateSerializer(
         )
 
         return value
+
+    def update(self, instance, validated_data):
+
+        profile_picture = validated_data.get('profile_picture')
+
+        instance = super().update(instance, validated_data)
+
+        profile_picture_url = upload_image_to_cloudinary(
+            profile_picture,
+            'profile_pictures'
+        )
+
+        if profile_picture_url:
+
+            instance.profile_picture_url = profile_picture_url
+            instance.save(update_fields=['profile_picture_url'])
+
+        return instance

@@ -69,7 +69,7 @@ My Listings
                     {% if listing.images.first %}
 
                         <img
-                            src="{{ listing.images.first.image.url }}"
+                            src="{{ listing.images.first.display_url }}"
                             alt="{{ listing.title }}"
                             class="img-fluid rounded-3 listing-card-image"
                         >

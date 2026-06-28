@@ -446,7 +446,14 @@ class ListingImage(models.Model):
     )
 
     image = models.ImageField(
-        upload_to='listing_images/'
+        upload_to='listing_images/',
+        blank=True,
+        null=True
+    )
+
+    image_url = models.URLField(
+        blank=True,
+        null=True
     )
 
     uploaded_at = models.DateTimeField(
@@ -456,6 +463,19 @@ class ListingImage(models.Model):
     def __str__(self):
 
         return f"Image for {self.listing.title}"  
+
+    @property
+    def display_url(self):
+
+        if self.image_url:
+
+            return self.image_url
+
+        if self.image:
+
+            return self.image.url
+
+        return ''
     
 class Favorite(models.Model):
 

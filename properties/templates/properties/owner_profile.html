@@ -24,10 +24,10 @@
 
                 <div class="d-flex align-items-center gap-4 flex-wrap">
 
-                    {% if owner.profile_picture %}
+                    {% if owner.profile_picture_display_url %}
 
                         <img
-                            src="{{ owner.profile_picture.url }}"
+                            src="{{ owner.profile_picture_display_url }}"
                             class="profile-picture-lg"
                             alt="{{ owner.get_full_name|default:owner.username }} profile picture"
                         >
@@ -305,7 +305,7 @@
                 {% if listing.images.first %}
 
                     <img
-                        src="{{ listing.images.first.image.url }}"
+                        src="{{ listing.images.first.display_url }}"
                         class="card-img-top listing-card-image"
                         alt="{{ listing.title }}"
                     >

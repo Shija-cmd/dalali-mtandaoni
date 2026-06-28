@@ -25,7 +25,7 @@
 
                 <img
                     id="mainImage"
-                    src="{{ listing.images.first.image.url }}"
+                    src="{{ listing.images.first.display_url }}"
                     class="img-fluid rounded-4 shadow w-100"
                     style="height:500px; object-fit:cover;"
                     alt="{{ listing.title }}"
@@ -57,7 +57,7 @@
                 <div class="col-3">
 
                     <img
-                        src="{{ image.image.url }}"
+                        src="{{ image.display_url }}"
                         class="img-fluid rounded-3 shadow-sm thumbnail-image"
                         style="height:100px; width:100%; object-fit:cover; cursor:pointer;"
                         onclick="changeImage(this)"
@@ -560,7 +560,7 @@ function changeImage(image){
                     {% if item.images.first %}
 
                         <img
-                            src="{{ item.images.first.image.url }}"
+                            src="{{ item.images.first.display_url }}"
                             class="listing-card-image"
                             alt="{{ item.title }}"
                         >

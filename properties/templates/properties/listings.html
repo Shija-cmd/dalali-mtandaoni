@@ -437,7 +437,7 @@ Browse Listings Header
             {% if listing.images.first %}
 
                 <img
-                    src="{{ listing.images.first.image.url }}"
+                    src="{{ listing.images.first.display_url }}"
                     class="listing-card-image"
                     alt="{{ listing.title }}"
                 >

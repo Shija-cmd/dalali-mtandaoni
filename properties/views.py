@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Case, IntegerField, Q, Value, When
 from django.core.paginator import Paginator
 from accounts.models import User
+from dalalimtandaoni.cloudinary_uploads import upload_image_to_cloudinary
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.utils import timezone
@@ -794,6 +795,11 @@ def upload_listing_image(request, pk):
 
             image.listing = listing
 
+            image.image_url = upload_image_to_cloudinary(
+                form.cleaned_data.get('image'),
+                'listing_images'
+            )
+
             image.save()
 
             return redirect(
@@ -1197,7 +1203,17 @@ def my_profile(request):
 
         if form.is_valid():
 
-            form.save()
+            user = form.save()
+
+            profile_picture_url = upload_image_to_cloudinary(
+                form.cleaned_data.get('profile_picture'),
+                'profile_pictures'
+            )
+
+            if profile_picture_url:
+
+                user.profile_picture_url = profile_picture_url
+                user.save(update_fields=['profile_picture_url'])
 
             messages.success(
                 request,
@@ -2579,7 +2595,10 @@ def api_upload_listing_image(
     )
 
     serializer = ListingImageCreateSerializer(
-        data=request.data
+        data=request.data,
+        context={
+            'request': request,
+        }
     )
 
     if serializer.is_valid():
