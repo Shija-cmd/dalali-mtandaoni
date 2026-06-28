@@ -1227,7 +1227,7 @@ def my_profile(request):
 
                     messages.error(
                         request,
-                        'Profile picture upload failed. Please check Cloudinary settings and try again.'
+                        str(exc)
                     )
 
                     cloudinary_url = ''

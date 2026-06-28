@@ -26,14 +26,20 @@ def upload_image_to_cloudinary(uploaded_file, folder):
 
         return ''
 
-    if hasattr(uploaded_file, 'seek'):
+    file_to_upload = getattr(
+        uploaded_file,
+        'file',
+        uploaded_file
+    )
 
-        uploaded_file.seek(0)
+    if hasattr(file_to_upload, 'seek'):
+
+        file_to_upload.seek(0)
 
     try:
 
         result = cloudinary.uploader.upload(
-            uploaded_file,
+            file_to_upload,
             folder=folder,
             resource_type='image',
         )
