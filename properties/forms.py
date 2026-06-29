@@ -1,6 +1,7 @@
 from django import forms
 from django.utils import timezone
 from .models import (
+    Category,
     ContactUnlock,
     District,
     Listing,
@@ -19,6 +20,10 @@ class ListingForm(forms.ModelForm):
 
         super().__init__(*args, **kwargs)
 
+        self.fields['category'].queryset = Category.objects.order_by(
+            'name'
+        )
+        self.fields['category'].empty_label = 'Choose category'
         self.fields['region'].queryset = Region.objects.all()
         self.fields['district'].queryset = District.objects.none()
         self.fields['ward'].queryset = Ward.objects.none()
