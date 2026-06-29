@@ -460,7 +460,7 @@ urlpatterns = [
 
     path(
         'api/admin/listing-approval-requests/',
-        views.listing_approval_requests,
+        views.api_admin_listing_approval_requests,
         name='api_admin_listing_approval_requests'
     ),
 

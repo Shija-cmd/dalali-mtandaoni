@@ -2881,6 +2881,41 @@ def api_admin_statistics(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def api_admin_listing_approval_requests(request):
+
+    permission_error = _require_admin_api(
+        request
+    )
+
+    if permission_error is not None:
+
+        return permission_error
+
+    listings = Listing.objects.filter(
+        is_approved=False,
+        availability_status='available'
+    ).select_related(
+        'owner',
+        'category'
+    ).order_by(
+        '-created_at'
+    )
+
+    serializer = ListingSerializer(
+        listings,
+        many=True,
+        context={
+            'request': request,
+        }
+    )
+
+    return Response(
+        serializer.data
+    )
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def api_admin_featured_listing_management(request):
 
     permission_error = _require_admin_api(
