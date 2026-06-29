@@ -212,7 +212,11 @@ Listing Approval Requests
                         <a
                             href="{% url 'approve_listing' listing.id %}"
                             class="btn btn-success"
-                            onclick="return confirm('Approve this listing and publish it publicly?');"
+                            data-confirm-title="Approve Listing"
+                            data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
+                            data-confirm-message="This listing will be approved and published publicly for users to view."
+                            data-confirm-button="Approve Listing"
+                            data-confirm-button-class="btn btn-success"
                         >
 
                             ✅ Approve Listing
@@ -260,7 +264,11 @@ Listing Approval Requests
                                 <button
                                     type="submit"
                                     class="btn btn-outline-primary"
-                                    onclick="return confirm('Update this featured listing time limit?');"
+                                    data-confirm-title="Update Featured Time"
+                                    data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
+                                    data-confirm-message="This will update the featured package or time limit for this listing."
+                                    data-confirm-button="Update Featured"
+                                    data-confirm-button-class="btn btn-primary"
                                 >
                                     Update Featured
                                 </button>
@@ -275,7 +283,11 @@ Listing Approval Requests
                                 <button
                                     type="submit"
                                     class="btn btn-warning"
-                                    onclick="return confirm('Remove this listing from featured listings?');"
+                                    data-confirm-title="Remove Featured Status"
+                                    data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
+                                    data-confirm-message="This listing will no longer appear as a featured listing."
+                                    data-confirm-button="Remove Featured"
+                                    data-confirm-button-class="btn btn-warning"
                                 >
                                     Remove Featured
                                 </button>
@@ -316,7 +328,11 @@ Listing Approval Requests
                                 <button
                                     type="submit"
                                     class="btn btn-outline-warning"
-                                    onclick="return confirm('Mark this listing as featured?');"
+                                    data-confirm-title="Mark as Featured"
+                                    data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
+                                    data-confirm-message="This listing will be highlighted as featured using the selected package and time limit."
+                                    data-confirm-button="Mark Featured"
+                                    data-confirm-button-class="btn btn-warning"
                                 >
                                     Mark Featured
                                 </button>
@@ -327,7 +343,11 @@ Listing Approval Requests
                         <a
                             href="{% url 'reject_listing' listing.id %}"
                             class="btn btn-outline-danger"
-                            onclick="return confirm('Reject and delete this listing?');"
+                            data-confirm-title="Reject Listing"
+                            data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
+                            data-confirm-message="This listing will be rejected and removed from the approval queue."
+                            data-confirm-button="Reject Listing"
+                            data-confirm-button-class="btn btn-danger"
                         >
 
                             ❌ Reject Listing

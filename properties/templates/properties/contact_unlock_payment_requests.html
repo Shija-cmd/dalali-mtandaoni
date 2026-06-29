@@ -117,7 +117,11 @@ Contact Unlock Payment Requests
                     <a
                         href="{% url 'approve_contact_unlock_payment' unlock.id %}"
                         class="btn btn-success"
-                        onclick="return confirm('Confirm this contact unlock payment?');"
+                        data-confirm-title="Confirm Contact Unlock"
+                        data-confirm-subtitle="{{ unlock.user.get_full_name|default:unlock.user.username }}"
+                        data-confirm-message="This payment will be confirmed and the listing contact details will be unlocked for this user."
+                        data-confirm-button="Confirm Payment"
+                        data-confirm-button-class="btn btn-success"
                     >
                         Confirm Payment
                     </a>
@@ -125,7 +129,11 @@ Contact Unlock Payment Requests
                     <a
                         href="{% url 'reject_contact_unlock_payment' unlock.id %}"
                         class="btn btn-outline-danger"
-                        onclick="return confirm('Reject this contact unlock payment reference?');"
+                        data-confirm-title="Reject Contact Unlock"
+                        data-confirm-subtitle="{{ unlock.user.get_full_name|default:unlock.user.username }}"
+                        data-confirm-message="This payment reference will be rejected and the user will need to submit another payment."
+                        data-confirm-button="Reject Payment"
+                        data-confirm-button-class="btn btn-danger"
                     >
                         Reject Payment
                     </a>

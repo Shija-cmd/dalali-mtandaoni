@@ -122,7 +122,11 @@ Featured Payment Requests
                     <a
                         href="{% url 'approve_listing_payment' listing.id %}"
                         class="btn btn-success"
-                        onclick="return confirm('Confirm this featured listing payment?');"
+                        data-confirm-title="Confirm Featured Payment"
+                        data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
+                        data-confirm-message="This payment will be confirmed and the selected featured package will be activated."
+                        data-confirm-button="Confirm Payment"
+                        data-confirm-button-class="btn btn-success"
                     >
                         Confirm Payment
                     </a>
@@ -130,7 +134,11 @@ Featured Payment Requests
                     <a
                         href="{% url 'reject_listing_payment' listing.id %}"
                         class="btn btn-outline-danger"
-                        onclick="return confirm('Reject this featured listing payment reference?');"
+                        data-confirm-title="Reject Featured Payment"
+                        data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
+                        data-confirm-message="This payment reference will be rejected and the listing owner will need to submit another payment."
+                        data-confirm-button="Reject Payment"
+                        data-confirm-button-class="btn btn-danger"
                     >
                         Reject Payment
                     </a>

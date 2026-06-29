@@ -180,7 +180,11 @@ Manage Featured Listings
                                     <button
                                         type="submit"
                                         class="btn btn-outline-primary"
-                                        onclick="return confirm('Update this featured listing time limit?');"
+                                        data-confirm-title="Update Featured Time"
+                                        data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
+                                        data-confirm-message="This will update the featured package or time limit for this listing."
+                                        data-confirm-button="Update Featured"
+                                        data-confirm-button-class="btn btn-primary"
                                     >
                                         Update Featured
                                     </button>
@@ -195,7 +199,11 @@ Manage Featured Listings
                                     <button
                                         type="submit"
                                         class="btn btn-warning"
-                                        onclick="return confirm('Remove this listing from featured listings?');"
+                                        data-confirm-title="Remove Featured Status"
+                                        data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
+                                        data-confirm-message="This listing will no longer appear as a featured listing."
+                                        data-confirm-button="Remove Featured"
+                                        data-confirm-button-class="btn btn-warning"
                                     >
                                         Remove Featured
                                     </button>
@@ -236,7 +244,11 @@ Manage Featured Listings
                                     <button
                                         type="submit"
                                         class="btn btn-outline-warning"
-                                        onclick="return confirm('Mark this listing as featured?');"
+                                        data-confirm-title="Mark as Featured"
+                                        data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
+                                        data-confirm-message="This listing will be highlighted as featured using the selected package and time limit."
+                                        data-confirm-button="Mark Featured"
+                                        data-confirm-button-class="btn btn-warning"
                                     >
                                         Mark Featured
                                     </button>
