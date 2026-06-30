@@ -40,7 +40,7 @@ Home
 
                 <p class="hero-subtitle">
 
-                    Browse verified listings from trusted owners across Tanzania.
+                    Browse verified ads from trusted owners across Tanzania.
                     Rent, buy or sell with confidence.
 
                 </p>
@@ -50,7 +50,7 @@ Home
 <form
     method="GET"
     action="{% url 'listings' %}"
-    class="hero-search shadow"
+    class="hero-search shadow-sm"
 >
 
     <div class="row g-2">
@@ -61,7 +61,7 @@ Home
                 type="text"
                 name="q"
                 class="form-control form-control-lg"
-                placeholder="Search by city, district or location..."
+                placeholder="Search houses, rooms, plots, cars, or location..."
                 value="{{ request.GET.q }}"
             >
 
@@ -93,7 +93,7 @@ Home
                         class="btn btn-primary btn-lg px-4"
                     >
 
-                        Browse Listings
+                        Browse Ads
 
                     </a>
 
@@ -124,7 +124,7 @@ Home
 
                                 <h2>{{ total_listings }}</h2>
 
-                                <p>Active Listings</p>
+                                <p>Active Ads</p>
 
                             </div>
 
@@ -136,7 +136,7 @@ Home
 
                                 <h2>{{ approved_listings }}</h2>
 
-                                <p>Approved Listings</p>
+                                <p>Approved Ads</p>
 
                             </div>
 
@@ -214,7 +214,26 @@ Home
 
         </div>
 
-        <div class="row g-4">
+        <div class="category-chip-row justify-content-center mb-4">
+            <a href="{% url 'listings' %}" class="category-chip">
+                <i class="bi bi-house-door-fill text-primary"></i>
+                Houses
+            </a>
+            <a href="{% url 'listings' %}" class="category-chip">
+                <i class="bi bi-door-open-fill text-success"></i>
+                Rooms
+            </a>
+            <a href="{% url 'listings' %}" class="category-chip">
+                <i class="bi bi-map-fill text-warning"></i>
+                Plots
+            </a>
+            <a href="{% url 'listings' %}" class="category-chip">
+                <i class="bi bi-car-front-fill text-danger"></i>
+                Cars
+            </a>
+        </div>
+
+        <div class="row g-3">
 
             <div class="col-lg-3 col-md-6">
 
@@ -352,7 +371,7 @@ Home
 
 
 <!-- =========================
-    FEATURED LISTINGS
+    FEATURED ADS
 ========================== -->
 
 <section class="py-5">
@@ -363,19 +382,19 @@ Home
 
             <span class="badge bg-warning text-dark px-3 py-2 mb-3">
 
-                FEATURED PROPERTIES
+                FEATURED ADS
 
             </span>
 
             <h2 class="fw-bold display-6">
 
-                Featured Listings
+                Featured Ads
 
             </h2>
 
             <p class="text-muted">
 
-                Discover listings promoted for extra visibility from active owners.
+                Discover ads promoted for extra visibility from active owners.
 
             </p>
 
@@ -407,6 +426,14 @@ Home
 
                         </span>
 
+                        <a
+                            href="{% url 'toggle_favorite' listing.id %}"
+                            class="favorite-float"
+                            aria-label="Save ad"
+                        >
+                            <i class="bi bi-heart"></i>
+                        </a>
+
                         <span class="price-badge">
 
                             TZS {{ listing.price|floatformat:0 }}
@@ -415,7 +442,7 @@ Home
 
                     </div>
 
-                    <div class="card-body p-4">
+                    <div class="card-body">
 
                         <h5 class="fw-bold">
 
@@ -423,7 +450,7 @@ Home
 
                         </h5>
 
-                        <p class="text-muted mb-3">
+                        <p class="text-muted mb-2">
 
                             <i class="bi bi-geo-alt-fill text-danger"></i>
 
@@ -431,9 +458,10 @@ Home
 
                         </p>
 
-                        <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
 
-                            <span class="badge bg-success">
+                            <span class="verified-pill">
+                                <i class="bi bi-patch-check-fill"></i>
 
                                 Verified
 
@@ -441,7 +469,7 @@ Home
 
                             <small class="text-muted">
 
-                                Featured Listing
+                                Featured Ad
 
                             </small>
 
@@ -449,10 +477,10 @@ Home
 
                         <a
                             href="{% url 'listing_detail' listing.id %}"
-                            class="btn btn-primary w-100"
+                            class="btn btn-primary btn-sm w-100"
                         >
 
-                            View Details
+                            View Ad
 
                         </a>
 
@@ -468,7 +496,7 @@ Home
 
                 <div class="alert alert-info text-center">
 
-                    No featured listings available.
+                    No featured ads available.
 
                 </div>
 
@@ -483,7 +511,7 @@ Home
 </section>
 
 <!-- =========================
-    RECENT LISTINGS
+    RECENT ADS
 ========================= -->
 
 <section class="py-5 recent-section">
@@ -502,13 +530,13 @@ Home
 
                 <h2 class="fw-bold">
 
-                    Recently Added Listings
+                    Recently Added Ads
 
                 </h2>
 
                 <p class="text-muted">
 
-                    Fresh properties recently published on Dalali Mtandaoni.
+                    Fresh ads recently published on Dalali Mtandaoni.
 
                 </p>
 
@@ -589,10 +617,10 @@ Home
 
                                 <a
                                     href="{% url 'listing_detail' listing.id %}"
-                                    class="btn btn-primary mt-3"
+                                    class="btn btn-primary btn-sm mt-2"
                                 >
 
-                                    View Details
+                                    View Ad
 
                                 </a>
 
@@ -612,7 +640,7 @@ Home
 
                 <div class="alert alert-info text-center">
 
-                    No recent listings available.
+                    No recent ads available.
 
                 </div>
 
@@ -674,14 +702,14 @@ Home
 
                     <h4>
 
-                        Reviewed Listings
+                        Reviewed Ads
 
                     </h4>
 
                     <p>
 
-                        Owners upload ID when submitting listings, and admins
-                        review listings before they appear publicly.
+                        Owners upload ID when submitting ads, and admins
+                        review ads before they appear publicly.
 
                     </p>
 
@@ -738,7 +766,7 @@ Home
 
                     <p>
 
-                        Browse listings from every region across Tanzania in one place.
+                        Browse ads from every region across Tanzania in one place.
 
                     </p>
 
@@ -803,7 +831,7 @@ Home
 
                     <h2 class="fw-bold text-white mb-3">
 
-                        Ready to Find or List Your Property?
+                        Ready to Find or Post Your Property?
 
                     </h2>
 
@@ -828,7 +856,7 @@ Home
 
                                 <i class="bi bi-plus-circle-fill me-2"></i>
 
-                                Create Listing
+                                Create Ad
 
                             </a>
 
@@ -854,7 +882,7 @@ Home
 
                         <i class="bi bi-search me-2"></i>
 
-                        Browse Listings
+                        Browse Ads
 
                     </a>
 

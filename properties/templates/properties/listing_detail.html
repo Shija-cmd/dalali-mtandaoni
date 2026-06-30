@@ -26,7 +26,7 @@
                 <img
                     id="mainImage"
                     src="{{ listing.images.first.display_url }}"
-                    class="img-fluid rounded-4 shadow w-100"
+                    class="img-fluid ad-detail-main-image shadow-sm w-100"
                     style="height:500px; object-fit:cover;"
                     alt="{{ listing.title }}"
                 >
@@ -58,7 +58,7 @@
 
                     <img
                         src="{{ image.display_url }}"
-                        class="img-fluid rounded-3 shadow-sm thumbnail-image"
+                        class="img-fluid ad-detail-gallery shadow-sm thumbnail-image"
                         style="height:100px; width:100%; object-fit:cover; cursor:pointer;"
                         onclick="changeImage(this)"
                         alt="{{ listing.title }}"
@@ -107,7 +107,7 @@
             {% if not listing.is_approved %}
 
                 <div class="alert alert-info">
-                    This listing is waiting for admin approval.
+                    This ad is waiting for admin approval.
                 </div>
 
             {% endif %}
@@ -115,20 +115,20 @@
             {% if listing.is_featured_active %}
 
                 <div class="alert alert-warning">
-                    This listing is featured{% if listing.featured_until %} until {{ listing.featured_until|date:"d M Y" }}{% endif %}.
+                    This ad is featured{% if listing.featured_until %} until {{ listing.featured_until|date:"d M Y" }}{% endif %}.
                 </div>
 
             {% elif user == listing.owner and listing.is_approved %}
 
                 <div class="alert alert-success d-flex justify-content-between align-items-center flex-wrap gap-2">
                     <span>
-                        Promote this listing with a featured package for more visibility.
+                        Promote this ad with a featured package for more visibility.
                     </span>
                     <a
                         href="{% url 'feature_listing' listing.id %}"
-                        class="btn btn-success"
+                        class="btn btn-success btn-sm"
                     >
-                        Feature Listing
+                        Feature Ad
                     </a>
                 </div>
 
@@ -137,7 +137,7 @@
         {% endif %}
             <span class="badge bg-primary px-3 py-2">
 
-                Listing Owner
+                Verified Owner
 
             </span>
 
@@ -145,7 +145,7 @@
 
         <h5 class="fw-bold mb-3">
 
-            Property Description
+            Description
 
         </h5>
 
@@ -159,10 +159,10 @@
 
             <a
                 href="{% url 'upload_listing_image' listing.id %}"
-                class="btn btn-primary mt-3"
+                class="btn btn-primary btn-sm mt-2"
             >
 
-                📷 Upload More Images
+                📷 Upload More Photos
 
             </a>
 
@@ -175,16 +175,16 @@
         <hr class="my-5">
 
 <!-- ==========================================
-    Property Overview
+    Ad Overview
 ========================================== -->
 
-<div class="card border-0 shadow-lg rounded-4 mt-5">
+<div class="card border-0 ad-owner-card mt-4">
 
     <div class="card-body p-4">
 
         <h3 class="fw-bold mb-4">
 
-            📋 Property Overview
+            📋 Ad Overview
 
         </h3>
 
@@ -234,7 +234,7 @@
 
                 <p class="mb-4">
 
-                    <strong>Listing ID</strong><br>
+                    <strong>Ad ID</strong><br>
 
                     #DM{{ listing.id }}
 
@@ -272,7 +272,7 @@
     Owner Information
 ========================================== -->
 
-<div class="card border-0 shadow-lg rounded-4">
+<div class="card border-0 ad-owner-card mt-4">
 
     <div class="card-body p-4">
 
@@ -282,7 +282,7 @@
 
                 <h3 class="fw-bold mb-2">
 
-                    👤 Property Owner
+                    👤 Owner
 
                 </h3>
 
@@ -295,7 +295,7 @@
             </div>
             <span class="badge bg-primary px-3 py-2">
 
-                Listing Owner
+                Verified Owner
 
             </span>
 
@@ -427,7 +427,7 @@
 
                         <a
                             href="tel:{{ listing.owner.phone_number }}"
-                            class="btn btn-success btn-lg"
+                            class="btn btn-success btn-sm"
                         >
 
                             Call Owner
@@ -437,7 +437,7 @@
                         <a
                             href="https://wa.me/{{ whatsapp_number }}?text=Hello,%20I%20am%20interested%20in%20{{ listing.title }}"
                             target="_blank"
-                            class="btn btn-success btn-lg"
+                            class="btn btn-success btn-sm"
                         >
 
                             WhatsApp
@@ -450,7 +450,7 @@
 
                             <a
                                 href="{% url 'unlock_contact' listing.id %}"
-                                class="btn {% if contact_unlock.payment_status == 'pending' %}btn-outline-warning{% else %}btn-warning{% endif %} btn-lg"
+                                class="btn {% if contact_unlock.payment_status == 'pending' %}btn-outline-warning{% else %}btn-warning{% endif %} btn-sm"
                             >
 
                                 {% if contact_unlock.payment_status == 'pending' %}
@@ -465,7 +465,7 @@
 
                             <a
                                 href="{% url 'login' %}"
-                                class="btn btn-primary btn-lg"
+                                class="btn btn-primary btn-sm"
                             >
 
                                 Login to Unlock Contact
@@ -478,7 +478,7 @@
 
                     <a
                         href="{% url 'owner_profile' listing.owner.id %}"
-                        class="btn btn-outline-primary btn-lg"
+                        class="btn btn-outline-primary btn-sm"
                     >
 
                         👤 View Owner Profile
@@ -487,7 +487,7 @@
 
                     <a
                         href="{% url 'toggle_favorite' listing.id %}"
-                        class="btn btn-outline-danger btn-lg"
+                        class="btn btn-outline-danger btn-sm"
                     >
 
                         {% if is_favorite %}
@@ -496,20 +496,29 @@
 
                         {% else %}
 
-                            🤍 Save Listing
+                            🤍 Save Ad
 
                         {% endif %}
 
                     </a>
 
+                    <button
+                        type="button"
+                        class="btn btn-outline-secondary btn-sm"
+                        onclick="shareAd()"
+                    >
+                        <i class="bi bi-share"></i>
+                        Share
+                    </button>
+
                     {% if user == listing.owner %}
 
                         <a
                             href="{% url 'upload_listing_image' listing.id %}"
-                            class="btn btn-warning btn-lg"
+                            class="btn btn-warning btn-sm"
                         >
 
-                            📷 Upload More Images
+                            📷 Upload More Photos
 
                         </a>
 
@@ -530,6 +539,20 @@
 function changeImage(image){
 
     document.getElementById("mainImage").src = image.src;
+
+}
+
+function shareAd(){
+
+    if(navigator.share){
+        navigator.share({
+            title: "{{ listing.title|escapejs }}",
+            url: window.location.href
+        });
+        return;
+    }
+
+    navigator.clipboard.writeText(window.location.href);
 
 }
 
@@ -600,7 +623,7 @@ function changeImage(image){
                         class="btn btn-primary w-100"
                     >
 
-                        View Details
+                        View Ad
 
                     </a>
 
@@ -616,7 +639,7 @@ function changeImage(image){
 
             <div class="alert alert-light text-center">
 
-                No related listings available.
+                No related ads available.
 
             </div>
 

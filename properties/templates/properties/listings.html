@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Browse Listings
+Browse Ads
 {% endblock %}
 
 {% block content %}
 
-<div class="container py-5">
+<div class="container py-4">
 
 <!-- ===========================================
-Browse Listings Header
+Browse Ads Header
 =========================================== -->
 
-<section class="mb-5">
+<section class="mb-4">
 
-    <div class="text-center mb-5">
+    <div class="text-center mb-4">
 
         <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">
 
@@ -24,13 +24,13 @@ Browse Listings Header
 
         <h1 class="fw-bold display-5">
 
-            Browse Properties
+            Browse Ads
 
         </h1>
 
         <p class="text-muted fs-5">
 
-            Discover verified houses, rooms, plots and cars available across Tanzania.
+            Discover verified houses, rooms, plots and cars across Tanzania.
 
         </p>
 
@@ -40,13 +40,13 @@ Browse Listings Header
 
     <form method="GET">
 
-    <div class="card border-0 shadow-lg rounded-4">
+    <div class="card border-0 ad-search-shell">
 
-        <div class="card-body p-4">
+        <div class="card-body">
 
-            <h4 class="fw-bold mb-4">
+            <h4 class="fw-bold mb-3">
 
-                🔍 Search Listings
+                🔍 Search Ads
 
             </h4>
 
@@ -97,6 +97,25 @@ Browse Listings Header
 
                 </div>
 
+            </div>
+
+            <div class="category-chip-row mt-3">
+                <a href="{% url 'listings' %}" class="category-chip">
+                    <i class="bi bi-house-door-fill text-primary"></i>
+                    Houses
+                </a>
+                <a href="{% url 'listings' %}" class="category-chip">
+                    <i class="bi bi-door-open-fill text-success"></i>
+                    Rooms
+                </a>
+                <a href="{% url 'listings' %}" class="category-chip">
+                    <i class="bi bi-map-fill text-warning"></i>
+                    Plots
+                </a>
+                <a href="{% url 'listings' %}" class="category-chip">
+                    <i class="bi bi-car-front-fill text-danger"></i>
+                    Cars
+                </a>
             </div>
 
             <!-- Second Row -->
@@ -308,7 +327,7 @@ Browse Listings Header
 
                     <span class="text-muted">
 
-                        listings found
+                        ads found
 
                     </span>
 
@@ -326,7 +345,7 @@ Browse Listings Header
 
                     <span class="badge bg-secondary">
 
-                        Showing All Listings
+                        Showing All Ads
 
                     </span>
 
@@ -350,13 +369,13 @@ Browse Listings Header
 
         <h5 class="fw-bold mb-1">
 
-            Available Listings
+            Available Ads
 
         </h5>
 
         <small class="text-muted">
 
-            {{ page_obj.paginator.count }} properties found
+            {{ page_obj.paginator.count }} ads found
 
         </small>
 
@@ -452,13 +471,13 @@ Browse Listings Header
 
             {% endif %}
 
-            <!-- Price -->
-
-            <div class="price-badge">
-
-                TZS {{ listing.price|floatformat:0 }}
-
-            </div>
+            <a
+                href="{% url 'toggle_favorite' listing.id %}"
+                class="favorite-float"
+                aria-label="Save ad"
+            >
+                <i class="bi bi-heart"></i>
+            </a>
 
             <!-- Category -->
 
@@ -484,42 +503,46 @@ Browse Listings Header
 
         <div class="card-body">
 
-            <h5 class="fw-bold mb-3">
+            <h5 class="fw-bold mb-1">
 
                 {{ listing.title }}
 
             </h5>
 
-            <p class="text-muted mb-3">
+            <p class="text-muted mb-2">
 
-                📍 {{ listing.location }}
+                <i class="bi bi-geo-alt"></i>
+                {{ listing.location }}
 
             </p>
 
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
 
-                <span class="badge bg-success">
+                <strong class="text-primary">
+                    TZS {{ listing.price|floatformat:0 }}
+                </strong>
 
-                    ✔ Verified
-
+                <span class="verified-pill">
+                    <i class="bi bi-patch-check-fill"></i>
+                    Verified
                 </span>
-
-                <small class="text-muted">
-
-                    Available
-
-                </small>
 
             </div>
 
-            <a
-                href="{% url 'listing_detail' listing.id %}"
-                class="btn btn-primary w-100"
-            >
+            <div class="d-flex justify-content-between align-items-center">
 
-                View Details
+                <small class="text-muted">
+                    Available
+                </small>
 
-            </a>
+                <a
+                    href="{% url 'listing_detail' listing.id %}"
+                    class="btn btn-primary btn-sm"
+                >
+                    View Ad
+                </a>
+
+            </div>
 
         </div>
 
@@ -535,7 +558,7 @@ Browse Listings Header
 
         <h5 class="mb-2">
 
-            🔍 No Listings Found
+            🔍 No Ads Found
 
         </h5>
 

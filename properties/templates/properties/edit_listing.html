@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Edit Listing
+Edit Ad
 {% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@ Edit Listing
 
                     <h2 class="mb-4">
 
-                        Edit Listing
+                        Edit Ad
 
                     </h2>
 
@@ -98,7 +98,7 @@ Edit Listing
                                 </small>
                             {% else %}
                                 <small class="text-muted d-block mt-1">
-                                    Upload a clear photo of your ID for listing review.
+                                    Upload a clear photo of your ID for ad review.
                                 </small>
                             {% endif %}
                         </div>
@@ -106,7 +106,7 @@ Edit Listing
                         {% if form.errors %}
 
                             <div class="alert alert-danger">
-                                Please correct the highlighted listing details.
+                                Please correct the highlighted ad details.
                             </div>
 
                         {% endif %}

@@ -110,7 +110,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'listings' %}">
-                        Browse Listings
+                        Browse Ads
                     </a>
                 </li>
 
@@ -174,14 +174,14 @@
                     <li>
                         <a class="dropdown-item" href="{% url 'create_listing' %}">
                             <i class="bi bi-plus-circle me-2"></i>
-                            Create Listing
+                            Create Ad
                         </a>
                     </li>
 
                     <li>
                         <a class="dropdown-item" href="{% url 'my_listings' %}">
                             <i class="bi bi-card-list me-2"></i>
-                            My Listings
+                            My Ads
                         </a>
                     </li>
 
@@ -232,7 +232,7 @@
                             href="{% url 'listing_approval_requests' %}"
                         >
 
-                            Listing Approval
+                            Ad Approval
 
                             {% if pending_listing_requests %}
                                 <span class="badge bg-danger rounded-pill">
@@ -251,7 +251,7 @@
                             href="{% url 'featured_listing_management' %}"
                         >
 
-                            Featured Listings
+                            Featured Ads
 
                         </a>
 
@@ -503,7 +503,7 @@
 
                         <a href="{% url 'listings' %}">
 
-                            Browse Listings
+                            Browse Ads
 
                         </a>
 
@@ -533,7 +533,7 @@
 
                         <a href="{% url 'listing_rules' %}">
 
-                            Listing Rules
+                            Ad Rules
 
                         </a>
 
