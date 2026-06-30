@@ -100,22 +100,29 @@ Browse Ads Header
             </div>
 
             <div class="category-chip-row mt-3">
-                <a href="{% url 'listings' %}" class="category-chip">
-                    <i class="bi bi-house-door-fill text-primary"></i>
-                    Houses
-                </a>
-                <a href="{% url 'listings' %}" class="category-chip">
-                    <i class="bi bi-door-open-fill text-success"></i>
-                    Rooms
-                </a>
-                <a href="{% url 'listings' %}" class="category-chip">
-                    <i class="bi bi-map-fill text-warning"></i>
-                    Plots
-                </a>
-                <a href="{% url 'listings' %}" class="category-chip">
-                    <i class="bi bi-car-front-fill text-danger"></i>
-                    Cars
-                </a>
+                {% for category in categories %}
+                    <a
+                        href="{% url 'listings' %}?category={{ category.id }}"
+                        class="category-chip {% if selected_category == category.id|stringformat:'s' %}active{% endif %}"
+                    >
+                        {% if 'House' in category.name %}
+                            <i class="bi bi-house-door-fill text-primary"></i>
+                            Houses
+                        {% elif 'Room' in category.name %}
+                            <i class="bi bi-door-open-fill text-success"></i>
+                            Rooms
+                        {% elif 'Plot' in category.name %}
+                            <i class="bi bi-map-fill text-warning"></i>
+                            Plots
+                        {% elif 'Car' in category.name %}
+                            <i class="bi bi-car-front-fill text-danger"></i>
+                            Cars
+                        {% else %}
+                            <i class="bi bi-grid text-primary"></i>
+                            {{ category.name }}
+                        {% endif %}
+                    </a>
+                {% endfor %}
             </div>
 
             <!-- Second Row -->
@@ -445,7 +452,7 @@ Browse Ads Header
 
     {% for listing in listings %}
 
-<div class="col-lg-4 col-md-6 mb-4">
+<div class="col-lg-4 col-md-6 mb-4 d-flex">
 
     <div class="listing-card">
 
@@ -479,17 +486,9 @@ Browse Ads Header
                 <i class="bi bi-heart"></i>
             </a>
 
-            <!-- Category -->
-
-            <div class="featured-badge">
-
-                {{ listing.category }}
-
-            </div>
-
             {% if listing.is_featured_active %}
 
-                <div class="position-absolute top-0 start-0 m-2 badge bg-warning text-dark shadow-sm">
+                <div class="featured-badge">
 
                     Featured
 
@@ -502,6 +501,12 @@ Browse Ads Header
         <!-- Body -->
 
         <div class="card-body">
+
+            <div class="ad-category-label">
+
+                {{ listing.category }}
+
+            </div>
 
             <h5 class="fw-bold mb-1">
 

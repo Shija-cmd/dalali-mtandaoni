@@ -77,6 +77,19 @@ Upload Images
 
                             {{ form.image }}
 
+                            {% for error in form.image.errors %}
+                                <div class="text-danger small mt-2">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                            <small
+                                class="text-muted d-block mt-2"
+                                id="selectedImageName"
+                            >
+                                No photo selected yet.
+                            </small>
+
                         </div>
 
                         <div class="d-flex gap-3 flex-wrap">
@@ -84,6 +97,8 @@ Upload Images
                             <button
                                 type="submit"
                                 class="btn btn-primary"
+                                id="uploadImageButton"
+                                disabled
                             >
 
                                 📤 Upload Image
@@ -166,5 +181,28 @@ Upload Images
     </div>
 
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        const imageInput = document.getElementById("id_image");
+        const uploadButton = document.getElementById("uploadImageButton");
+        const selectedImageName = document.getElementById("selectedImageName");
+
+        if(!imageInput || !uploadButton || !selectedImageName){
+            return;
+        }
+
+        function updateUploadState(){
+            const hasFile = imageInput.files && imageInput.files.length > 0;
+            uploadButton.disabled = !hasFile;
+            selectedImageName.textContent = hasFile
+                ? imageInput.files[0].name
+                : "No photo selected yet.";
+        }
+
+        imageInput.addEventListener("change", updateUploadState);
+        updateUploadState();
+    });
+</script>
 
 {% endblock %}

@@ -238,9 +238,21 @@
 
                     <p>
 
-                        📞 <strong>{{ owner.phone_number }}</strong>
+                        <i class="bi bi-telephone-fill text-primary me-1"></i>
+                        <strong>{{ owner.phone_number }}</strong>
 
                     </p>
+
+                    {% if contact_unlock %}
+
+                        <div class="alert alert-success mb-3">
+
+                            Contact unlocked until
+                            {{ contact_unlock.expires_at|date:"d M Y H:i" }}.
+
+                        </div>
+
+                    {% endif %}
 
                 {% else %}
 

@@ -185,6 +185,12 @@ class ListingForm(forms.ModelForm):
 
 class ListingImageForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        self.fields['image'].required = True
+
     class Meta:
 
         model = ListingImage
@@ -197,7 +203,9 @@ class ListingImageForm(forms.ModelForm):
 
             'image': forms.FileInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'accept': 'image/*',
+                    'required': 'required'
                 }
             )
 
@@ -208,6 +216,12 @@ class ListingImageForm(forms.ModelForm):
         image = self.cleaned_data.get(
             'image'
         )
+
+        if not image:
+
+            raise forms.ValidationError(
+                'Please choose a photo before uploading.'
+            )
 
         validate_image_upload(
             image

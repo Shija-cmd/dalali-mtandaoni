@@ -215,49 +215,47 @@ Home
         </div>
 
         <div class="category-chip-row justify-content-center mb-4">
-            <a href="{% url 'listings' %}" class="category-chip">
-                <i class="bi bi-house-door-fill text-primary"></i>
-                Houses
-            </a>
-            <a href="{% url 'listings' %}" class="category-chip">
-                <i class="bi bi-door-open-fill text-success"></i>
-                Rooms
-            </a>
-            <a href="{% url 'listings' %}" class="category-chip">
-                <i class="bi bi-map-fill text-warning"></i>
-                Plots
-            </a>
-            <a href="{% url 'listings' %}" class="category-chip">
-                <i class="bi bi-car-front-fill text-danger"></i>
-                Cars
-            </a>
+            {% for card in category_cards %}
+                <a
+                    href="{% url 'listings' %}{% if card.category %}?category={{ card.category.id }}{% endif %}"
+                    class="category-chip"
+                >
+                    <i class="bi {{ card.icon }} text-{{ card.color }}"></i>
+                    {{ card.label }}
+                </a>
+            {% endfor %}
         </div>
 
         <div class="row g-3">
 
-            <div class="col-lg-3 col-md-6">
+            {% for card in category_cards %}
+
+                <div class="col-lg-3 col-md-6">
 
                 <div class="category-card text-center h-100">
 
-                    <div class="category-icon bg-primary">
+                    <div class="category-icon bg-{{ card.color }}">
 
-                        <i class="bi bi-house-door-fill"></i>
+                        <i class="bi {{ card.icon }}"></i>
 
                     </div>
 
                     <h4 class="fw-bold mt-4">
 
-                        Houses
+                        {{ card.label }}
 
                     </h4>
 
                     <p class="text-muted">
 
-                        Buy or rent beautiful houses from verified owners.
+                        {{ card.description }}
 
                     </p>
 
-                    <a href="{% url 'listings' %}" class="btn btn-outline-primary">
+                    <a
+                        href="{% url 'listings' %}{% if card.category %}?category={{ card.category.id }}{% endif %}"
+                        class="btn btn-outline-{{ card.color }}"
+                    >
 
                         Explore
 
@@ -267,101 +265,7 @@ Home
 
             </div>
 
-            <div class="col-lg-3 col-md-6">
-
-                <div class="category-card text-center h-100">
-
-                    <div class="category-icon bg-success">
-
-                        <i class="bi bi-door-open-fill"></i>
-
-                    </div>
-
-                    <h4 class="fw-bold mt-4">
-
-                        Rooms
-
-                    </h4>
-
-                    <p class="text-muted">
-
-                        Affordable rooms for students and professionals.
-
-                    </p>
-
-                    <a href="{% url 'listings' %}" class="btn btn-outline-success">
-
-                        Explore
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="category-card text-center h-100">
-
-                    <div class="category-icon bg-warning">
-
-                        <i class="bi bi-map-fill"></i>
-
-                    </div>
-
-                    <h4 class="fw-bold mt-4">
-
-                        Plots
-
-                    </h4>
-
-                    <p class="text-muted">
-
-                        Residential and commercial land opportunities.
-
-                    </p>
-
-                    <a href="{% url 'listings' %}" class="btn btn-outline-warning">
-
-                        Explore
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="category-card text-center h-100">
-
-                    <div class="category-icon bg-danger">
-
-                        <i class="bi bi-car-front-fill"></i>
-
-                    </div>
-
-                    <h4 class="fw-bold mt-4">
-
-                        Cars
-
-                    </h4>
-
-                    <p class="text-muted">
-
-                        Buy, sell or hire vehicles across Tanzania.
-
-                    </p>
-
-                    <a href="{% url 'listings' %}" class="btn btn-outline-danger">
-
-                        Explore
-
-                    </a>
-
-                </div>
-
-            </div>
+            {% endfor %}
 
         </div>
 
@@ -404,7 +308,7 @@ Home
 
             {% for listing in featured_listings %}
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 d-flex">
 
                 <div class="listing-card">
 

@@ -154,21 +154,7 @@
             {{ listing.description }}
 
         </p>
-
-        {% if user == listing.owner %}
-
-            <a
-                href="{% url 'upload_listing_image' listing.id %}"
-                class="btn btn-primary btn-sm mt-2"
-            >
-
-                📷 Upload More Photos
-
-            </a>
-
-        {% endif %}
-
-    </div>
+</div>
 
 </div>
 
@@ -574,7 +560,7 @@ function shareAd(){
 
         {% for item in related_listings %}
 
-        <div class="col-lg-4 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4 d-flex">
 
             <div class="listing-card">
 
@@ -596,15 +582,15 @@ function shareAd(){
 
                     </div>
 
-                    <div class="featured-badge">
+                </div>
+
+                <div class="card-body">
+
+                    <div class="ad-category-label">
 
                         {{ item.category }}
 
                     </div>
-
-                </div>
-
-                <div class="card-body">
 
                     <h5 class="fw-bold">
 

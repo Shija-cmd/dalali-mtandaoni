@@ -747,13 +747,19 @@ footer hr{
 
     border-radius:16px;
 
-    overflow:hidden;
+    overflow:visible;
 
     transition:.2s ease;
 
     box-shadow:0 4px 18px rgba(15,23,42,.07);
 
     height:100%;
+
+}
+
+.listing-card .listing-image-wrapper{
+
+    overflow:hidden;
 
 }
 
@@ -816,6 +822,25 @@ footer hr{
     font-size:.9rem;
     font-weight:600;
     z-index:5;
+
+}
+
+.category-badge{
+
+    display:none;
+
+}
+
+.ad-category-label{
+
+    color:#0B3D91;
+    font-size:.78rem;
+    font-weight:700;
+    line-height:1.2;
+    margin-bottom:6px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 
 }
 
@@ -900,26 +925,50 @@ footer hr{
     border-color:#0B3D91;
 
 }
+
+.category-chip.active{
+
+    color:#fff;
+    border-color:#0B3D91;
+    background:#0B3D91;
+
+}
+
+.category-chip.active i{
+
+    color:#fff !important;
+
+}
 /* Airbnb-style compact card body */
 
 .listing-card .card-body{
 
-    padding:13px 14px 15px;
+    padding:14px 14px 16px;
+    overflow:visible;
 
 }
 
 .listing-card h5{
 
-    font-size:.98rem;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
+    min-height:2.7em;
+    font-size:1rem;
     font-weight:700;
-    line-height:1.3;
-    margin-bottom:6px;
-    min-height:auto;
+    line-height:1.35;
+    margin-bottom:7px;
+    color:#172033;
 
 }
 
 .listing-card p{
 
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
     font-size:.84rem;
     line-height:1.45;
     color:#6c757d;

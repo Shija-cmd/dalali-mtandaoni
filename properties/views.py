@@ -245,6 +245,56 @@ def location_streets(request):
 
 def home(request):
 
+    categories = Category.objects.order_by(
+        'name'
+    )
+
+    def find_category(*keywords):
+
+        for category in categories:
+
+            category_name = category.name.lower()
+
+            if any(
+                keyword in category_name
+                for keyword in keywords
+            ):
+
+                return category
+
+        return None
+
+    category_cards = [
+        {
+            'label': 'Houses',
+            'icon': 'bi-house-door-fill',
+            'color': 'primary',
+            'description': 'Buy or rent beautiful houses from verified owners.',
+            'category': find_category('house'),
+        },
+        {
+            'label': 'Rooms',
+            'icon': 'bi-door-open-fill',
+            'color': 'success',
+            'description': 'Affordable rooms for students and professionals.',
+            'category': find_category('room'),
+        },
+        {
+            'label': 'Plots',
+            'icon': 'bi-map-fill',
+            'color': 'warning',
+            'description': 'Residential and commercial land opportunities.',
+            'category': find_category('plot', 'land'),
+        },
+        {
+            'label': 'Cars',
+            'icon': 'bi-car-front-fill',
+            'color': 'danger',
+            'description': 'Buy, sell or hire vehicles across Tanzania.',
+            'category': find_category('car', 'vehicle'),
+        },
+    ]
+
     featured_listings = Listing.objects.filter(
         is_active=True,
         is_approved=True,
@@ -286,6 +336,8 @@ def home(request):
             'total_categories': total_categories,
             'approved_listings': approved_listings,
             'recent_listings': recent_listings,
+            'categories': categories,
+            'category_cards': category_cards,
         }
     )
 
@@ -497,7 +549,9 @@ def listings(request):
             "-created_at"
         )
 
-    categories = Category.objects.all()
+    categories = Category.objects.order_by(
+        'name'
+    )
     regions = Region.objects.all()
     districts = District.objects.filter(
         region_id=region_id
@@ -799,12 +853,42 @@ def upload_listing_image(request, pk):
 
             image.listing = listing
 
-            image.image_url = upload_image_to_cloudinary(
-                form.cleaned_data.get('image'),
-                'listing_images'
-            )
+            try:
+
+                image.image_url = upload_image_to_cloudinary(
+                    form.cleaned_data.get('image'),
+                    'listing_images'
+                )
+
+            except CloudinaryUploadError as exc:
+
+                form.add_error(
+                    'image',
+                    str(exc)
+                )
+
+                messages.error(
+                    request,
+                    str(exc)
+                )
+
+            if form.errors:
+
+                return render(
+                    request,
+                    'properties/upload_image.html',
+                    {
+                        'form': form,
+                        'listing': listing
+                    }
+                )
 
             image.save()
+
+            messages.success(
+                request,
+                'Photo uploaded successfully.'
+            )
 
             return redirect(
                 'listing_detail',
@@ -1110,6 +1194,26 @@ def owner_profile(request, owner_id):
             or request.user.is_superuser
         )
     )
+    contact_unlock = None
+
+    if (
+        request.user.is_authenticated
+        and not can_view_owner_contact
+    ):
+
+        contact_unlock = ContactUnlock.objects.filter(
+            user=request.user,
+            listing__in=listings,
+            is_paid=True,
+            payment_status='paid',
+            expires_at__gt=timezone.now()
+        ).order_by(
+            '-expires_at'
+        ).first()
+
+        if contact_unlock:
+
+            can_view_owner_contact = True
 
     whatsapp_number = ''
 
@@ -1128,6 +1232,7 @@ def owner_profile(request, owner_id):
             'listing_count': listings.count(),
             'whatsapp_number': whatsapp_number,
             'can_view_owner_contact': can_view_owner_contact,
+            'contact_unlock': contact_unlock,
         }
     )
 
