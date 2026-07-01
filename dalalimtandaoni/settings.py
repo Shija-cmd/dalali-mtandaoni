@@ -40,6 +40,8 @@ DEBUG = env_bool(
     False
 )
 
+APP_VERSION = '1.0.0'
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
     'DJANGO_SECRET_KEY',

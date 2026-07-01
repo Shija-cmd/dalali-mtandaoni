@@ -33,6 +33,16 @@ Dashboard
 
                 </p>
 
+                {% if request.user.is_superuser %}
+
+                    <p class="text-muted small mb-0 mt-2">
+
+                        System Version: {{ APP_VERSION }}
+
+                    </p>
+
+                {% endif %}
+
             </div>
 
             <div>

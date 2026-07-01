@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from .models import ContactUnlock, Listing
 
 
@@ -30,6 +32,7 @@ def verification_status(request):
             )
 
     return {
+        'APP_VERSION': settings.APP_VERSION,
         'pending_listing_requests': pending_listing_requests,
         'pending_featured_payment_requests': pending_featured_payment_requests,
         'pending_contact_unlock_requests': pending_contact_unlock_requests,
