@@ -38,7 +38,7 @@ My Favorites
 
                 <span class="badge bg-danger fs-6 px-3 py-2">
 
-                    {{ favorites.count }} Favorite{{ favorites.count|pluralize }}
+                    {{ page_obj.paginator.count }} Favorite{{ page_obj.paginator.count|pluralize }}
 
                 </span>
 
@@ -199,6 +199,8 @@ My Favorites
     {% endfor %}
 
 </div>
+
+{% include 'properties/includes/pagination.html' %}
 
 </div>
 

@@ -27,7 +27,7 @@ Contact Unlock Payment Requests
                 </div>
 
                 <span class="badge bg-warning text-dark fs-6 px-3 py-2">
-                    {{ unlocks|length }} Pending Contact Unlock{{ unlocks|length|pluralize }}
+                    {{ page_obj.paginator.count }} Pending Contact Unlock{{ page_obj.paginator.count|pluralize }}
                 </span>
 
             </div>
@@ -163,6 +163,8 @@ Contact Unlock Payment Requests
         </div>
 
     {% endfor %}
+
+    {% include 'properties/includes/pagination.html' %}
 
 </div>
 

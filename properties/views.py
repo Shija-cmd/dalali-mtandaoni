@@ -416,6 +416,27 @@ def custom_500(request):
     )
 
 
+def paginate_queryset(request, queryset, per_page):
+
+    paginator = Paginator(
+        queryset,
+        per_page
+    )
+
+    page_obj = paginator.get_page(
+        request.GET.get(
+            'page'
+        )
+    )
+
+    query_params = request.GET.copy()
+    if 'page' in query_params:
+
+        del query_params['page']
+
+    return page_obj, query_params.urlencode()
+
+
 def listings(request):
 
     query = request.GET.get(
@@ -583,6 +604,10 @@ def listings(request):
     page_obj = paginator.get_page(
         page_number
     )
+    query_params = request.GET.copy()
+    if 'page' in query_params:
+
+        del query_params['page']
 
     return render(
     request,
@@ -604,6 +629,7 @@ def listings(request):
             'min_price': min_price,
             'max_price': max_price,
             'sort': sort,
+            'pagination_query': query_params.urlencode(),
         }
     )
 
@@ -1006,12 +1032,19 @@ def my_listings(request):
     ).order_by(
         '-created_at'
     )
+    page_obj, pagination_query = paginate_queryset(
+        request,
+        listings,
+        10
+    )
 
     return render(
         request,
         'properties/my_listings.html',
         {
-            'listings': listings
+            'listings': page_obj,
+            'page_obj': page_obj,
+            'pagination_query': pagination_query,
         }
     )
 
@@ -1193,7 +1226,11 @@ def owner_profile(request, owner_id):
         is_approved=True,
 
         availability_status='available'
+    ).order_by(
+        '-is_featured',
+        '-created_at'
     )
+    listing_count = listings.count()
 
     can_view_owner_contact = (
         request.user.is_authenticated
@@ -1231,13 +1268,21 @@ def owner_profile(request, owner_id):
             owner.phone_number
         )
 
+    page_obj, pagination_query = paginate_queryset(
+        request,
+        listings,
+        12
+    )
+
     return render(
         request,
         'properties/owner_profile.html',
         {
             'owner': owner,
-            'listings': listings,
-            'listing_count': listings.count(),
+            'listings': page_obj,
+            'page_obj': page_obj,
+            'pagination_query': pagination_query,
+            'listing_count': listing_count,
             'whatsapp_number': whatsapp_number,
             'can_view_owner_contact': can_view_owner_contact,
             'contact_unlock': contact_unlock,
@@ -1294,13 +1339,22 @@ def my_favorites(request):
         user=request.user
     ).select_related(
         'listing'
+    ).order_by(
+        '-id'
+    )
+    page_obj, pagination_query = paginate_queryset(
+        request,
+        favorites,
+        12
     )
 
     return render(
         request,
         'properties/my_favorites.html',
         {
-            'favorites': favorites
+            'favorites': page_obj,
+            'page_obj': page_obj,
+            'pagination_query': pagination_query,
         }
     )
 
@@ -1420,13 +1474,22 @@ def listing_approval_requests(request):
     listings = Listing.objects.filter(
         is_approved=False,
         availability_status='available'
+    ).order_by(
+        '-created_at'
+    )
+    page_obj, pagination_query = paginate_queryset(
+        request,
+        listings,
+        10
     )
 
     return render(
         request,
         'properties/listing_approval_requests.html',
         {
-            'listings': listings,
+            'listings': page_obj,
+            'page_obj': page_obj,
+            'pagination_query': pagination_query,
             'featured_package_choices': Listing.FEATURED_PACKAGE_CHOICES,
         }
     )
@@ -1448,12 +1511,19 @@ def featured_listing_management(request):
         '-is_featured',
         '-created_at'
     )
+    page_obj, pagination_query = paginate_queryset(
+        request,
+        listings,
+        15
+    )
 
     return render(
         request,
         'properties/featured_listing_management.html',
         {
-            'listings': listings,
+            'listings': page_obj,
+            'page_obj': page_obj,
+            'pagination_query': pagination_query,
             'featured_package_choices': Listing.FEATURED_PACKAGE_CHOICES,
         }
     )
@@ -1579,12 +1649,19 @@ def payment_confirmation_requests(request):
     ).order_by(
         '-payment_submitted_at'
     )
+    page_obj, pagination_query = paginate_queryset(
+        request,
+        listings,
+        10
+    )
 
     return render(
         request,
         'properties/payment_confirmation_requests.html',
         {
-            'listings': listings
+            'listings': page_obj,
+            'page_obj': page_obj,
+            'pagination_query': pagination_query,
         }
     )
 
@@ -1686,12 +1763,19 @@ def contact_unlock_payment_requests(request):
     ).order_by(
         '-payment_submitted_at'
     )
+    page_obj, pagination_query = paginate_queryset(
+        request,
+        unlocks,
+        10
+    )
 
     return render(
         request,
         'properties/contact_unlock_payment_requests.html',
         {
-            'unlocks': unlocks
+            'unlocks': page_obj,
+            'page_obj': page_obj,
+            'pagination_query': pagination_query,
         }
     )
 

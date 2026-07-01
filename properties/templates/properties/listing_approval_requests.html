@@ -38,7 +38,7 @@ Listing Approval Requests
 
                 <span class="badge bg-warning text-dark fs-6 px-3 py-2">
 
-                    {{ listings|length }} Pending Listing{{ listings|length|pluralize }}
+                    {{ page_obj.paginator.count }} Pending Listing{{ page_obj.paginator.count|pluralize }}
 
                 </span>
 
@@ -393,6 +393,8 @@ Listing Approval Requests
     </div>
 
 {% endfor %}
+
+{% include 'properties/includes/pagination.html' %}
 
 </div>
 

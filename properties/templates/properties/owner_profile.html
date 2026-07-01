@@ -80,7 +80,7 @@
 
                 <h2 class="text-primary fw-bold">
 
-                    {{ listings.count }}
+                    {{ listing_count }}
 
                 </h2>
 
@@ -326,7 +326,7 @@
 
         <small class="text-muted">
 
-            {{ listings.count }} active ad{{ listings.count|pluralize }}
+            {{ listing_count }} active ad{{ listing_count|pluralize }}
 
         </small>
 
@@ -400,6 +400,8 @@
     {% endfor %}
 
 </div>
+
+{% include 'properties/includes/pagination.html' %}
 
 </div>
 

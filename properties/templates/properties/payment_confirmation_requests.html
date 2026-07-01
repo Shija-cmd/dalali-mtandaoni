@@ -27,7 +27,7 @@ Featured Payment Requests
                 </div>
 
                 <span class="badge bg-warning text-dark fs-6 px-3 py-2">
-                    {{ listings|length }} Pending Featured Payment{{ listings|length|pluralize }}
+                    {{ page_obj.paginator.count }} Pending Featured Payment{{ page_obj.paginator.count|pluralize }}
                 </span>
 
             </div>
@@ -168,6 +168,8 @@ Featured Payment Requests
         </div>
 
     {% endfor %}
+
+    {% include 'properties/includes/pagination.html' %}
 
 </div>
 

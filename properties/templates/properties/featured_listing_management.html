@@ -25,7 +25,7 @@ Manage Featured Listings
                 </div>
 
                 <span class="badge bg-warning text-dark fs-6 px-3 py-2">
-                    {{ listings|length }} Approved Listing{{ listings|length|pluralize }}
+                    {{ page_obj.paginator.count }} Approved Listing{{ page_obj.paginator.count|pluralize }}
                 </span>
 
             </div>
@@ -283,6 +283,8 @@ Manage Featured Listings
         </div>
 
     {% endfor %}
+
+    {% include 'properties/includes/pagination.html' %}
 
 </div>
 
