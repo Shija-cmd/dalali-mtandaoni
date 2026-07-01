@@ -6,6 +6,33 @@ Home
 
 {% block content %}
 
+<section class="container mt-3">
+
+    <div class="alert alert-warning border-0 rounded-4 shadow-sm d-flex gap-3 align-items-start mb-4">
+
+        <i class="bi bi-info-circle-fill fs-4 text-primary"></i>
+
+        <div>
+
+            <strong>Notice:</strong>
+            Dalali Mtandaoni is currently under development and pre-launch testing.
+            All advertisements, images, prices, contacts, and other information displayed are
+            for demonstration purposes only and may not represent actual properties or services.
+            The official public launch will be announced soon.
+
+            <a
+                href="{% url 'disclaimer' %}"
+                class="alert-link ms-1"
+            >
+                Read full disclaimer
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
 <!-- HERO SECTION -->
 
 <section class="hero-section">

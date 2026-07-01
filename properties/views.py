@@ -373,6 +373,14 @@ def privacy(request):
     )
 
 
+def disclaimer(request):
+
+    return render(
+        request,
+        'properties/disclaimer.html'
+    )
+
+
 def listing_rules(request):
 
     return render(

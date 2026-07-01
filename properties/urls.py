@@ -43,6 +43,12 @@ urlpatterns = [
     ),
 
     path(
+        'disclaimer/',
+        views.disclaimer,
+        name='disclaimer'
+    ),
+
+    path(
         'listing-rules/',
         views.listing_rules,
         name='listing_rules'
