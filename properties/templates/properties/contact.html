@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
-Contact Us
+{% trans "Contact Us" %}
 {% endblock %}
 
 {% block content %}
@@ -22,13 +23,13 @@ Contact Us
 
     <h1 class="fw-bold mb-3">
 
-        Contact Us
+        {% trans "Contact Us" %}
 
     </h1>
 
     <p class="lead text-muted">
 
-        Need assistance? Our team is ready to help you.
+        {% trans "Need assistance? Our team is ready to help you." %}
 
     </p>
 
@@ -54,7 +55,7 @@ Contact Us
 
                 <h4 class="fw-bold">
 
-                    Phone
+                    {% trans "Phone" %}
 
                 </h4>
 
@@ -84,7 +85,7 @@ Contact Us
 
                 <h4 class="fw-bold">
 
-                    Email
+                    {% trans "Email" %}
 
                 </h4>
 
@@ -114,13 +115,13 @@ Contact Us
 
                 <h4 class="fw-bold">
 
-                    Location
+                    {% trans "Location" %}
 
                 </h4>
 
                 <p class="text-muted mb-0">
 
-                    Tanzania
+                    {% trans "Tanzania" %}
 
                 </p>
 
@@ -142,15 +143,15 @@ Contact Us
 
         <h2 class="fw-bold mb-3">
 
-            We're Here to Help
+            {% trans "We're Here to Help" %}
 
         </h2>
 
         <p class="text-muted mb-4">
 
-            Whether you need help finding a property, posting a listing,
-            submitting a listing, or managing your account, our team is
-            ready to assist you.
+            {% blocktrans trimmed %}
+            Whether you need help finding a property, posting an ad, submitting an ad, or managing your account, our team is ready to assist you.
+            {% endblocktrans %}
 
         </p>
 

@@ -1,8 +1,8 @@
-{% load static %}
+{% load i18n static %}
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 
 <head>
 
@@ -104,29 +104,69 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'home' %}">
-                        Home
+                        {% trans "Home" %}
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'listings' %}">
-                        Browse Ads
+                        {% trans "Browse Ads" %}
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'about' %}">
-                        About
+                        {% trans "About" %}
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'contact' %}">
-                        Contact
+                        {% trans "Contact" %}
                     </a>
                 </li>
 
             </ul>
+
+            <form
+                action="{% url 'set_language' %}"
+                method="post"
+                class="d-flex align-items-center me-lg-3 mb-3 mb-lg-0"
+            >
+                {% csrf_token %}
+                {% get_current_language as CURRENT_LANGUAGE %}
+                {% get_available_languages as AVAILABLE_LANGUAGES %}
+
+                <input
+                    type="hidden"
+                    name="next"
+                    value="{{ request.get_full_path }}"
+                >
+
+                <label
+                    class="visually-hidden"
+                    for="languageSelect"
+                >
+                    {% trans "Language" %}
+                </label>
+
+                <select
+                    id="languageSelect"
+                    name="language"
+                    class="form-select form-select-sm rounded-pill"
+                    onchange="this.form.submit()"
+                    aria-label="{% trans 'Language' %}"
+                >
+                    {% for language_code, language_name in AVAILABLE_LANGUAGES %}
+                        <option
+                            value="{{ language_code }}"
+                            {% if language_code == CURRENT_LANGUAGE %}selected{% endif %}
+                        >
+                            {{ language_name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
 
             {% if user.is_authenticated %}
 
@@ -160,35 +200,35 @@
                     <li>
                         <a class="dropdown-item" href="{% url 'dashboard' %}">
                             <i class="bi bi-speedometer2 me-2"></i>
-                            Dashboard
+                            {% trans "Dashboard" %}
                         </a>
                     </li>
 
                     <li>
                         <a class="dropdown-item" href="{% url 'my_profile' %}">
                             <i class="bi bi-person me-2"></i>
-                            My Profile
+                            {% trans "My Profile" %}
                         </a>
                     </li>
 
                     <li>
                         <a class="dropdown-item" href="{% url 'create_listing' %}">
                             <i class="bi bi-plus-circle me-2"></i>
-                            Create Ad
+                            {% trans "Create Ad" %}
                         </a>
                     </li>
 
                     <li>
                         <a class="dropdown-item" href="{% url 'my_listings' %}">
                             <i class="bi bi-card-list me-2"></i>
-                            My Ads
+                            {% trans "My Ads" %}
                         </a>
                     </li>
 
                     <li>
                         <a class="dropdown-item" href="{% url 'my_favorites' %}">
                             <i class="bi bi-heart me-2"></i>
-                            My Favorites
+                            {% trans "My Favorites" %}
                         </a>
                     </li>
 
@@ -200,7 +240,7 @@
 
                         <h6 class="dropdown-header">
 
-                            Administrator
+                            {% trans "Administrator" %}
 
                         </h6>
 
@@ -213,7 +253,7 @@
                             href="{% url 'payment_confirmation_requests' %}"
                         >
 
-                            Payment Confirmation
+                            {% trans "Payment Confirmation" %}
 
                             {% if pending_payment_requests %}
                                 <span class="badge bg-danger rounded-pill">
@@ -232,7 +272,7 @@
                             href="{% url 'listing_approval_requests' %}"
                         >
 
-                            Ad Approval
+                            {% trans "Ad Approval" %}
 
                             {% if pending_listing_requests %}
                                 <span class="badge bg-danger rounded-pill">
@@ -251,7 +291,7 @@
                             href="{% url 'featured_listing_management' %}"
                         >
 
-                            Featured Ads
+                            {% trans "Featured Ads" %}
 
                         </a>
 
@@ -270,7 +310,7 @@
 
                             <i class="bi bi-box-arrow-right me-2"></i>
 
-                            Logout
+                            {% trans "Logout" %}
 
                         </a>
 
@@ -288,14 +328,14 @@
                     href="{% url 'login' %}"
                     class="btn btn-outline-light rounded-pill px-4"
                 >
-                    Login
+                    {% trans "Login" %}
                 </a>
 
                 <a
                     href="{% url 'register' %}"
                     class="btn btn-warning rounded-pill px-4 fw-semibold"
                 >
-                    Register
+                    {% trans "Register" %}
                 </a>
 
             </div>
@@ -352,13 +392,13 @@
                         class="modal-title fw-bold"
                         id="actionConfirmModalTitle"
                     >
-                        Confirm Action
+                        {% trans "Confirm Action" %}
                     </h5>
                     <p
                         class="text-muted small mb-0"
                         id="actionConfirmModalSubtitle"
                     >
-                        Please review before continuing.
+                        {% trans "Please review before continuing." %}
                     </p>
                 </div>
                 <button
@@ -373,7 +413,7 @@
                     class="mb-0"
                     id="actionConfirmModalMessage"
                 >
-                    Are you sure you want to continue?
+                    {% trans "Are you sure you want to continue?" %}
                 </p>
             </div>
             <div class="modal-footer border-0 pt-0">
@@ -382,14 +422,14 @@
                     class="btn btn-light"
                     data-bs-dismiss="modal"
                 >
-                    Cancel
+                    {% trans "Cancel" %}
                 </button>
                 <button
                     type="button"
                     class="btn btn-primary"
                     id="actionConfirmModalButton"
                 >
-                    Continue
+                    {% trans "Continue" %}
                 </button>
             </div>
         </div>
@@ -429,9 +469,9 @@
 
                 <p class="footer-text mt-4">
 
-                    Tanzania's trusted online marketplace for
-                    buying, renting and selling houses, rooms,
-                    plots and cars.
+                    {% blocktrans trimmed %}
+                    Tanzania's trusted online marketplace for buying, renting and selling houses, rooms, plots and cars.
+                    {% endblocktrans %}
 
                 </p>
 
@@ -483,7 +523,7 @@
 
                 <h5>
 
-                    Quick Links
+                    {% trans "Quick Links" %}
 
                 </h5>
 
@@ -493,7 +533,7 @@
 
                         <a href="{% url 'home' %}">
 
-                            Home
+                            {% trans "Home" %}
 
                         </a>
 
@@ -503,7 +543,7 @@
 
                         <a href="{% url 'listings' %}">
 
-                            Browse Ads
+                            {% trans "Browse Ads" %}
 
                         </a>
 
@@ -513,7 +553,7 @@
 
                         <a href="{% url 'about' %}">
 
-                            About Us
+                            {% trans "About Us" %}
 
                         </a>
 
@@ -523,7 +563,7 @@
 
                         <a href="{% url 'contact' %}">
 
-                            Contact
+                            {% trans "Contact" %}
 
                         </a>
 
@@ -533,7 +573,7 @@
 
                         <a href="{% url 'listing_rules' %}">
 
-                            Ad Rules
+                            {% trans "Ad Rules" %}
 
                         </a>
 
@@ -543,7 +583,7 @@
 
                         <a href="{% url 'terms' %}">
 
-                            Terms
+                            {% trans "Terms" %}
 
                         </a>
 
@@ -553,7 +593,7 @@
 
                         <a href="{% url 'privacy' %}">
 
-                            Privacy
+                            {% trans "Privacy" %}
 
                         </a>
 
@@ -563,7 +603,7 @@
 
                         <a href="{% url 'disclaimer' %}">
 
-                            Disclaimer
+                            {% trans "Disclaimer" %}
 
                         </a>
 
@@ -579,7 +619,7 @@
 
                 <h5>
 
-                    Categories
+                    {% trans "Categories" %}
 
                 </h5>
 
@@ -603,7 +643,7 @@
 
                 <h5>
 
-                    Contact Us
+                    {% trans "Contact Us" %}
 
                 </h5>
 
@@ -623,7 +663,7 @@
                     <div class="d-flex align-items-start mb-2">
                     <i class="bi bi-telephone-fill text-warning me-2 mt-1"></i>
             <div>
-            <strong>System Administrator</strong><br>
+            <strong>{% trans "System Administrator" %}</strong><br>
                 <a href="tel:+255662809761"
                     class="text-white text-decoration-none">
                     +255 662 809 761
@@ -634,7 +674,7 @@
         <div class="d-flex align-items-start">
         <i class="bi bi-telephone-fill text-warning me-2 mt-1"></i>
         <div>
-            <strong>Marketing Officer</strong><br>
+            <strong>{% trans "Marketing Officer" %}</strong><br>
             <a href="tel:+255625685028"
                 class="text-white text-decoration-none">
                 +255 625 685 028
@@ -647,7 +687,7 @@
 
                         <i class="bi bi-geo-alt-fill"></i>
 
-                        Tanzania
+                        {% trans "Tanzania" %}
 
                     </li>
 
@@ -665,13 +705,13 @@
 
                 <small>
 
-                    &copy; 2026 Dalali Mtandaoni. All rights reserved.
+                    &copy; 2026 Dalali Mtandaoni. {% trans "All rights reserved." %}
 
                 </small>
 
                 <small class="d-block mt-1">
 
-                    Version {{ APP_VERSION }}
+                    {% trans "Version" %} {{ APP_VERSION }}
 
                 </small>
 
@@ -681,7 +721,7 @@
 
                 <small>
 
-                    Developed by MITSOL
+                    {% trans "Developed by MITSOL" %}
 
                 </small>
 
@@ -726,10 +766,10 @@
         let pendingAction = null;
 
         function showConfirmation(trigger, action){
-            title.textContent = trigger.dataset.confirmTitle || "Confirm Action";
-            subtitle.textContent = trigger.dataset.confirmSubtitle || "Please review before continuing.";
-            message.textContent = trigger.dataset.confirmMessage || "Are you sure you want to continue?";
-            confirmButton.textContent = trigger.dataset.confirmButton || "Continue";
+            title.textContent = trigger.dataset.confirmTitle || "{% trans 'Confirm Action' %}";
+            subtitle.textContent = trigger.dataset.confirmSubtitle || "{% trans 'Please review before continuing.' %}";
+            message.textContent = trigger.dataset.confirmMessage || "{% trans 'Are you sure you want to continue?' %}";
+            confirmButton.textContent = trigger.dataset.confirmButton || "{% trans 'Continue' %}";
             confirmButton.className = trigger.dataset.confirmButtonClass || "btn btn-primary";
             pendingAction = action;
             modal.show();

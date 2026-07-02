@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
-About Us
+{% trans "About Us" %}
 {% endblock %}
 
 {% block content %}
@@ -22,21 +23,21 @@ About Us
 
     <h1 class="fw-bold mb-3">
 
-        About Us
+        {% trans "About Us" %}
 
     </h1>
 
     <p class="lead text-muted mx-auto" style="max-width: 800px;">
 
-        DALALI MTANDAONI is a digital marketplace that connects property owners,
-        vehicle owners, buyers, tenants and service seekers across Tanzania through
-        a trusted and easy-to-use platform.
+        {% blocktrans trimmed %}
+        DALALI MTANDAONI is a digital marketplace that connects property owners, vehicle owners, buyers, tenants and service seekers across Tanzania through a trusted and easy-to-use platform.
+        {% endblocktrans %}
 
     </p>
 
     <p class="text-muted mb-0">
 
-        Version {{ APP_VERSION }} &middot; Powered by MITSOL
+        {% trans "Version" %} {{ APP_VERSION }} &middot; {% trans "Powered by MITSOL" %}
 
     </p>
 
@@ -56,15 +57,15 @@ About Us
 
                 <h3 class="fw-bold mb-3">
 
-                    🎯 Our Mission
+                    🎯 {% trans "Our Mission" %}
 
                 </h3>
 
                 <p class="mb-0">
 
-                    To simplify the process of finding houses, rooms,
-                    plots and vehicles by providing a trusted, accessible
-                    and efficient online platform for everyone in Tanzania.
+                    {% blocktrans trimmed %}
+                    To simplify the process of finding houses, rooms, plots and vehicles by providing a trusted, accessible and efficient online platform for everyone in Tanzania.
+                    {% endblocktrans %}
 
                 </p>
 
@@ -82,15 +83,15 @@ About Us
 
                 <h3 class="fw-bold mb-3">
 
-                    🚀 Our Vision
+                    🚀 {% trans "Our Vision" %}
 
                 </h3>
 
                 <p class="mb-0">
 
-                    To become Tanzania's leading online marketplace for
-                    property and vehicle listings, making it easier for
-                    people to connect, advertise and find opportunities.
+                    {% blocktrans trimmed %}
+                    To become Tanzania's leading online marketplace for property and vehicle ads, making it easier for people to connect, advertise and find opportunities.
+                    {% endblocktrans %}
 
                 </p>
 
@@ -112,7 +113,7 @@ About Us
 
         <h2 class="fw-bold text-center mb-5">
 
-            Why Choose DALALI MTANDAONI?
+            {% trans "Why Choose DALALI MTANDAONI?" %}
 
         </h2>
 
@@ -128,13 +129,13 @@ About Us
 
                 <h5 class="fw-bold">
 
-                    Property Listings
+                    {% trans "Property Ads" %}
 
                 </h5>
 
                 <p class="text-muted">
 
-                    Houses, rooms and plots from different locations across Tanzania.
+                    {% trans "Houses, rooms and plots from different locations across Tanzania." %}
 
                 </p>
 
@@ -150,13 +151,13 @@ About Us
 
                 <h5 class="fw-bold">
 
-                    Vehicle Listings
+                    {% trans "Vehicle Ads" %}
 
                 </h5>
 
                 <p class="text-muted">
 
-                    Vehicles available for sale or hire.
+                    {% trans "Vehicles available for sale or hire." %}
 
                 </p>
 
@@ -172,13 +173,13 @@ About Us
 
                 <h5 class="fw-bold">
 
-                    Reviewed Listings
+                    {% trans "Reviewed Ads" %}
 
                 </h5>
 
                 <p class="text-muted">
 
-                    Listing submissions include owner ID review before publishing.
+                    {% trans "Ad submissions include owner ID review before publishing." %}
 
                 </p>
 
@@ -194,13 +195,13 @@ About Us
 
                 <h5 class="fw-bold">
 
-                    Save Favorites
+                    {% trans "Save Favorites" %}
 
                 </h5>
 
                 <p class="text-muted">
 
-                    Keep track of listings that interest you.
+                    {% trans "Keep track of ads that interest you." %}
 
                 </p>
 
@@ -220,14 +221,15 @@ About Us
 
     <h3 class="fw-bold mb-3">
 
-        Connecting Tanzania, One Listing at a Time
+        {% trans "Connecting Tanzania, One Ad at a Time" %}
 
     </h3>
 
     <p class="text-muted">
 
-        Whether you're looking to buy, rent, hire or advertise,
-        DALALI MTANDAONI is here to help you connect with the right people.
+        {% blocktrans trimmed %}
+        Whether you're looking to buy, rent, hire or advertise, DALALI MTANDAONI is here to help you connect with the right people.
+        {% endblocktrans %}
 
     </p>
 

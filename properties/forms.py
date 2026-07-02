@@ -171,7 +171,7 @@ class ListingForm(forms.ModelForm):
         ):
 
             raise forms.ValidationError(
-                'Please upload a photo of your ID before submitting this listing.'
+                'Please upload a photo of your ID before submitting this ad.'
             )
 
         if id_document:
@@ -318,7 +318,7 @@ class ListingPaymentForm(forms.ModelForm):
         if not featured_package:
 
             raise forms.ValidationError(
-                'Please choose a featured listing package.'
+                'Please choose a featured ad package.'
             )
 
         return featured_package

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
-Browse Ads
+{% trans "Browse Ads" %}
 {% endblock %}
 
 {% block content %}
@@ -24,13 +25,13 @@ Browse Ads Header
 
         <h1 class="fw-bold display-5">
 
-            Browse Ads
+            {% trans "Browse Ads" %}
 
         </h1>
 
         <p class="text-muted fs-5">
 
-            Discover verified houses, rooms, plots and cars across Tanzania.
+            {% trans "Discover verified houses, rooms, plots and cars across Tanzania." %}
 
         </p>
 
@@ -46,7 +47,7 @@ Browse Ads Header
 
             <h4 class="fw-bold mb-3">
 
-                🔍 Search Ads
+                🔍 {% trans "Search Ads" %}
 
             </h4>
 
@@ -60,7 +61,7 @@ Browse Ads Header
 
                     <label class="form-label fw-semibold">
 
-                        Keyword
+                        {% trans "Keyword" %}
 
                     </label>
 
@@ -68,7 +69,7 @@ Browse Ads Header
                         type="text"
                         name="q"
                         class="form-control form-control-lg"
-                        placeholder="Search by title, location, district or keyword..."
+                        placeholder="{% trans 'Search by title, location, district or keyword...' %}"
                         value="{{ query }}"
                     >
 
@@ -80,7 +81,7 @@ Browse Ads Header
 
                     <label class="form-label text-white">
 
-                        Search
+                        {% trans "Search" %}
 
                     </label>
 
@@ -91,7 +92,7 @@ Browse Ads Header
 
                         <i class="bi bi-search me-2"></i>
 
-                        Search
+                        {% trans "Search" %}
 
                     </button>
 
@@ -107,16 +108,16 @@ Browse Ads Header
                     >
                         {% if 'House' in category.name %}
                             <i class="bi bi-house-door-fill text-primary"></i>
-                            Houses
+                            {% trans "Houses" %}
                         {% elif 'Room' in category.name %}
                             <i class="bi bi-door-open-fill text-success"></i>
-                            Rooms
+                            {% trans "Rooms" %}
                         {% elif 'Plot' in category.name %}
                             <i class="bi bi-map-fill text-warning"></i>
-                            Plots
+                            {% trans "Plots" %}
                         {% elif 'Car' in category.name %}
                             <i class="bi bi-car-front-fill text-danger"></i>
-                            Cars
+                            {% trans "Cars" %}
                         {% else %}
                             <i class="bi bi-grid text-primary"></i>
                             {{ category.name }}
@@ -133,7 +134,7 @@ Browse Ads Header
 
                     <label class="form-label fw-semibold">
 
-                        Category
+                        {% trans "Category" %}
 
                     </label>
 
@@ -144,7 +145,7 @@ Browse Ads Header
 
                         <option value="">
 
-                            All Categories
+                            {% trans "All Categories" %}
 
                         </option>
 
@@ -171,7 +172,7 @@ Browse Ads Header
 
                     <label class="form-label fw-semibold">
 
-                        Minimum Price
+                        {% trans "Minimum Price" %}
 
                     </label>
 
@@ -189,7 +190,7 @@ Browse Ads Header
 
                     <label class="form-label fw-semibold">
 
-                        Maximum Price
+                        {% trans "Maximum Price" %}
 
                     </label>
 
@@ -197,7 +198,7 @@ Browse Ads Header
                         type="number"
                         name="max_price"
                         class="form-control"
-                        placeholder="Unlimited"
+                        placeholder="{% trans 'Unlimited' %}"
                         value="{{ max_price }}"
                     >
 
@@ -210,7 +211,7 @@ Browse Ads Header
                         class="btn btn-outline-secondary w-100"
                     >
 
-                        Clear
+                        {% trans "Clear" %}
 
                     </a>
 
@@ -223,7 +224,7 @@ Browse Ads Header
                 <div class="col-md-3">
 
                     <label class="form-label fw-semibold">
-                        Region
+                        {% trans "Region" %}
                     </label>
 
                     <select
@@ -231,7 +232,7 @@ Browse Ads Header
                         name="region"
                         class="form-select"
                     >
-                        <option value="">All Regions</option>
+                        <option value="">{% trans "All Regions" %}</option>
                         {% for region in regions %}
                             <option
                                 value="{{ region.id }}"
@@ -247,7 +248,7 @@ Browse Ads Header
                 <div class="col-md-3">
 
                     <label class="form-label fw-semibold">
-                        District
+                        {% trans "District" %}
                     </label>
 
                     <select
@@ -255,7 +256,7 @@ Browse Ads Header
                         name="district"
                         class="form-select"
                     >
-                        <option value="">All Districts</option>
+                        <option value="">{% trans "All Districts" %}</option>
                         {% for district in districts %}
                             <option
                                 value="{{ district.id }}"
@@ -271,7 +272,7 @@ Browse Ads Header
                 <div class="col-md-3">
 
                     <label class="form-label fw-semibold">
-                        Ward
+                        {% trans "Ward" %}
                     </label>
 
                     <select
@@ -279,7 +280,7 @@ Browse Ads Header
                         name="ward"
                         class="form-select"
                     >
-                        <option value="">All Wards</option>
+                        <option value="">{% trans "All Wards" %}</option>
                         {% for ward in wards %}
                             <option
                                 value="{{ ward.id }}"
@@ -295,7 +296,7 @@ Browse Ads Header
                 <div class="col-md-3">
 
                     <label class="form-label fw-semibold">
-                        Street/Area
+                        {% trans "Street/Area" %}
                     </label>
 
                     <select
@@ -303,7 +304,7 @@ Browse Ads Header
                         name="street_area"
                         class="form-select"
                     >
-                        <option value="">All Streets/Areas</option>
+                        <option value="">{% trans "All Streets/Areas" %}</option>
                         {% for street in streets %}
                             <option
                                 value="{{ street.id }}"
@@ -334,7 +335,7 @@ Browse Ads Header
 
                     <span class="text-muted">
 
-                        ads found
+                        {% trans "ads found" %}
 
                     </span>
 
@@ -344,7 +345,7 @@ Browse Ads Header
 
                     <span class="badge bg-success">
 
-                        Filters Applied
+                        {% trans "Filters Applied" %}
 
                     </span>
 
@@ -352,7 +353,7 @@ Browse Ads Header
 
                     <span class="badge bg-secondary">
 
-                        Showing All Ads
+                        {% trans "Showing All Ads" %}
 
                     </span>
 
@@ -376,13 +377,13 @@ Browse Ads Header
 
         <h5 class="fw-bold mb-1">
 
-            Available Ads
+            {% trans "Available Ads" %}
 
         </h5>
 
         <small class="text-muted">
 
-            {{ page_obj.paginator.count }} ads found
+            {{ page_obj.paginator.count }} {% trans "ads found" %}
 
         </small>
 
@@ -418,28 +419,28 @@ Browse Ads Header
                 value="newest"
                 {% if sort == "newest" %}selected{% endif %}
             >
-                Newest First
+                {% trans "Newest First" %}
             </option>
 
             <option
                 value="oldest"
                 {% if sort == "oldest" %}selected{% endif %}
             >
-                Oldest First
+                {% trans "Oldest First" %}
             </option>
 
             <option
                 value="price_low"
                 {% if sort == "price_low" %}selected{% endif %}
             >
-                Price: Low to High
+                {% trans "Price: Low to High" %}
             </option>
 
             <option
                 value="price_high"
                 {% if sort == "price_high" %}selected{% endif %}
             >
-                Price: High to Low
+                {% trans "Price: High to Low" %}
             </option>
 
         </select>
@@ -473,7 +474,7 @@ Browse Ads Header
                 <img
                     src="https://placehold.co/600x400?text=No+Image"
                     class="listing-card-image"
-                    alt="No Image"
+                    alt="{% trans 'No Image' %}"
                 >
 
             {% endif %}
@@ -481,7 +482,7 @@ Browse Ads Header
             <a
                 href="{% url 'toggle_favorite' listing.id %}"
                 class="favorite-float"
-                aria-label="Save ad"
+                aria-label="{% trans 'Save ad' %}"
             >
                 <i class="bi bi-heart"></i>
             </a>
@@ -490,7 +491,7 @@ Browse Ads Header
 
                 <div class="featured-badge">
 
-                    Featured
+                    {% trans "Featured" %}
 
                 </div>
 
@@ -529,7 +530,7 @@ Browse Ads Header
 
                 <span class="verified-pill">
                     <i class="bi bi-patch-check-fill"></i>
-                    Verified
+                    {% trans "Verified" %}
                 </span>
 
             </div>
@@ -537,14 +538,14 @@ Browse Ads Header
             <div class="d-flex justify-content-between align-items-center">
 
                 <small class="text-muted">
-                    Available
+                    {% trans "Available" %}
                 </small>
 
                 <a
                     href="{% url 'listing_detail' listing.id %}"
                     class="btn btn-primary btn-sm"
                 >
-                    View Ad
+                    {% trans "View Ad" %}
                 </a>
 
             </div>
@@ -563,13 +564,13 @@ Browse Ads Header
 
         <h5 class="mb-2">
 
-            🔍 No Ads Found
+            🔍 {% trans "No Ads Found" %}
 
         </h5>
 
         <p class="mb-0">
 
-            Try changing your search filters.
+            {% trans "Try changing your search filters." %}
 
         </p>
 

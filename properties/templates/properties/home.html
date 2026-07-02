@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
-Home
+{% trans "Home" %}
 {% endblock %}
 
 {% block content %}
@@ -14,17 +15,16 @@ Home
 
         <div>
 
-            <strong>Notice:</strong>
-            Dalali Mtandaoni is currently under development and pre-launch testing.
-            All advertisements, images, prices, contacts, and other information displayed are
-            for demonstration purposes only and may not represent actual properties or services.
-            The official public launch will be announced soon.
+            <strong>{% trans "Notice:" %}</strong>
+            {% blocktrans trimmed %}
+            Dalali Mtandaoni is currently under development and pre-launch testing. All advertisements, images, prices, contacts, and other information displayed are for demonstration purposes only and may not represent actual properties or services. The official public launch will be announced soon.
+            {% endblocktrans %}
 
             <a
                 href="{% url 'disclaimer' %}"
                 class="alert-link ms-1"
             >
-                Read full disclaimer
+                {% trans "Read full disclaimer" %}
             </a>
 
         </div>
@@ -47,19 +47,17 @@ Home
 
                 <span class="badge bg-warning text-dark px-3 py-2 mb-3">
 
-                    Tanzania's Trusted Marketplace
+                    {% trans "Tanzania's Trusted Marketplace" %}
 
                 </span>
 
                 <h1 class="hero-title">
 
-                    Find Your Perfect
+                    {% trans "Find Your Perfect" %}
 
                     <span class="text-primary">
 
-                        House, Room,
-
-                        Plot or Car
+                        {% trans "House, Room, Plot or Car" %}
 
                     </span>
 
@@ -67,8 +65,9 @@ Home
 
                 <p class="hero-subtitle">
 
-                    Browse verified ads from trusted owners across Tanzania.
-                    Rent, buy or sell with confidence.
+                    {% blocktrans trimmed %}
+                    Browse verified ads from trusted owners across Tanzania. Rent, buy or sell with confidence.
+                    {% endblocktrans %}
 
                 </p>
 
@@ -88,7 +87,7 @@ Home
                 type="text"
                 name="q"
                 class="form-control form-control-lg"
-                placeholder="Search houses, rooms, plots, cars, or location..."
+                placeholder="{% trans 'Search houses, rooms, plots, cars, or location...' %}"
                 value="{{ request.GET.q }}"
             >
 
@@ -103,7 +102,7 @@ Home
 
                 <i class="bi bi-search"></i>
 
-                Search
+                {% trans "Search" %}
 
             </button>
 
@@ -120,7 +119,7 @@ Home
                         class="btn btn-primary btn-lg px-4"
                     >
 
-                        Browse Ads
+                        {% trans "Browse Ads" %}
 
                     </a>
 
@@ -129,7 +128,7 @@ Home
                         class="btn btn-outline-primary btn-lg px-4"
                     >
 
-                        Become an Owner
+                        {% trans "Become an Owner" %}
 
                     </a>
 
@@ -151,7 +150,7 @@ Home
 
                                 <h2>{{ total_listings }}</h2>
 
-                                <p>Active Ads</p>
+                                <p>{% trans "Active Ads" %}</p>
 
                             </div>
 
@@ -163,7 +162,7 @@ Home
 
                                 <h2>{{ approved_listings }}</h2>
 
-                                <p>Approved Ads</p>
+                                <p>{% trans "Approved Ads" %}</p>
 
                             </div>
 
@@ -175,7 +174,7 @@ Home
 
                                 <h2>{{ total_users }}</h2>
 
-                                <p>Users</p>
+                                <p>{% trans "Users" %}</p>
 
                             </div>
 
@@ -187,7 +186,7 @@ Home
 
                                 <h2>{{ total_categories }}</h2>
 
-                                <p>Categories</p>
+                                <p>{% trans "Categories" %}</p>
 
                             </div>
 
@@ -205,7 +204,7 @@ Home
 
     <div class="scroll-indicator">
 
-    <span>Scroll Down</span>
+    <span>{% trans "Scroll Down" %}</span>
 
     <i class="bi bi-chevron-double-down"></i>
 
@@ -223,19 +222,19 @@ Home
 
             <span class="badge bg-primary px-3 py-2 mb-3">
 
-                PROPERTY CATEGORIES
+                {% trans "PROPERTY CATEGORIES" %}
 
             </span>
 
             <h2 class="fw-bold display-6">
 
-                Browse by Category
+                {% trans "Browse by Category" %}
 
             </h2>
 
             <p class="text-muted">
 
-                Find exactly what you're looking for across Tanzania.
+                {% trans "Find exactly what you're looking for across Tanzania." %}
 
             </p>
 
@@ -284,7 +283,7 @@ Home
                         class="btn btn-outline-{{ card.color }}"
                     >
 
-                        Explore
+                        {% trans "Explore" %}
 
                     </a>
 
@@ -313,19 +312,19 @@ Home
 
             <span class="badge bg-warning text-dark px-3 py-2 mb-3">
 
-                FEATURED ADS
+                {% trans "FEATURED ADS" %}
 
             </span>
 
             <h2 class="fw-bold display-6">
 
-                Featured Ads
+                {% trans "Featured Ads" %}
 
             </h2>
 
             <p class="text-muted">
 
-                Discover ads promoted for extra visibility from active owners.
+                {% trans "Discover ads promoted for extra visibility from active owners." %}
 
             </p>
 
@@ -353,14 +352,14 @@ Home
 
                         <span class="featured-badge">
 
-                            Featured
+                            {% trans "Featured" %}
 
                         </span>
 
                         <a
                             href="{% url 'toggle_favorite' listing.id %}"
                             class="favorite-float"
-                            aria-label="Save ad"
+                            aria-label="{% trans 'Save ad' %}"
                         >
                             <i class="bi bi-heart"></i>
                         </a>
@@ -394,13 +393,13 @@ Home
                             <span class="verified-pill">
                                 <i class="bi bi-patch-check-fill"></i>
 
-                                Verified
+                                {% trans "Verified" %}
 
                             </span>
 
                             <small class="text-muted">
 
-                                Featured Ad
+                                {% trans "Featured Ad" %}
 
                             </small>
 
@@ -411,7 +410,7 @@ Home
                             class="btn btn-primary btn-sm w-100"
                         >
 
-                            View Ad
+                            {% trans "View Ad" %}
 
                         </a>
 
@@ -427,7 +426,7 @@ Home
 
                 <div class="alert alert-info text-center">
 
-                    No featured ads available.
+                    {% trans "No featured ads available." %}
 
                 </div>
 
@@ -455,19 +454,19 @@ Home
 
                 <span class="badge bg-success px-3 py-2 mb-2">
 
-                    JUST ADDED
+                    {% trans "JUST ADDED" %}
 
                 </span>
 
                 <h2 class="fw-bold">
 
-                    Recently Added Ads
+                    {% trans "Recently Added Ads" %}
 
                 </h2>
 
                 <p class="text-muted">
 
-                    Fresh ads recently published on Dalali Mtandaoni.
+                    {% trans "Fresh ads recently published on Dalali Mtandaoni." %}
 
                 </p>
 
@@ -478,7 +477,7 @@ Home
                 class="btn btn-outline-primary"
             >
 
-                View All
+                {% trans "View All" %}
 
             </a>
 
@@ -509,7 +508,7 @@ Home
                             <img
                                 src="https://placehold.co/600x400?text=No+Image"
                                 class="recent-image"
-                                alt="No Image"
+                                alt="{% trans 'No Image' %}"
                             >
 
                             {% endif %}
@@ -522,7 +521,7 @@ Home
 
                                 <span class="badge bg-success mb-3">
 
-                                    New
+                                    {% trans "New" %}
 
                                 </span>
 
@@ -551,7 +550,7 @@ Home
                                     class="btn btn-primary btn-sm mt-2"
                                 >
 
-                                    View Ad
+                                    {% trans "View Ad" %}
 
                                 </a>
 
@@ -571,7 +570,7 @@ Home
 
                 <div class="alert alert-info text-center">
 
-                    No recent ads available.
+                    {% trans "No recent ads available." %}
 
                 </div>
 
@@ -598,20 +597,21 @@ Home
 
             <span class="badge bg-primary px-3 py-2 mb-3">
 
-                WHY CHOOSE US
+                {% trans "WHY CHOOSE US" %}
 
             </span>
 
             <h2 class="display-6 fw-bold">
 
-                Why Choose Dalali Mtandaoni?
+                {% trans "Why Choose Dalali Mtandaoni?" %}
 
             </h2>
 
             <p class="text-muted">
 
-                We make finding, buying and renting properties across Tanzania
-                easier, safer and more transparent.
+                {% blocktrans trimmed %}
+                We make finding, buying and renting properties across Tanzania easier, safer and more transparent.
+                {% endblocktrans %}
 
             </p>
 
@@ -633,14 +633,15 @@ Home
 
                     <h4>
 
-                        Reviewed Ads
+                        {% trans "Reviewed Ads" %}
 
                     </h4>
 
                     <p>
 
-                        Owners upload ID when submitting ads, and admins
-                        review ads before they appear publicly.
+                        {% blocktrans trimmed %}
+                        Owners upload ID when submitting ads, and admins review ads before they appear publicly.
+                        {% endblocktrans %}
 
                     </p>
 
@@ -662,14 +663,15 @@ Home
 
                     <h4>
 
-                        Easy Search
+                        {% trans "Easy Search" %}
 
                     </h4>
 
                     <p>
 
-                        Quickly search houses, rooms, plots and cars using
-                        powerful filters.
+                        {% blocktrans trimmed %}
+                        Quickly search houses, rooms, plots and cars using powerful filters.
+                        {% endblocktrans %}
 
                     </p>
 
@@ -691,13 +693,13 @@ Home
 
                     <h4>
 
-                        Nationwide Coverage
+                        {% trans "Nationwide Coverage" %}
 
                     </h4>
 
                     <p>
 
-                        Browse ads from every region across Tanzania in one place.
+                        {% trans "Browse ads from every region across Tanzania in one place." %}
 
                     </p>
 
@@ -719,14 +721,15 @@ Home
 
                     <h4>
 
-                        Secure Platform
+                        {% trans "Secure Platform" %}
 
                     </h4>
 
                     <p>
 
-                        Connect directly with owners through a trusted and secure
-                        marketplace.
+                        {% blocktrans trimmed %}
+                        Connect directly with owners through a trusted and secure marketplace.
+                        {% endblocktrans %}
 
                     </p>
 
@@ -756,21 +759,21 @@ Home
 
                     <span class="badge bg-warning text-dark px-3 py-2 mb-3">
 
-                        START TODAY
+                        {% trans "START TODAY" %}
 
                     </span>
 
                     <h2 class="fw-bold text-white mb-3">
 
-                        Ready to Find or Post Your Property?
+                        {% trans "Ready to Find or Post Your Property?" %}
 
                     </h2>
 
                     <p class="text-white-50 mb-0">
 
-                        Join thousands of Tanzanians using
-                        <strong>Dalali Mtandaoni</strong> to buy, rent,
-                        sell houses, rooms, plots and cars with confidence.
+                        {% blocktrans trimmed %}
+                        Join thousands of Tanzanians using <strong>Dalali Mtandaoni</strong> to buy, rent, sell houses, rooms, plots and cars with confidence.
+                        {% endblocktrans %}
 
                     </p>
 
@@ -787,7 +790,7 @@ Home
 
                                 <i class="bi bi-plus-circle-fill me-2"></i>
 
-                                Create Ad
+                                {% trans "Create Ad" %}
 
                             </a>
 
@@ -800,7 +803,7 @@ Home
 
                             <i class="bi bi-person-plus-fill me-2"></i>
 
-                            Register
+                            {% trans "Register" %}
 
                         </a>
 
@@ -813,7 +816,7 @@ Home
 
                         <i class="bi bi-search me-2"></i>
 
-                        Browse Ads
+                        {% trans "Browse Ads" %}
 
                     </a>
 

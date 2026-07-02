@@ -845,7 +845,7 @@ def create_listing(request):
 
             messages.success(
                 request,
-                'Listing submitted successfully. Admin will review it before publishing.'
+                'Ad submitted successfully. Admin will review it before publishing.'
             )
 
             return redirect(
@@ -956,7 +956,7 @@ def submit_listing_payment(request, pk):
 
         messages.info(
             request,
-            'This listing is already featured.'
+            'This ad is already featured.'
         )
 
         return redirect(
@@ -984,7 +984,7 @@ def submit_listing_payment(request, pk):
 
             messages.success(
                 request,
-                'Featured listing payment submitted. Admin will confirm it before promotion starts.'
+                'Featured ad payment submitted. Admin will confirm it before promotion starts.'
             )
 
             return redirect(
@@ -1071,7 +1071,7 @@ def edit_listing(request, pk):
 
             messages.success(
                 request,
-                'Listing updated successfully.'
+                'Ad updated successfully.'
             )
 
             return redirect(
@@ -1111,7 +1111,7 @@ def delete_listing(request, pk):
 
         messages.success(
             request,
-            'Listing removed from public view.'
+            'Ad removed from public view.'
         )
 
         return redirect('my_listings')
@@ -1159,7 +1159,7 @@ def update_listing_availability(request, pk, status):
 
     messages.success(
         request,
-        f'Listing marked as {listing.get_availability_status_display()}.'
+        f'Ad marked as {listing.get_availability_status_display()}.'
     )
 
     return redirect(
@@ -1312,7 +1312,7 @@ def toggle_favorite(request, listing_id):
 
         messages.info(
             request,
-            'Listing removed from favorites.'
+            'Ad removed from favorites.'
         )
 
     else:
@@ -1324,7 +1324,7 @@ def toggle_favorite(request, listing_id):
 
         messages.success(
             request,
-            'Listing added to favorites.'
+            'Ad added to favorites.'
         )
 
     return redirect(
@@ -1546,7 +1546,7 @@ def approve_listing(request, listing_id):
 
     messages.success(
         request,
-        'Listing approved successfully.'
+        'Ad approved successfully.'
     )
 
     return redirect(
@@ -1570,7 +1570,7 @@ def toggle_featured_listing(request, listing_id):
 
         messages.warning(
             request,
-            'Choose a featured package and time limit before marking a listing as featured.'
+            'Choose a featured package and time limit before marking an ad as featured.'
         )
 
         return redirect(
@@ -1593,7 +1593,7 @@ def toggle_featured_listing(request, listing_id):
 
         messages.info(
             request,
-            'Listing removed from featured listings.'
+            'Ad removed from featured ads.'
         )
 
     else:
@@ -1626,7 +1626,7 @@ def toggle_featured_listing(request, listing_id):
 
             messages.success(
                 request,
-                'Listing marked as featured with a time limit.'
+                'Ad marked as featured with a time limit.'
             )
 
     return redirect(
@@ -1691,7 +1691,7 @@ def approve_listing_payment(request, listing_id):
 
     messages.success(
         request,
-        'Featured listing payment confirmed. Listing is now promoted.'
+        'Featured ad payment confirmed. Ad is now promoted.'
     )
 
     return redirect(
@@ -1726,7 +1726,7 @@ def reject_listing_payment(request, listing_id):
 
             messages.warning(
                 request,
-                'Featured listing payment rejected. Owner can submit a corrected reference.'
+                'Featured ad payment rejected. Owner can submit a corrected reference.'
             )
 
             return redirect(
@@ -1891,7 +1891,7 @@ def reject_listing(request, listing_id):
 
             messages.warning(
                 request,
-                'Listing rejected.'
+                'Ad rejected.'
             )
 
             return redirect(
@@ -2586,7 +2586,7 @@ def api_submit_listing_payment(
 
         return Response(
             {
-                'message': 'This listing is already featured.'
+                'message': 'This ad is already featured.'
             },
             status=400
         )
@@ -2699,14 +2699,14 @@ def api_toggle_favorite(
         return Response(
             {
                 'favorite': False,
-                'message': 'Listing removed from favorites.'
+                'message': 'Ad removed from favorites.'
             }
         )
 
     return Response(
         {
             'favorite': True,
-            'message': 'Listing added to favorites.'
+            'message': 'Ad added to favorites.'
         }
     )
 
@@ -2759,7 +2759,7 @@ def api_delete_listing(
 
     return Response(
         {
-            'message': 'Listing removed from public view.'
+            'message': 'Ad removed from public view.'
         },
         status=200
     )
@@ -3178,7 +3178,7 @@ def api_admin_approve_listing(
 
     return Response(
         {
-            'message': 'Listing approved successfully.',
+            'message': 'Ad approved successfully.',
             'listing': serializer.data,
         }
     )
@@ -3219,7 +3219,7 @@ def api_admin_reject_listing(
 
     return Response(
         {
-            'message': 'Listing rejected.'
+            'message': 'Ad rejected.'
         }
     )
 
@@ -3432,7 +3432,7 @@ def api_admin_approve_listing_payment(
 
     return Response(
         {
-            'message': 'Featured listing payment confirmed. Listing is now promoted.',
+            'message': 'Featured ad payment confirmed. Ad is now promoted.',
             'listing': serializer.data,
         }
     )
@@ -3480,7 +3480,7 @@ def api_admin_reject_listing_payment(
 
     return Response(
         {
-            'message': 'Featured listing payment rejected. Owner can submit a corrected reference.',
+            'message': 'Featured ad payment rejected. Owner can submit a corrected reference.',
             'listing': serializer.data,
         }
     )

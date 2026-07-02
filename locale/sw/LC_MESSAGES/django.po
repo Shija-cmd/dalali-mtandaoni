@@ -1,0 +1,691 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Dalali Mtandaoni 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 00:00+0300\n"
+"PO-Revision-Date: 2026-07-02 00:00+0300\n"
+"Last-Translator: Dalali Mtandaoni\n"
+"Language-Team: Dalali Mtandaoni\n"
+"Language: sw\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "English"
+msgstr "Kiingereza"
+
+msgid "Swahili"
+msgstr "Kiswahili"
+
+msgid "Home"
+msgstr "Nyumbani"
+
+msgid "Browse Ads"
+msgstr "Tazama Matangazo"
+
+msgid "About"
+msgstr "Kuhusu"
+
+msgid "About Us"
+msgstr "Kuhusu Sisi"
+
+msgid "Contact"
+msgstr "Mawasiliano"
+
+msgid "Language"
+msgstr "Lugha"
+
+msgid "Dashboard"
+msgstr "Dashibodi"
+
+msgid "My Profile"
+msgstr "Wasifu Wangu"
+
+msgid "Create Ad"
+msgstr "Tengeneza Tangazo"
+
+msgid "My Ads"
+msgstr "Matangazo Yangu"
+
+msgid "My Favorites"
+msgstr "Niliyohifadhi"
+
+msgid "Administrator"
+msgstr "Msimamizi"
+
+msgid "Payment Confirmation"
+msgstr "Uthibitisho wa Malipo"
+
+msgid "Ad Approval"
+msgstr "Uidhinishaji wa Tangazo"
+
+msgid "Featured Ads"
+msgstr "Matangazo Yaliyoangaziwa"
+
+msgid "Logout"
+msgstr "Toka"
+
+msgid "Login"
+msgstr "Ingia"
+
+msgid "Register"
+msgstr "Jisajili"
+
+msgid "Confirm Action"
+msgstr "Thibitisha Kitendo"
+
+msgid "Please review before continuing."
+msgstr "Tafadhali hakiki kabla ya kuendelea."
+
+msgid "Are you sure you want to continue?"
+msgstr "Una uhakika unataka kuendelea?"
+
+msgid "Cancel"
+msgstr "Ghairi"
+
+msgid "Continue"
+msgstr "Endelea"
+
+msgid "Tanzania's trusted online marketplace for buying, renting and selling houses, rooms, plots and cars."
+msgstr "Soko la mtandaoni linaloaminika Tanzania kwa kununua, kukodisha na kuuza nyumba, vyumba, viwanja na magari."
+
+msgid "Quick Links"
+msgstr "Viungo Muhimu"
+
+msgid "Ad Rules"
+msgstr "Kanuni za Tangazo"
+
+msgid "Terms"
+msgstr "Masharti"
+
+msgid "Privacy"
+msgstr "Faragha"
+
+msgid "Disclaimer"
+msgstr "Kanusho"
+
+msgid "Categories"
+msgstr "Makundi"
+
+msgid "Houses"
+msgstr "Nyumba"
+
+msgid "Rooms"
+msgstr "Vyumba"
+
+msgid "Plots"
+msgstr "Viwanja"
+
+msgid "Cars"
+msgstr "Magari"
+
+msgid "Contact Us"
+msgstr "Wasiliana Nasi"
+
+msgid "System Administrator"
+msgstr "Msimamizi wa Mfumo"
+
+msgid "Marketing Officer"
+msgstr "Afisa Masoko"
+
+msgid "Tanzania"
+msgstr "Tanzania"
+
+msgid "All rights reserved."
+msgstr "Haki zote zimehifadhiwa."
+
+msgid "Version"
+msgstr "Toleo"
+
+msgid "Developed by MITSOL"
+msgstr "Imetengenezwa na MITSOL"
+
+msgid "Powered by MITSOL"
+msgstr "Inaendeshwa na MITSOL"
+
+msgid "DALALI MTANDAONI is a digital marketplace that connects property owners, vehicle owners, buyers, tenants and service seekers across Tanzania through a trusted and easy-to-use platform."
+msgstr "DALALI MTANDAONI ni soko la kidijitali linalounganisha wamiliki wa mali, wamiliki wa magari, wanunuzi, wapangaji na watafuta huduma kote Tanzania kupitia jukwaa linaloaminika na rahisi kutumia."
+
+msgid "Our Mission"
+msgstr "Dhamira Yetu"
+
+msgid "To simplify the process of finding houses, rooms, plots and vehicles by providing a trusted, accessible and efficient online platform for everyone in Tanzania."
+msgstr "Kurahisisha mchakato wa kupata nyumba, vyumba, viwanja na magari kwa kutoa jukwaa la mtandaoni linaloaminika, linalofikika na lenye ufanisi kwa kila mtu Tanzania."
+
+msgid "Our Vision"
+msgstr "Dira Yetu"
+
+msgid "To become Tanzania's leading online marketplace for property and vehicle ads, making it easier for people to connect, advertise and find opportunities."
+msgstr "Kuwa soko kuu la mtandaoni Tanzania kwa matangazo ya mali na magari, na kurahisisha watu kuungana, kutangaza na kupata fursa."
+
+msgid "Why Choose DALALI MTANDAONI?"
+msgstr "Kwa Nini Uchague DALALI MTANDAONI?"
+
+msgid "Property Ads"
+msgstr "Matangazo ya Mali"
+
+msgid "Houses, rooms and plots from different locations across Tanzania."
+msgstr "Nyumba, vyumba na viwanja kutoka maeneo mbalimbali Tanzania."
+
+msgid "Vehicle Ads"
+msgstr "Matangazo ya Magari"
+
+msgid "Vehicles available for sale or hire."
+msgstr "Magari yanayopatikana kwa kuuza au kukodisha."
+
+msgid "Reviewed Ads"
+msgstr "Matangazo Yaliyohakikiwa"
+
+msgid "Ad submissions include owner ID review before publishing."
+msgstr "Maombi ya matangazo yanahusisha uhakiki wa kitambulisho cha mmiliki kabla ya kuchapishwa."
+
+msgid "Save Favorites"
+msgstr "Hifadhi Unayopenda"
+
+msgid "Keep track of ads that interest you."
+msgstr "Fuatilia matangazo yanayokuvutia."
+
+msgid "Connecting Tanzania, One Ad at a Time"
+msgstr "Tunaunganisha Tanzania, Tangazo Moja kwa Wakati"
+
+msgid "Whether you're looking to buy, rent, hire or advertise, DALALI MTANDAONI is here to help you connect with the right people."
+msgstr "Iwe unatafuta kununua, kupanga, kukodisha au kutangaza, DALALI MTANDAONI ipo kukusaidia kuungana na watu sahihi."
+
+msgid "Need assistance? Our team is ready to help you."
+msgstr "Unahitaji msaada? Timu yetu iko tayari kukusaidia."
+
+msgid "Phone"
+msgstr "Simu"
+
+msgid "Email"
+msgstr "Barua pepe"
+
+msgid "Location"
+msgstr "Eneo"
+
+msgid "We're Here to Help"
+msgstr "Tupo Hapa Kukusaidia"
+
+msgid "Whether you need help finding a property, posting an ad, submitting an ad, or managing your account, our team is ready to assist you."
+msgstr "Iwe unahitaji msaada kupata mali, kuweka tangazo, kuwasilisha tangazo, au kusimamia akaunti yako, timu yetu iko tayari kukusaidia."
+
+msgid "Send Email"
+msgstr "Tuma Barua pepe"
+
+msgid "Terms of Use"
+msgstr "Masharti ya Matumizi"
+
+msgid "By using Dalali Mtandaoni, you agree to use the platform honestly, lawfully, and only for legitimate property, room, plot, and vehicle ads."
+msgstr "Kwa kutumia Dalali Mtandaoni, unakubali kutumia jukwaa hili kwa uaminifu, kisheria, na kwa matangazo halali ya mali, vyumba, viwanja na magari pekee."
+
+msgid "User Accounts"
+msgstr "Akaunti za Watumiaji"
+
+msgid "Users are responsible for keeping account details accurate and secure. Owners submit an ID document with ad requests so admins can review the ad before it appears publicly."
+msgstr "Watumiaji wanawajibika kuhakikisha taarifa za akaunti zao ni sahihi na salama. Wamiliki huwasilisha kitambulisho pamoja na maombi ya tangazo ili wasimamizi wahakiki tangazo kabla halijaonekana hadharani."
+
+msgid "Ads"
+msgstr "Matangazo"
+
+msgid "Ad information, prices, images, locations, and contact details must be truthful. Dalali Mtandaoni may reject, hide, or remove ads that appear misleading, duplicated, illegal, unsafe, or abusive."
+msgstr "Taarifa za tangazo, bei, picha, maeneo na mawasiliano lazima ziwe za kweli. Dalali Mtandaoni inaweza kukataa, kuficha au kuondoa matangazo yanayoonekana kupotosha, kurudiwa, kuwa kinyume cha sheria, yasiyo salama au yenye unyanyasaji."
+
+msgid "Payments"
+msgstr "Malipo"
+
+msgid "Publishing fees and payment references are reviewed before ads are approved. Submitting false payment information may lead to rejection or account restriction."
+msgstr "Ada za uchapishaji na kumbukumbu za malipo hukaguliwa kabla matangazo hayajaidhinishwa. Kuwasilisha taarifa za malipo zisizo sahihi kunaweza kusababisha kukataliwa au kuwekewa kikomo kwa akaunti."
+
+msgid "Platform Role"
+msgstr "Jukumu la Jukwaa"
+
+msgid "Dalali Mtandaoni helps connect owners and seekers. Users should inspect properties, confirm ownership, and make payments carefully before completing transactions outside the platform."
+msgstr "Dalali Mtandaoni husaidia kuwaunganisha wamiliki na watafutaji. Watumiaji wanapaswa kukagua mali, kuthibitisha umiliki, na kufanya malipo kwa uangalifu kabla ya kukamilisha miamala nje ya jukwaa."
+
+msgid "Questions about these terms can be sent through the contact page."
+msgstr "Maswali kuhusu masharti haya yanaweza kutumwa kupitia ukurasa wa mawasiliano."
+
+msgid "Privacy Policy"
+msgstr "Sera ya Faragha"
+
+msgid "Dalali Mtandaoni collects only the information needed to operate the marketplace, review ads, and help users contact each other safely."
+msgstr "Dalali Mtandaoni hukusanya taarifa zinazohitajika tu kuendesha soko, kuhakiki matangazo, na kusaidia watumiaji kuwasiliana kwa usalama."
+
+msgid "Information We Collect"
+msgstr "Taarifa Tunazokusanya"
+
+msgid "We may collect account details, names, phone numbers, profile photos, ad owner ID images, ad details, ad images, payment references, and usage information."
+msgstr "Tunaweza kukusanya taarifa za akaunti, majina, namba za simu, picha za wasifu, picha za vitambulisho vya wamiliki wa matangazo, taarifa za matangazo, picha za matangazo, kumbukumbu za malipo na taarifa za matumizi."
+
+msgid "How We Use Information"
+msgstr "Jinsi Tunavyotumia Taarifa"
+
+msgid "Information is used for account access, ad approval, payment confirmation, support, fraud prevention, and marketplace improvements."
+msgstr "Taarifa hutumika kwa ufikiaji wa akaunti, kuidhinisha matangazo, kuthibitisha malipo, kutoa msaada, kuzuia udanganyifu na kuboresha soko."
+
+msgid "Information Shared Publicly"
+msgstr "Taarifa Zinazoonekana Hadharani"
+
+msgid "Approved ads may show owner names, ad details, images, location, and contact options. Owner ID documents are intended for admin review only."
+msgstr "Matangazo yaliyoidhinishwa yanaweza kuonyesha majina ya wamiliki, taarifa za tangazo, picha, eneo na chaguo za mawasiliano. Nyaraka za vitambulisho vya wamiliki ni kwa ukaguzi wa wasimamizi pekee."
+
+msgid "Data Protection"
+msgstr "Ulinzi wa Taarifa"
+
+msgid "Users should upload only required information. Administrators should review sensitive owner ID documents carefully and avoid sharing them outside the review process."
+msgstr "Watumiaji wanapaswa kupakia taarifa zinazohitajika tu. Wasimamizi wanapaswa kuhakiki nyaraka nyeti za vitambulisho vya wamiliki kwa uangalifu na kuepuka kuzishiriki nje ya mchakato wa ukaguzi."
+
+msgid "Privacy questions or account requests can be sent through the contact page."
+msgstr "Maswali ya faragha au maombi kuhusu akaunti yanaweza kutumwa kupitia ukurasa wa mawasiliano."
+
+msgid "Pre-launch Notice"
+msgstr "Taarifa ya Kabla ya Uzinduzi"
+
+msgid "Dalali Mtandaoni is currently in the testing and pre-launch phase. The platform has not yet been officially launched to the public."
+msgstr "Dalali Mtandaoni ipo katika hatua ya majaribio na kabla ya uzinduzi. Jukwaa bado halijazinduliwa rasmi kwa umma."
+
+msgid "All property advertisements, images, prices, contact details, locations, user profiles, payment information, and other content currently displayed on this platform are for demonstration, testing, and system evaluation purposes only. Such information may be fictitious, incomplete, outdated, or subject to change without prior notice and should not be relied upon for making rental, purchase, or investment decisions."
+msgstr "Matangazo yote ya mali, picha, bei, mawasiliano, maeneo, wasifu wa watumiaji, taarifa za malipo na maudhui mengine yanayoonekana sasa kwenye jukwaa hili ni kwa madhumuni ya maonyesho, majaribio na tathmini ya mfumo pekee. Taarifa hizo zinaweza kuwa za kubuni, pungufu, zilizopitwa na wakati au kubadilishwa bila taarifa ya awali, hivyo hazipaswi kutegemewa kufanya maamuzi ya kupanga, kununua au kuwekeza."
+
+msgid "No transaction, agreement, or communication initiated through the platform during this testing phase shall be considered legally binding or representative of the final production service."
+msgstr "Hakuna muamala, makubaliano au mawasiliano yaliyoanzishwa kupitia jukwaa wakati wa majaribio yatakayochukuliwa kuwa ya kisheria au kuwakilisha huduma ya mwisho ya uzalishaji."
+
+msgid "Dalali Mtandaoni and its developers reserve the right to modify, remove, or replace any content, functionality, or service without notice until the official public launch."
+msgstr "Dalali Mtandaoni na watengenezaji wake wana haki ya kubadilisha, kuondoa au kuweka upya maudhui, vipengele au huduma yoyote bila taarifa hadi uzinduzi rasmi kwa umma."
+
+msgid "We appreciate your patience and support as we continue to improve the platform before its official release."
+msgstr "Tunathamini uvumilivu na msaada wako tunapoendelea kuboresha jukwaa kabla ya kutolewa rasmi."
+
+msgid "These rules help keep Dalali Mtandaoni useful, trustworthy, and safe for buyers, renters, owners, and agents."
+msgstr "Kanuni hizi husaidia kuifanya Dalali Mtandaoni iwe yenye manufaa, ya kuaminika na salama kwa wanunuzi, wapangaji, wamiliki na mawakala."
+
+msgid "Allowed Ads"
+msgstr "Matangazo Yanayoruhusiwa"
+
+msgid "Houses, rooms, plots, cars, and other supported marketplace categories."
+msgstr "Nyumba, vyumba, viwanja, magari na makundi mengine yanayoungwa mkono sokoni."
+
+msgid "Ads with accurate prices, locations, descriptions, and contact details."
+msgstr "Matangazo yenye bei, maeneo, maelezo na taarifa za mawasiliano zilizo sahihi."
+
+msgid "Clear images that show the actual property, room, plot, or vehicle."
+msgstr "Picha wazi zinazoonyesha mali, chumba, kiwanja au gari halisi."
+
+msgid "Not Allowed"
+msgstr "Hairuhusiwi"
+
+msgid "Fake, copied, misleading, or duplicated ads."
+msgstr "Matangazo ya uongo, yaliyonakiliwa, yanayopotosha au kurudiwa."
+
+msgid "Images that do not match the listed item."
+msgstr "Picha zisizolingana na kitu kilichotangazwa."
+
+msgid "Illegal, abusive, discriminatory, or unsafe content."
+msgstr "Maudhui yaliyo kinyume cha sheria, yenye unyanyasaji, ubaguzi au yasiyo salama."
+
+msgid "False payment references or attempts to avoid the approval process."
+msgstr "Kumbukumbu za malipo za uongo au majaribio ya kukwepa mchakato wa uidhinishaji."
+
+msgid "Approval"
+msgstr "Uidhinishaji"
+
+msgid "Ads may require payment confirmation and admin approval before appearing publicly. Admins may reject ads that do not follow these rules."
+msgstr "Matangazo yanaweza kuhitaji uthibitisho wa malipo na idhini ya msimamizi kabla ya kuonekana hadharani. Wasimamizi wanaweza kukataa matangazo yasiyofuata kanuni hizi."
+
+msgid "Good Ad Checklist"
+msgstr "Orodha ya Tangazo Zuri"
+
+msgid "Use a clear title."
+msgstr "Tumia kichwa kilicho wazi."
+
+msgid "Include the real location and fair price."
+msgstr "Weka eneo halisi na bei inayofaa."
+
+msgid "Upload bright, useful images."
+msgstr "Pakia picha angavu na zenye manufaa."
+
+msgid "Keep the ad availability updated when it is rented, sold, hired, or unavailable."
+msgstr "Sasisha upatikanaji wa tangazo linapopangishwa, kuuzwa, kukodishwa au kutopatikana."
+
+msgid "Notice:"
+msgstr "Taarifa:"
+
+msgid "Dalali Mtandaoni is currently under development and pre-launch testing. All advertisements, images, prices, contacts, and other information displayed are for demonstration purposes only and may not represent actual properties or services. The official public launch will be announced soon."
+msgstr "Dalali Mtandaoni bado ipo kwenye maendeleo na majaribio kabla ya uzinduzi. Matangazo, picha, bei, mawasiliano na taarifa nyingine zinazoonekana ni kwa madhumuni ya maonyesho pekee na huenda zisiwakilishe mali au huduma halisi. Uzinduzi rasmi utatangazwa hivi karibuni."
+
+msgid "Read full disclaimer"
+msgstr "Soma kanusho kamili"
+
+msgid "Tanzania's Trusted Marketplace"
+msgstr "Soko Linaloaminika Tanzania"
+
+msgid "Find Your Perfect"
+msgstr "Pata Unachotafuta"
+
+msgid "House, Room, Plot or Car"
+msgstr "Nyumba, Chumba, Kiwanja au Gari"
+
+msgid "Browse verified ads from trusted owners across Tanzania. Rent, buy or sell with confidence."
+msgstr "Tazama matangazo yaliyohakikiwa kutoka kwa wamiliki wa kuaminika kote Tanzania. Panga, nunua au uza kwa kujiamini."
+
+msgid "Search houses, rooms, plots, cars, or location..."
+msgstr "Tafuta nyumba, vyumba, viwanja, magari au eneo..."
+
+msgid "Search"
+msgstr "Tafuta"
+
+msgid "Become an Owner"
+msgstr "Kuwa Mmiliki"
+
+msgid "Active Ads"
+msgstr "Matangazo Hai"
+
+msgid "Approved Ads"
+msgstr "Matangazo Yaliyoidhinishwa"
+
+msgid "Users"
+msgstr "Watumiaji"
+
+msgid "Scroll Down"
+msgstr "Sogeza Chini"
+
+msgid "PROPERTY CATEGORIES"
+msgstr "MAKUNDI YA MALI"
+
+msgid "Browse by Category"
+msgstr "Tazama kwa Kundi"
+
+msgid "Find exactly what you're looking for across Tanzania."
+msgstr "Pata hasa unachokitafuta kote Tanzania."
+
+msgid "Explore"
+msgstr "Chunguza"
+
+msgid "FEATURED ADS"
+msgstr "MATANGAZO YALIYOANGAZIWA"
+
+msgid "Discover ads promoted for extra visibility from active owners."
+msgstr "Gundua matangazo yaliyopandishwa kwa kuonekana zaidi kutoka kwa wamiliki hai."
+
+msgid "Featured"
+msgstr "Limeangaziwa"
+
+msgid "Save ad"
+msgstr "Hifadhi tangazo"
+
+msgid "Verified"
+msgstr "Imethibitishwa"
+
+msgid "Featured Ad"
+msgstr "Tangazo Lililoangaziwa"
+
+msgid "View Ad"
+msgstr "Tazama Tangazo"
+
+msgid "No featured ads available."
+msgstr "Hakuna matangazo yaliyoangaziwa kwa sasa."
+
+msgid "JUST ADDED"
+msgstr "IMEONGEZWA SASA"
+
+msgid "Recently Added Ads"
+msgstr "Matangazo Yaliyoongezwa Hivi Karibuni"
+
+msgid "Fresh ads recently published on Dalali Mtandaoni."
+msgstr "Matangazo mapya yaliyochapishwa hivi karibuni Dalali Mtandaoni."
+
+msgid "View All"
+msgstr "Tazama Yote"
+
+msgid "No Image"
+msgstr "Hakuna Picha"
+
+msgid "New"
+msgstr "Mpya"
+
+msgid "No recent ads available."
+msgstr "Hakuna matangazo mapya kwa sasa."
+
+msgid "WHY CHOOSE US"
+msgstr "KWANINI UTUCHAGUE"
+
+msgid "Why Choose Dalali Mtandaoni?"
+msgstr "Kwa Nini Uchague Dalali Mtandaoni?"
+
+msgid "We make finding, buying and renting properties across Tanzania easier, safer and more transparent."
+msgstr "Tunarahisisha kupata, kununua na kupanga mali kote Tanzania kwa njia rahisi, salama na wazi zaidi."
+
+msgid "Owners upload ID when submitting ads, and admins review ads before they appear publicly."
+msgstr "Wamiliki hupakia kitambulisho wanapowasilisha matangazo, na wasimamizi huhakiki matangazo kabla hayajaonekana hadharani."
+
+msgid "Easy Search"
+msgstr "Utafutaji Rahisi"
+
+msgid "Quickly search houses, rooms, plots and cars using powerful filters."
+msgstr "Tafuta haraka nyumba, vyumba, viwanja na magari kwa kutumia vichujio imara."
+
+msgid "Nationwide Coverage"
+msgstr "Huduma Tanzania Nzima"
+
+msgid "Browse ads from every region across Tanzania in one place."
+msgstr "Tazama matangazo kutoka kila mkoa Tanzania katika sehemu moja."
+
+msgid "Secure Platform"
+msgstr "Jukwaa Salama"
+
+msgid "Connect directly with owners through a trusted and secure marketplace."
+msgstr "Ungana moja kwa moja na wamiliki kupitia soko linaloaminika na salama."
+
+msgid "START TODAY"
+msgstr "ANZA LEO"
+
+msgid "Ready to Find or Post Your Property?"
+msgstr "Uko Tayari Kupata au Kuweka Mali Yako?"
+
+msgid "Join thousands of Tanzanians using <strong>Dalali Mtandaoni</strong> to buy, rent, sell houses, rooms, plots and cars with confidence."
+msgstr "Jiunge na maelfu ya Watanzania wanaotumia <strong>Dalali Mtandaoni</strong> kununua, kupanga, kuuza nyumba, vyumba, viwanja na magari kwa kujiamini."
+
+msgid "Discover verified houses, rooms, plots and cars across Tanzania."
+msgstr "Gundua nyumba, vyumba, viwanja na magari yaliyohakikiwa kote Tanzania."
+
+msgid "Search Ads"
+msgstr "Tafuta Matangazo"
+
+msgid "Keyword"
+msgstr "Neno Muhimu"
+
+msgid "Search by title, location, district or keyword..."
+msgstr "Tafuta kwa kichwa, eneo, wilaya au neno muhimu..."
+
+msgid "Category"
+msgstr "Kundi"
+
+msgid "All Categories"
+msgstr "Makundi Yote"
+
+msgid "Minimum Price"
+msgstr "Bei ya Chini"
+
+msgid "Maximum Price"
+msgstr "Bei ya Juu"
+
+msgid "Unlimited"
+msgstr "Bila Kikomo"
+
+msgid "Clear"
+msgstr "Futa"
+
+msgid "Region"
+msgstr "Mkoa"
+
+msgid "All Regions"
+msgstr "Mikoa Yote"
+
+msgid "District"
+msgstr "Wilaya"
+
+msgid "All Districts"
+msgstr "Wilaya Zote"
+
+msgid "Ward"
+msgstr "Kata"
+
+msgid "All Wards"
+msgstr "Kata Zote"
+
+msgid "Street/Area"
+msgstr "Mtaa/Eneo"
+
+msgid "All Streets/Areas"
+msgstr "Mitaa/Maeneo Yote"
+
+msgid "ads found"
+msgstr "matangazo yamepatikana"
+
+msgid "Filters Applied"
+msgstr "Vichujio Vimetumika"
+
+msgid "Showing All Ads"
+msgstr "Inaonyesha Matangazo Yote"
+
+msgid "Available Ads"
+msgstr "Matangazo Yanayopatikana"
+
+msgid "Newest First"
+msgstr "Mapya Kwanza"
+
+msgid "Oldest First"
+msgstr "Ya Zamani Kwanza"
+
+msgid "Price: Low to High"
+msgstr "Bei: Chini kwenda Juu"
+
+msgid "Price: High to Low"
+msgstr "Bei: Juu kwenda Chini"
+
+msgid "Available"
+msgstr "Inapatikana"
+
+msgid "No Ads Found"
+msgstr "Hakuna Matangazo Yaliyopatikana"
+
+msgid "Try changing your search filters."
+msgstr "Jaribu kubadilisha vichujio vya utafutaji."
+
+msgid "No Image Available"
+msgstr "Hakuna Picha Inayopatikana"
+
+msgid "This ad is waiting for admin approval."
+msgstr "Tangazo hili linasubiri idhini ya msimamizi."
+
+msgid "This ad is featured"
+msgstr "Tangazo hili limeangaziwa"
+
+msgid "until"
+msgstr "hadi"
+
+msgid "Promote this ad with a featured package for more visibility."
+msgstr "Pandisha tangazo hili kwa kifurushi cha kuangaziwa ili lionekane zaidi."
+
+msgid "Feature Ad"
+msgstr "Angazia Tangazo"
+
+msgid "Description"
+msgstr "Maelezo"
+
+msgid "Ad Overview"
+msgstr "Muhtasari wa Tangazo"
+
+msgid "Extra Location Details"
+msgstr "Maelezo ya Ziada ya Eneo"
+
+msgid "Price"
+msgstr "Bei"
+
+msgid "Ad ID"
+msgstr "Namba ya Tangazo"
+
+msgid "Posted"
+msgstr "Limechapishwa"
+
+msgid "Status"
+msgstr "Hali"
+
+msgid "Owner"
+msgstr "Mmiliki"
+
+msgid "Contact the owner directly for more information."
+msgstr "Wasiliana moja kwa moja na mmiliki kwa taarifa zaidi."
+
+msgid "Verified Owner"
+msgstr "Mmiliki Aliyethibitishwa"
+
+msgid "Owner Name"
+msgstr "Jina la Mmiliki"
+
+msgid "Username"
+msgstr "Jina la Mtumiaji"
+
+msgid "Phone Number"
+msgstr "Namba ya Simu"
+
+msgid "Contact unlocked until"
+msgstr "Mawasiliano yamefunguliwa hadi"
+
+msgid "Unlock Contact and Call the Owner Today"
+msgstr "Fungua Mawasiliano na Mpigie Mmiliki Leo"
+
+msgid "Pay only"
+msgstr "Lipa tu"
+
+msgid "to contact the owner directly."
+msgstr "ili kuwasiliana moja kwa moja na mmiliki."
+
+msgid "Call the owner"
+msgstr "Mpigie mmiliki"
+
+msgid "WhatsApp instantly"
+msgstr "Tuma WhatsApp mara moja"
+
+msgid "No broker commission"
+msgstr "Hakuna kamisheni ya dalali"
+
+msgid "Your contact unlock payment is awaiting admin confirmation."
+msgstr "Malipo yako ya kufungua mawasiliano yanasubiri uthibitisho wa msimamizi."
+
+msgid "Your contact unlock payment was rejected."
+msgstr "Malipo yako ya kufungua mawasiliano yalikataliwa."
+
+msgid "Unlock fee:"
+msgstr "Ada ya kufungua:"
+
+msgid "Access duration:"
+msgstr "Muda wa ufikiaji:"
+
+msgid "Call Owner"
+msgstr "Mpigie Mmiliki"
+
+msgid "Update Contact Unlock Payment"
+msgstr "Sasisha Malipo ya Kufungua Mawasiliano"
+
+msgid "Unlock Contact"
+msgstr "Fungua Mawasiliano"
+
+msgid "Login to Unlock Contact"
+msgstr "Ingia Kufungua Mawasiliano"
+
+msgid "View Owner Profile"
+msgstr "Tazama Wasifu wa Mmiliki"
+
+msgid "Saved to Favorites"
+msgstr "Imehifadhiwa kwenye Vipendwa"
+
+msgid "Save Ad"
+msgstr "Hifadhi Tangazo"
+
+msgid "Share"
+msgstr "Shiriki"
+
+msgid "Upload More Photos"
+msgstr "Pakia Picha Zaidi"

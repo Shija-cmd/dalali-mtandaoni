@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
-Terms of Use
+{% trans "Terms of Use" %}
 {% endblock %}
 
 {% block content %}
@@ -12,49 +13,50 @@ Terms of Use
 
         <div class="card-body p-5">
 
-            <h1 class="fw-bold mb-4">Terms of Use</h1>
+            <h1 class="fw-bold mb-4">{% trans "Terms of Use" %}</h1>
 
             <p class="text-muted">
-                By using Dalali Mtandaoni, you agree to use the platform honestly,
-                lawfully, and only for legitimate property, room, plot, and vehicle listings.
+                {% blocktrans trimmed %}
+                By using Dalali Mtandaoni, you agree to use the platform honestly, lawfully, and only for legitimate property, room, plot, and vehicle ads.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">User Accounts</h4>
+            <h4 class="fw-bold mt-4">{% trans "User Accounts" %}</h4>
 
             <p>
-                Users are responsible for keeping account details accurate and secure.
-                Owners submit an ID document with listing requests so admins can review
-                the listing before it appears publicly.
+                {% blocktrans trimmed %}
+                Users are responsible for keeping account details accurate and secure. Owners submit an ID document with ad requests so admins can review the ad before it appears publicly.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">Listings</h4>
+            <h4 class="fw-bold mt-4">{% trans "Ads" %}</h4>
 
             <p>
-                Listing information, prices, images, locations, and contact details must be
-                truthful. Dalali Mtandaoni may reject, hide, or remove listings that appear
-                misleading, duplicated, illegal, unsafe, or abusive.
+                {% blocktrans trimmed %}
+                Ad information, prices, images, locations, and contact details must be truthful. Dalali Mtandaoni may reject, hide, or remove ads that appear misleading, duplicated, illegal, unsafe, or abusive.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">Payments</h4>
+            <h4 class="fw-bold mt-4">{% trans "Payments" %}</h4>
 
             <p>
-                Publishing fees and payment references are reviewed before listings are
-                approved. Submitting false payment information may lead to rejection or account
-                restriction.
+                {% blocktrans trimmed %}
+                Publishing fees and payment references are reviewed before ads are approved. Submitting false payment information may lead to rejection or account restriction.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">Platform Role</h4>
+            <h4 class="fw-bold mt-4">{% trans "Platform Role" %}</h4>
 
             <p>
-                Dalali Mtandaoni helps connect owners and seekers. Users should inspect
-                properties, confirm ownership, and make payments carefully before completing
-                transactions outside the platform.
+                {% blocktrans trimmed %}
+                Dalali Mtandaoni helps connect owners and seekers. Users should inspect properties, confirm ownership, and make payments carefully before completing transactions outside the platform.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">Contact</h4>
+            <h4 class="fw-bold mt-4">{% trans "Contact" %}</h4>
 
             <p class="mb-0">
-                Questions about these terms can be sent through the contact page.
+                {% trans "Questions about these terms can be sent through the contact page." %}
             </p>
 
         </div>

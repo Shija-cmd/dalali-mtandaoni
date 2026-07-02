@@ -58,12 +58,12 @@ Contact Unlock Payment Requests
                         </p>
 
                         <p class="mb-1">
-                            <strong>Listing Owner:</strong>
+                            <strong>Ad Owner:</strong>
                             {{ unlock.listing.owner.get_full_name|default:unlock.listing.owner.username }}
                         </p>
 
                         <p class="mb-1">
-                            <strong>Listing ID:</strong>
+                            <strong>Ad ID:</strong>
                             #DM{{ unlock.listing.id }}
                         </p>
 
@@ -111,7 +111,7 @@ Contact Unlock Payment Requests
                         href="{% url 'listing_detail' unlock.listing.id %}"
                         class="btn btn-outline-primary"
                     >
-                        View Listing
+                        View Ad
                     </a>
 
                     <a
@@ -119,7 +119,7 @@ Contact Unlock Payment Requests
                         class="btn btn-success"
                         data-confirm-title="Confirm Contact Unlock"
                         data-confirm-subtitle="{{ unlock.user.get_full_name|default:unlock.user.username }}"
-                        data-confirm-message="This payment will be confirmed and the listing contact details will be unlocked for this user."
+                        data-confirm-message="This payment will be confirmed and the ad contact details will be unlocked for this user."
                         data-confirm-button="Confirm Payment"
                         data-confirm-button-class="btn btn-success"
                     >

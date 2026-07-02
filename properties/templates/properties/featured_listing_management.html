@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Manage Featured Listings
+Manage Featured Ads
 {% endblock %}
 
 {% block content %}
@@ -16,16 +16,16 @@ Manage Featured Listings
 
                 <div>
 
-                    <h1 class="fw-bold mb-2">Manage Featured Listings</h1>
+                    <h1 class="fw-bold mb-2">Manage Featured Ads</h1>
 
                     <p class="text-muted mb-0">
-                        Mark approved listings as featured or remove them from the featured section.
+                        Mark approved ads as featured or remove them from the featured section.
                     </p>
 
                 </div>
 
                 <span class="badge bg-warning text-dark fs-6 px-3 py-2">
-                    {{ page_obj.paginator.count }} Approved Listing{{ page_obj.paginator.count|pluralize }}
+                    {{ page_obj.paginator.count }} Approved Ad{{ page_obj.paginator.count|pluralize }}
                 </span>
 
             </div>
@@ -123,7 +123,7 @@ Manage Featured Listings
                                     {{ listing.location }}
                                 </p>
                                 <p class="mb-2">
-                                    <strong>Listing ID:</strong>
+                                    <strong>Ad ID:</strong>
                                     #DM{{ listing.id }}
                                 </p>
                             </div>
@@ -136,7 +136,7 @@ Manage Featured Listings
                                 href="{% url 'listing_detail' listing.id %}"
                                 class="btn btn-outline-primary"
                             >
-                                View Listing
+                                View Ad
                             </a>
 
                             {% if listing.is_featured %}
@@ -182,7 +182,7 @@ Manage Featured Listings
                                         class="btn btn-outline-primary"
                                         data-confirm-title="Update Featured Time"
                                         data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
-                                        data-confirm-message="This will update the featured package or time limit for this listing."
+                                        data-confirm-message="This will update the featured package or time limit for this ad."
                                         data-confirm-button="Update Featured"
                                         data-confirm-button-class="btn btn-primary"
                                     >
@@ -201,7 +201,7 @@ Manage Featured Listings
                                         class="btn btn-warning"
                                         data-confirm-title="Remove Featured Status"
                                         data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
-                                        data-confirm-message="This listing will no longer appear as a featured listing."
+                                        data-confirm-message="This ad will no longer appear as a featured ad."
                                         data-confirm-button="Remove Featured"
                                         data-confirm-button-class="btn btn-warning"
                                     >
@@ -246,7 +246,7 @@ Manage Featured Listings
                                         class="btn btn-outline-warning"
                                         data-confirm-title="Mark as Featured"
                                         data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
-                                        data-confirm-message="This listing will be highlighted as featured using the selected package and time limit."
+                                        data-confirm-message="This ad will be highlighted as featured using the selected package and time limit."
                                         data-confirm-button="Mark Featured"
                                         data-confirm-button-class="btn btn-warning"
                                     >
@@ -272,10 +272,10 @@ Manage Featured Listings
 
             <div class="card-body text-center p-5">
 
-                <h3 class="fw-bold mb-3">No Approved Listings</h3>
+                <h3 class="fw-bold mb-3">No Approved Ads</h3>
 
                 <p class="text-muted mb-0">
-                    Approved paid listings will appear here for featured management.
+                    Approved paid ads will appear here for featured management.
                 </p>
 
             </div>

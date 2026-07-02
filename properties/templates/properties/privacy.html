@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
-Privacy Policy
+{% trans "Privacy Policy" %}
 {% endblock %}
 
 {% block content %}
@@ -12,48 +13,50 @@ Privacy Policy
 
         <div class="card-body p-5">
 
-            <h1 class="fw-bold mb-4">Privacy Policy</h1>
+            <h1 class="fw-bold mb-4">{% trans "Privacy Policy" %}</h1>
 
             <p class="text-muted">
-                Dalali Mtandaoni collects only the information needed to operate the marketplace,
-                review listings, and help users contact each other safely.
+                {% blocktrans trimmed %}
+                Dalali Mtandaoni collects only the information needed to operate the marketplace, review ads, and help users contact each other safely.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">Information We Collect</h4>
+            <h4 class="fw-bold mt-4">{% trans "Information We Collect" %}</h4>
 
             <p>
-                We may collect account details, names, phone numbers, profile photos,
-                listing owner ID images, listing details, listing images, payment references,
-                and usage information.
+                {% blocktrans trimmed %}
+                We may collect account details, names, phone numbers, profile photos, ad owner ID images, ad details, ad images, payment references, and usage information.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">How We Use Information</h4>
+            <h4 class="fw-bold mt-4">{% trans "How We Use Information" %}</h4>
 
             <p>
-                Information is used for account access, listing approval,
-                payment confirmation, support, fraud prevention, and marketplace improvements.
+                {% blocktrans trimmed %}
+                Information is used for account access, ad approval, payment confirmation, support, fraud prevention, and marketplace improvements.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">Information Shared Publicly</h4>
+            <h4 class="fw-bold mt-4">{% trans "Information Shared Publicly" %}</h4>
 
             <p>
-                Approved listings may show owner names, listing details,
-                images, location, and contact options. Owner ID documents are intended
-                for admin review only.
+                {% blocktrans trimmed %}
+                Approved ads may show owner names, ad details, images, location, and contact options. Owner ID documents are intended for admin review only.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">Data Protection</h4>
+            <h4 class="fw-bold mt-4">{% trans "Data Protection" %}</h4>
 
             <p>
-                Users should upload only required information. Administrators should review
-                sensitive owner ID documents carefully and avoid sharing them outside the
-                review process.
+                {% blocktrans trimmed %}
+                Users should upload only required information. Administrators should review sensitive owner ID documents carefully and avoid sharing them outside the review process.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">Contact</h4>
+            <h4 class="fw-bold mt-4">{% trans "Contact" %}</h4>
 
             <p class="mb-0">
-                Privacy questions or account requests can be sent through the contact page.
+                {% trans "Privacy questions or account requests can be sent through the contact page." %}
             </p>
 
         </div>

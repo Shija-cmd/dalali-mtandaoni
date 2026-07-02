@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
 {{ listing.title }}
@@ -38,7 +39,7 @@
 
                     <h5 class="text-muted">
 
-                        No Image Available
+                        {% trans "No Image Available" %}
 
                     </h5>
 
@@ -107,7 +108,7 @@
             {% if not listing.is_approved %}
 
                 <div class="alert alert-info">
-                    This ad is waiting for admin approval.
+                    {% trans "This ad is waiting for admin approval." %}
                 </div>
 
             {% endif %}
@@ -115,20 +116,20 @@
             {% if listing.is_featured_active %}
 
                 <div class="alert alert-warning">
-                    This ad is featured{% if listing.featured_until %} until {{ listing.featured_until|date:"d M Y" }}{% endif %}.
+                    {% trans "This ad is featured" %}{% if listing.featured_until %} {% trans "until" %} {{ listing.featured_until|date:"d M Y" }}{% endif %}.
                 </div>
 
             {% elif user == listing.owner and listing.is_approved %}
 
                 <div class="alert alert-success d-flex justify-content-between align-items-center flex-wrap gap-2">
                     <span>
-                        Promote this ad with a featured package for more visibility.
+                        {% trans "Promote this ad with a featured package for more visibility." %}
                     </span>
                     <a
                         href="{% url 'feature_listing' listing.id %}"
                         class="btn btn-success btn-sm"
                     >
-                        Feature Ad
+                        {% trans "Feature Ad" %}
                     </a>
                 </div>
 
@@ -137,7 +138,7 @@
         {% endif %}
             <span class="badge bg-primary px-3 py-2">
 
-                Verified Owner
+                {% trans "Verified Owner" %}
 
             </span>
 
@@ -145,7 +146,7 @@
 
         <h5 class="fw-bold mb-3">
 
-            Description
+            {% trans "Description" %}
 
         </h5>
 
@@ -170,7 +171,7 @@
 
         <h3 class="fw-bold mb-4">
 
-            📋 Ad Overview
+            📋 {% trans "Ad Overview" %}
 
         </h3>
 
@@ -180,7 +181,7 @@
 
                 <p class="mb-4">
 
-                    <strong>Category</strong><br>
+                    <strong>{% trans "Category" %}</strong><br>
 
                     {{ listing.category }}
 
@@ -188,7 +189,7 @@
 
                 <p class="mb-4">
 
-                    <strong>Location</strong><br>
+                    <strong>{% trans "Location" %}</strong><br>
 
                     {{ listing.location }}
 
@@ -198,7 +199,7 @@
 
                     <p class="mb-4">
 
-                        <strong>Extra Location Details</strong><br>
+                        <strong>{% trans "Extra Location Details" %}</strong><br>
 
                         {{ listing.location_description }}
 
@@ -208,7 +209,7 @@
 
                 <p class="mb-4">
 
-                    <strong>Price</strong><br>
+                    <strong>{% trans "Price" %}</strong><br>
 
                     TZS {{ listing.price|floatformat:0 }}
 
@@ -220,7 +221,7 @@
 
                 <p class="mb-4">
 
-                    <strong>Ad ID</strong><br>
+                    <strong>{% trans "Ad ID" %}</strong><br>
 
                     #DM{{ listing.id }}
 
@@ -228,7 +229,7 @@
 
                 <p class="mb-4">
 
-                    <strong>Posted</strong><br>
+                    <strong>{% trans "Posted" %}</strong><br>
 
                     {{ listing.created_at|date:"d M Y" }}
 
@@ -236,11 +237,11 @@
 
                 <p class="mb-4">
 
-                    <strong>Status</strong><br>
+                    <strong>{% trans "Status" %}</strong><br>
 
                     <span class="badge bg-success">
 
-                        Available
+                        {% trans "Available" %}
 
                     </span>
 
@@ -268,20 +269,20 @@
 
                 <h3 class="fw-bold mb-2">
 
-                    👤 Owner
+                    👤 {% trans "Owner" %}
 
                 </h3>
 
                 <p class="text-muted mb-0">
 
-                    Contact the owner directly for more information.
+                    {% trans "Contact the owner directly for more information." %}
 
                 </p>
 
             </div>
             <span class="badge bg-primary px-3 py-2">
 
-                Verified Owner
+                {% trans "Verified Owner" %}
 
             </span>
 
@@ -293,7 +294,7 @@
 
                 <p class="mb-3">
 
-                    <strong>Owner Name</strong><br>
+                    <strong>{% trans "Owner Name" %}</strong><br>
 
                     {{ listing.owner.get_full_name|default:listing.owner.username }}
 
@@ -301,7 +302,7 @@
 
                 <p class="mb-3">
 
-                    <strong>Username</strong><br>
+                    <strong>{% trans "Username" %}</strong><br>
 
                     @{{ listing.owner.username }}
 
@@ -311,7 +312,7 @@
 
                     <p class="mb-3">
 
-                        <strong>Phone Number</strong><br>
+                        <strong>{% trans "Phone Number" %}</strong><br>
 
                         {{ listing.owner.phone_number }}
 
@@ -321,7 +322,7 @@
 
                         <div class="alert alert-success">
 
-                            Contact unlocked until
+                            {% trans "Contact unlocked until" %}
                             {{ contact_unlock.expires_at|date:"d M Y H:i" }}.
 
                         </div>
@@ -336,27 +337,27 @@
 
         <i class="bi bi-unlock-fill me-2"></i>
 
-    Unlock Contact and Call the Owner Today
+    {% trans "Unlock Contact and Call the Owner Today" %}
 
     </h5>
 
     <p class="mb-3">
 
-        Pay only
+        {% trans "Pay only" %}
         <strong>TZS {{ contact_unlock_fee|floatformat:0 }}</strong>
-        to contact the owner directly.
+        {% trans "to contact the owner directly." %}
 
     </p>
 
     <ul class="small mb-3">
 
-        <li>📞 Call the owner</li>
+        <li>📞 {% trans "Call the owner" %}</li>
 
-        <li>💬 WhatsApp instantly</li>
+        <li>💬 {% trans "WhatsApp instantly" %}</li>
 
         <li>⏳ Access for {{ contact_unlock_days }} days</li>
 
-        <li>💰 No broker commission</li>
+        <li>💰 {% trans "No broker commission" %}</li>
 
     </ul>
 
@@ -366,8 +367,9 @@
 
                         <div class="alert alert-info">
 
-                            Your contact unlock payment is awaiting admin
-                            confirmation.
+                            {% blocktrans trimmed %}
+                            Your contact unlock payment is awaiting admin confirmation.
+                            {% endblocktrans %}
 
                         </div>
 
@@ -375,7 +377,7 @@
 
                         <div class="alert alert-danger">
 
-                            Your contact unlock payment was rejected.
+                            {% trans "Your contact unlock payment was rejected." %}
                             {% if contact_unlock.payment_rejection_reason %}
                                 {{ contact_unlock.payment_rejection_reason }}
                             {% endif %}
@@ -386,9 +388,9 @@
 
                     <p class="text-muted">
 
-                        Unlock fee:
+                        {% trans "Unlock fee:" %}
                         <strong>TZS {{ contact_unlock_fee|floatformat:0 }}</strong><br>
-                        Access duration:
+                        {% trans "Access duration:" %}
                         <strong>{{ contact_unlock_days }} days</strong>
 
                     </p>
@@ -397,7 +399,7 @@
 
                 <p class="mb-0">
 
-                    <strong>Category</strong><br>
+                    <strong>{% trans "Category" %}</strong><br>
 
                     {{ listing.category }}
 
@@ -416,7 +418,7 @@
                             class="btn btn-success btn-sm"
                         >
 
-                            Call Owner
+                            {% trans "Call Owner" %}
 
                         </a>
 
@@ -440,9 +442,9 @@
                             >
 
                                 {% if contact_unlock.payment_status == 'pending' %}
-                                    Update Contact Unlock Payment
+                                    {% trans "Update Contact Unlock Payment" %}
                                 {% else %}
-                                    Unlock Contact - TZS {{ contact_unlock_fee|floatformat:0 }}
+                                    {% trans "Unlock Contact" %} - TZS {{ contact_unlock_fee|floatformat:0 }}
                                 {% endif %}
 
                             </a>
@@ -454,7 +456,7 @@
                                 class="btn btn-primary btn-sm"
                             >
 
-                                Login to Unlock Contact
+                                {% trans "Login to Unlock Contact" %}
 
                             </a>
 
@@ -467,7 +469,7 @@
                         class="btn btn-outline-primary btn-sm"
                     >
 
-                        👤 View Owner Profile
+                            👤 {% trans "View Owner Profile" %}
 
                     </a>
 
@@ -478,11 +480,11 @@
 
                         {% if is_favorite %}
 
-                            ❤️ Saved to Favorites
+                            ❤️ {% trans "Saved to Favorites" %}
 
                         {% else %}
 
-                            🤍 Save Ad
+                            🤍 {% trans "Save Ad" %}
 
                         {% endif %}
 
@@ -494,7 +496,7 @@
                         onclick="shareAd()"
                     >
                         <i class="bi bi-share"></i>
-                        Share
+                        {% trans "Share" %}
                     </button>
 
                     {% if user == listing.owner %}
@@ -504,7 +506,7 @@
                             class="btn btn-warning btn-sm"
                         >
 
-                            📷 Upload More Photos
+                            📷 {% trans "Upload More Photos" %}
 
                         </a>
 

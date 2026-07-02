@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Listing Approval Requests
+Ad Approval Requests
 {% endblock %}
 
 {% block content %}
@@ -22,13 +22,13 @@ Listing Approval Requests
 
                 <h1 class="fw-bold mb-2">
 
-                    🏠 Listing Approval Requests
+                    🏠 Ad Approval Requests
 
                 </h1>
 
                 <p class="text-muted mb-0">
 
-                    Review free listing submissions before they appear publicly.
+                    Review free ad submissions before they appear publicly.
 
                 </p>
 
@@ -38,7 +38,7 @@ Listing Approval Requests
 
                 <span class="badge bg-warning text-dark fs-6 px-3 py-2">
 
-                    {{ page_obj.paginator.count }} Pending Listing{{ page_obj.paginator.count|pluralize }}
+                    {{ page_obj.paginator.count }} Pending Ad{{ page_obj.paginator.count|pluralize }}
 
                 </span>
 
@@ -53,7 +53,7 @@ Listing Approval Requests
 {% include 'properties/includes/admin_approval_nav.html' with active_admin_tab='listings' %}
 
 <!-- ==========================================
-     Listing Requests
+     Ad Requests
 ========================================== -->
 
 {% for listing in listings %}
@@ -164,7 +164,7 @@ Listing Approval Requests
 
                             <p class="mb-2">
 
-                                🆔 <strong>Listing ID:</strong>
+                                🆔 <strong>Ad ID:</strong>
                                 #DM{{ listing.id }}
 
                             </p>
@@ -205,21 +205,21 @@ Listing Approval Requests
                             class="btn btn-outline-primary"
                         >
 
-                            👁 View Listing
+                            👁 View Ad
 
                         </a>
 
                         <a
                             href="{% url 'approve_listing' listing.id %}"
                             class="btn btn-success"
-                            data-confirm-title="Approve Listing"
+                            data-confirm-title="Approve Ad"
                             data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
-                            data-confirm-message="This listing will be approved and published publicly for users to view."
-                            data-confirm-button="Approve Listing"
+                            data-confirm-message="This ad will be approved and published publicly for users to view."
+                            data-confirm-button="Approve Ad"
                             data-confirm-button-class="btn btn-success"
                         >
 
-                            ✅ Approve Listing
+                            ✅ Approve Ad
 
                         </a>
 
@@ -266,7 +266,7 @@ Listing Approval Requests
                                     class="btn btn-outline-primary"
                                     data-confirm-title="Update Featured Time"
                                     data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
-                                    data-confirm-message="This will update the featured package or time limit for this listing."
+                                    data-confirm-message="This will update the featured package or time limit for this ad."
                                     data-confirm-button="Update Featured"
                                     data-confirm-button-class="btn btn-primary"
                                 >
@@ -285,7 +285,7 @@ Listing Approval Requests
                                     class="btn btn-warning"
                                     data-confirm-title="Remove Featured Status"
                                     data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
-                                    data-confirm-message="This listing will no longer appear as a featured listing."
+                                    data-confirm-message="This ad will no longer appear as a featured ad."
                                     data-confirm-button="Remove Featured"
                                     data-confirm-button-class="btn btn-warning"
                                 >
@@ -330,7 +330,7 @@ Listing Approval Requests
                                     class="btn btn-outline-warning"
                                     data-confirm-title="Mark as Featured"
                                     data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
-                                    data-confirm-message="This listing will be highlighted as featured using the selected package and time limit."
+                                    data-confirm-message="This ad will be highlighted as featured using the selected package and time limit."
                                     data-confirm-button="Mark Featured"
                                     data-confirm-button-class="btn btn-warning"
                                 >
@@ -343,14 +343,14 @@ Listing Approval Requests
                         <a
                             href="{% url 'reject_listing' listing.id %}"
                             class="btn btn-outline-danger"
-                            data-confirm-title="Reject Listing"
+                            data-confirm-title="Reject Ad"
                             data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
-                            data-confirm-message="This listing will be rejected and removed from the approval queue."
-                            data-confirm-button="Reject Listing"
+                            data-confirm-message="This ad will be rejected and removed from the approval queue."
+                            data-confirm-button="Reject Ad"
                             data-confirm-button-class="btn btn-danger"
                         >
 
-                            ❌ Reject Listing
+                            ❌ Reject Ad
 
                         </a>
 
@@ -378,13 +378,13 @@ Listing Approval Requests
 
             <h3 class="fw-bold mb-3">
 
-                No Pending Listings
+                No Pending Ads
 
             </h3>
 
             <p class="text-muted mb-0">
 
-                All listing approval requests have been reviewed.
+                All ad approval requests have been reviewed.
 
             </p>
 

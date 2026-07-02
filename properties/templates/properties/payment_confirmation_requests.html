@@ -21,7 +21,7 @@ Featured Payment Requests
                     </h1>
 
                     <p class="text-muted mb-0">
-                        Confirm payments for featured listing promotions.
+                        Confirm payments for featured ad promotions.
                     </p>
 
                 </div>
@@ -63,7 +63,7 @@ Featured Payment Requests
                         </p>
 
                         <p class="mb-1">
-                            <strong>Listing ID:</strong>
+                            <strong>Ad ID:</strong>
                             #DM{{ listing.id }}
                         </p>
 
@@ -116,7 +116,7 @@ Featured Payment Requests
                         href="{% url 'listing_detail' listing.id %}"
                         class="btn btn-outline-primary"
                     >
-                        View Listing
+                        View Ad
                     </a>
 
                     <a
@@ -136,7 +136,7 @@ Featured Payment Requests
                         class="btn btn-outline-danger"
                         data-confirm-title="Reject Featured Payment"
                         data-confirm-subtitle="#DM{{ listing.id }} - {{ listing.title }}"
-                        data-confirm-message="This payment reference will be rejected and the listing owner will need to submit another payment."
+                        data-confirm-message="This payment reference will be rejected and the ad owner will need to submit another payment."
                         data-confirm-button="Reject Payment"
                         data-confirm-button-class="btn btn-danger"
                     >
@@ -160,7 +160,7 @@ Featured Payment Requests
                 </h3>
 
                 <p class="text-muted mb-0">
-                    All submitted featured listing payments have been reviewed.
+                    All submitted featured ad payments have been reviewed.
                 </p>
 
             </div>

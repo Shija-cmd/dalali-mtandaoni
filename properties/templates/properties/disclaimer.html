@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
-Disclaimer
+{% trans "Disclaimer" %}
 {% endblock %}
 
 {% block content %}
@@ -13,44 +14,43 @@ Disclaimer
         <div class="card-body p-5">
 
             <span class="badge bg-warning text-dark px-3 py-2 rounded-pill mb-3">
-                Pre-launch Notice
+                {% trans "Pre-launch Notice" %}
             </span>
 
-            <h1 class="fw-bold mb-4">Disclaimer</h1>
+            <h1 class="fw-bold mb-4">{% trans "Disclaimer" %}</h1>
 
             <p class="text-muted">
-                Dalali Mtandaoni is currently in the testing and pre-launch phase.
-                The platform has not yet been officially launched to the public.
+                {% blocktrans trimmed %}
+                Dalali Mtandaoni is currently in the testing and pre-launch phase. The platform has not yet been officially launched to the public.
+                {% endblocktrans %}
             </p>
 
             <p>
-                All property advertisements, images, prices, contact details, locations,
-                user profiles, payment information, and other content currently displayed
-                on this platform are for demonstration, testing, and system evaluation
-                purposes only. Such information may be fictitious, incomplete, outdated,
-                or subject to change without prior notice and should not be relied upon
-                for making rental, purchase, or investment decisions.
+                {% blocktrans trimmed %}
+                All property advertisements, images, prices, contact details, locations, user profiles, payment information, and other content currently displayed on this platform are for demonstration, testing, and system evaluation purposes only. Such information may be fictitious, incomplete, outdated, or subject to change without prior notice and should not be relied upon for making rental, purchase, or investment decisions.
+                {% endblocktrans %}
             </p>
 
             <p>
-                No transaction, agreement, or communication initiated through the platform
-                during this testing phase shall be considered legally binding or
-                representative of the final production service.
+                {% blocktrans trimmed %}
+                No transaction, agreement, or communication initiated through the platform during this testing phase shall be considered legally binding or representative of the final production service.
+                {% endblocktrans %}
             </p>
 
             <p>
-                Dalali Mtandaoni and its developers reserve the right to modify, remove,
-                or replace any content, functionality, or service without notice until the
-                official public launch.
+                {% blocktrans trimmed %}
+                Dalali Mtandaoni and its developers reserve the right to modify, remove, or replace any content, functionality, or service without notice until the official public launch.
+                {% endblocktrans %}
             </p>
 
             <p>
-                We appreciate your patience and support as we continue to improve the
-                platform before its official release.
+                {% blocktrans trimmed %}
+                We appreciate your patience and support as we continue to improve the platform before its official release.
+                {% endblocktrans %}
             </p>
 
             <p class="mb-0 fw-semibold">
-                &copy; 2026 Dalali Mtandaoni. All rights reserved.
+                &copy; 2026 Dalali Mtandaoni. {% trans "All rights reserved." %}
             </p>
 
         </div>

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Reject Listing
+Reject Ad
 {% endblock %}
 
 {% block content %}
@@ -12,11 +12,11 @@ Reject Listing
 
         <div class="card-body p-5">
 
-            <h1 class="fw-bold mb-3">Reject Listing</h1>
+            <h1 class="fw-bold mb-3">Reject Ad</h1>
 
             <p class="text-muted">
                 Provide a clear reason for rejecting
-                <strong>{{ listing.title }}</strong>. The listing will be hidden from public pages.
+                <strong>{{ listing.title }}</strong>. The ad will be hidden from public pages.
             </p>
 
             <form method="post">
@@ -44,7 +44,7 @@ Reject Listing
                         type="submit"
                         class="btn btn-danger"
                     >
-                        Reject Listing
+                        Reject Ad
                     </button>
 
                 </div>

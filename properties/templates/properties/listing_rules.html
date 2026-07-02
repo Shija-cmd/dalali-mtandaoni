@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
-Ad Rules
+{% trans "Ad Rules" %}
 {% endblock %}
 
 {% block content %}
@@ -12,44 +13,46 @@ Ad Rules
 
         <div class="card-body p-5">
 
-            <h1 class="fw-bold mb-4">Ad Rules</h1>
+            <h1 class="fw-bold mb-4">{% trans "Ad Rules" %}</h1>
 
             <p class="text-muted">
-                These rules help keep Dalali Mtandaoni useful, trustworthy, and safe for buyers,
-                renters, owners, and agents.
+                {% blocktrans trimmed %}
+                These rules help keep Dalali Mtandaoni useful, trustworthy, and safe for buyers, renters, owners, and agents.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">Allowed Ads</h4>
+            <h4 class="fw-bold mt-4">{% trans "Allowed Ads" %}</h4>
 
             <ul>
-                <li>Houses, rooms, plots, cars, and other supported marketplace categories.</li>
-                <li>Ads with accurate prices, locations, descriptions, and contact details.</li>
-                <li>Clear images that show the actual property, room, plot, or vehicle.</li>
+                <li>{% trans "Houses, rooms, plots, cars, and other supported marketplace categories." %}</li>
+                <li>{% trans "Ads with accurate prices, locations, descriptions, and contact details." %}</li>
+                <li>{% trans "Clear images that show the actual property, room, plot, or vehicle." %}</li>
             </ul>
 
-            <h4 class="fw-bold mt-4">Not Allowed</h4>
+            <h4 class="fw-bold mt-4">{% trans "Not Allowed" %}</h4>
 
             <ul>
-                <li>Fake, copied, misleading, or duplicated ads.</li>
-                <li>Images that do not match the listed item.</li>
-                <li>Illegal, abusive, discriminatory, or unsafe content.</li>
-                <li>False payment references or attempts to avoid the approval process.</li>
+                <li>{% trans "Fake, copied, misleading, or duplicated ads." %}</li>
+                <li>{% trans "Images that do not match the listed item." %}</li>
+                <li>{% trans "Illegal, abusive, discriminatory, or unsafe content." %}</li>
+                <li>{% trans "False payment references or attempts to avoid the approval process." %}</li>
             </ul>
 
-            <h4 class="fw-bold mt-4">Approval</h4>
+            <h4 class="fw-bold mt-4">{% trans "Approval" %}</h4>
 
             <p>
-                Ads may require payment confirmation and admin approval before appearing
-                publicly. Admins may reject ads that do not follow these rules.
+                {% blocktrans trimmed %}
+                Ads may require payment confirmation and admin approval before appearing publicly. Admins may reject ads that do not follow these rules.
+                {% endblocktrans %}
             </p>
 
-            <h4 class="fw-bold mt-4">Good Ad Checklist</h4>
+            <h4 class="fw-bold mt-4">{% trans "Good Ad Checklist" %}</h4>
 
             <ul class="mb-0">
-                <li>Use a clear title.</li>
-                <li>Include the real location and fair price.</li>
-                <li>Upload bright, useful images.</li>
-                <li>Keep the ad availability updated when it is rented, sold, hired, or unavailable.</li>
+                <li>{% trans "Use a clear title." %}</li>
+                <li>{% trans "Include the real location and fair price." %}</li>
+                <li>{% trans "Upload bright, useful images." %}</li>
+                <li>{% trans "Keep the ad availability updated when it is rented, sold, hired, or unavailable." %}</li>
             </ul>
 
         </div>
